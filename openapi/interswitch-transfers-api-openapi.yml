@@ -1,0 +1,182 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Transfers API
+  description: |
+    Quickteller Send Money APIs covering Single Transfer, Bulk Transfer, Name
+    Inquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to
+    disburse funds across NIBSS-Instant-Payment-connected Nigerian bank
+    accounts with SHA-512 MAC authentication on each request.
+  version: '2024-01-01'
+servers:
+  - url: https://qa.interswitchng.com
+    description: Sandbox / QA
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Transfers
+  - name: Bulk Transfers
+  - name: Name Inquiry
+  - name: Bank Codes
+paths:
+  /quicktellerservice/api/v5/transactions/TransferFunds:
+    post:
+      tags: [Transfers]
+      summary: Send Single Transfer
+      description: |
+        Move funds from a sender wallet or account to a single recipient bank
+        account. `mac` is the SHA-512 hash of the canonical message; consult the
+        Interswitch transfer integration guide for the exact field order.
+      operationId: sendSingleTransfer
+      parameters:
+        - in: header
+          name: terminalId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleTransferRequest'
+      responses:
+        '200':
+          description: Transfer response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponse'
+  /quicktellerservice/api/v5/transactions/BulkTransfer:
+    post:
+      tags: [Bulk Transfers]
+      summary: Send Bulk Transfer
+      description: Disburse to up to thousands of recipients in a single request.
+      operationId: sendBulkTransfer
+      parameters:
+        - in: header
+          name: terminalId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkTransferRequest'
+      responses:
+        '200':
+          description: Batch accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batchId: { type: string }
+                  responseCode: { type: string }
+                  acceptedCount: { type: integer }
+                  rejectedCount: { type: integer }
+  /quicktellerservice/api/v5/transactions/NameInquiry:
+    post:
+      tags: [Name Inquiry]
+      summary: Resolve Account Name
+      description: Look up the registered name on a bank account before initiating a transfer to it.
+      operationId: nameInquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [accountId, bankCode]
+              properties:
+                accountId: { type: string, description: NUBAN bank account number. }
+                bankCode: { type: string, description: 6-digit CBN bank code. }
+      responses:
+        '200':
+          description: Account holder details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountName: { type: string }
+                  accountId: { type: string }
+                  bankCode: { type: string }
+                  responseCode: { type: string }
+  /quicktellerservice/api/v5/banks:
+    get:
+      tags: [Bank Codes]
+      summary: List Banks
+      description: Return CBN bank codes and bank names that can be addressed via the transfer endpoints.
+      operationId: listBanks
+      responses:
+        '200':
+          description: List of banks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bankCode: { type: string }
+                    bankName: { type: string }
+                    cbnCode: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    SingleTransferRequest:
+      type: object
+      required: [transferCode, mac, initiatingEntityCode, initiation, termination, sender]
+      properties:
+        transferCode: { type: string }
+        mac: { type: string, description: SHA-512 hash of canonical transfer fields. }
+        initiatingEntityCode: { type: string, example: PBL }
+        initiation:
+          type: object
+          properties:
+            amount: { type: integer }
+            currencyCode: { type: string }
+            channel: { type: string }
+            paymentMethodCode: { type: string, example: CA }
+        termination:
+          type: object
+          properties:
+            amount: { type: integer }
+            currencyCode: { type: string }
+            accountReceivable:
+              type: object
+              properties:
+                accountNumber: { type: string }
+                accountType: { type: string }
+            entityCode: { type: string, description: Recipient bank entity code. }
+            countryCode: { type: string }
+            paymentMethodCode: { type: string, example: AC }
+        sender:
+          type: object
+          properties:
+            phone: { type: string }
+            email: { type: string, format: email }
+            firstName: { type: string }
+            lastName: { type: string }
+    BulkTransferRequest:
+      type: object
+      required: [batchReference, items]
+      properties:
+        batchReference: { type: string }
+        initiatingEntityCode: { type: string }
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SingleTransferRequest'
+    TransferResponse:
+      type: object
+      properties:
+        ResponseCode: { type: string, description: 90000 indicates success. }
+        TransactionRef: { type: string }
+        TransferDate: { type: string, format: date-time }
+        Amount: { type: integer }

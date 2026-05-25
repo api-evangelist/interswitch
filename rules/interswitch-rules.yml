@@ -1,0 +1,77 @@
+extends:
+  - spectral:oas
+formats:
+  - oas3
+documentationUrl: https://github.com/api-evangelist/interswitch
+rules:
+  # Encourage Interswitch-style conventions across the OpenAPI artifacts in this repo.
+  interswitch-title-required:
+    description: All Interswitch OpenAPI specs must have an info.title prefixed with "Interswitch".
+    severity: error
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: '^Interswitch '
+  interswitch-server-https:
+    description: Servers MUST use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+  interswitch-sandbox-server:
+    description: At least one server should reference the Interswitch sandbox / QA host.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: 'sandbox\.interswitchng\.com|qa\.interswitchng\.com'
+  interswitch-operation-summary:
+    description: Every operation needs a Title Case summary.
+    severity: warn
+    given: $.paths.*[get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z]'
+  interswitch-operation-id:
+    description: Every operation needs an operationId in camelCase.
+    severity: error
+    given: $.paths.*[get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+  interswitch-bearer-or-interswitch-auth:
+    description: Security schemes should declare either Bearer (OAuth) or InterswitchAuth.
+    severity: warn
+    given: $.components.securitySchemes.*
+    then:
+      function: truthy
+  interswitch-money-minor-units:
+    description: 'Amount fields should be expressed in minor currency units (integer kobo for NGN).'
+    severity: info
+    given: "$.paths..*[?(@property === 'amount' || @property === 'refundAmount' || @property === 'balance')].type"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - integer
+  interswitch-response-codes-string:
+    description: Interswitch response codes are 5-character strings (e.g. 90000), not integers.
+    severity: info
+    given: "$.paths..*[?(@property === 'responseCode')].type"
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - string
+  interswitch-webhook-signature-header:
+    description: Webhook surfaces should document the X-Interswitch-Signature header.
+    severity: info
+    given: $..parameters[?(@.in == 'header' && @.name == 'X-Interswitch-Signature')]
+    then:
+      function: truthy

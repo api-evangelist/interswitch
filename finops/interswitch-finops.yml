@@ -1,0 +1,122 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Interswitch
+providerId: interswitch
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - Payments
+  - Africa
+description: |
+  FOCUS-aligned FinOps definition for the Interswitch developer platform.
+  Interswitch monetizes transaction volume across Web Checkout, Quickteller
+  Bills, Transfers, Paycode, Card 360, and Lending. Settlement is T+1 in NGN
+  with merchant statements available on Quickteller Business.
+sources:
+  - https://www.interswitchgroup.com
+  - https://docs.interswitchgroup.com/docs/home
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Interswitch
+serviceCategory: Financial Services
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per-Transaction
+  billingCurrency: NGN
+  chargeCategories:
+    - Usage
+    - Tax
+    - Adjustment
+    - Refund
+  primaryUnit: transaction
+  secondaryUnits:
+    - transfer
+    - token
+    - card
+focusColumns:
+  ServiceName: Interswitch
+  ServiceCategory: Financial Services
+  ProviderName: Interswitch
+  PublisherName: Interswitch
+  InvoiceIssuerName: Interswitch
+  PricingCategory: Usage-Based
+  PricingUnit: transaction
+  BillingCurrency: NGN
+meters:
+  - name: card_collection_transactions
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - merchant_code
+      - card_scheme
+      - currency
+      - geo
+  - name: card_collection_volume
+    unit: NGN_minor
+    aggregation: sum
+    dimensions:
+      - merchant_code
+      - card_scheme
+      - currency
+  - name: nip_transfers
+    unit: transfer
+    aggregation: count
+    dimensions:
+      - merchant_code
+      - destination_bank
+      - amount_band
+  - name: bill_payments
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - merchant_code
+      - biller_id
+      - category_id
+  - name: airtime_recharges
+    unit: transaction
+    aggregation: count
+    dimensions:
+      - merchant_code
+      - telco_biller_id
+  - name: paycode_tokens_generated
+    unit: token
+    aggregation: count
+    dimensions:
+      - subscriber_id
+      - front_end_partner_id
+  - name: refunds_volume
+    unit: NGN_minor
+    aggregation: sum
+    dimensions:
+      - merchant_code
+      - refund_type
+  - name: cards_issued
+    unit: card
+    aggregation: count
+    dimensions:
+      - product_code
+      - card_type
+  - name: loans_disbursed
+    unit: loan
+    aggregation: count
+    dimensions:
+      - provider_id
+      - product_type
+settlement:
+  cycle: T+1
+  currency: NGN
+  destination: Merchant settlement bank account configured on Quickteller Business
+  statementAccess: Quickteller Business dashboard
+notes:
+  - Interswitch does not currently expose a programmatic Usage / Cost API; merchant statements and settlement files are downloaded from the Quickteller Business dashboard.
+  - Webhook events (TRANSACTION, SUBSCRIPTION, PAYMENT_LINKS, INVOICES) are the canonical source of per-transaction cost-attribution signals.
+  - CBN-regulated NIP fees are passed through to the merchant; switching fees are retained by Interswitch.

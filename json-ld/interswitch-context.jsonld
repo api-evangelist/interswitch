@@ -1,0 +1,92 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "interswitch": "https://docs.interswitchgroup.com/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Payment": {
+      "@id": "interswitch:Payment",
+      "@context": {
+        "paymentId": { "@id": "interswitch:Payment/id", "@type": "xsd:string" },
+        "transactionRef": { "@id": "interswitch:Payment/transactionRef", "@type": "xsd:string" },
+        "amount": { "@id": "schema:price", "@type": "xsd:integer" },
+        "currency": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+        "merchantCode": { "@id": "interswitch:Payment/merchantCode", "@type": "xsd:string" },
+        "payItemId": { "@id": "interswitch:Payment/payItemId", "@type": "xsd:string" },
+        "customerId": { "@id": "interswitch:Payment/customerId", "@type": "xsd:string" },
+        "status": { "@id": "interswitch:Payment/status", "@type": "xsd:string" },
+        "responseCode": { "@id": "interswitch:Payment/responseCode", "@type": "xsd:string" },
+        "responseMessage": { "@id": "interswitch:Payment/responseMessage", "@type": "xsd:string" },
+        "authCode": { "@id": "interswitch:Payment/authCode", "@type": "xsd:string" },
+        "cardScheme": { "@id": "interswitch:Payment/cardScheme", "@type": "xsd:string" },
+        "settlementDate": { "@id": "interswitch:Payment/settlementDate", "@type": "xsd:date" },
+        "createdAt": { "@id": "dcterms:created", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "Refund": {
+      "@id": "interswitch:Refund",
+      "@context": {
+        "refundReference": { "@id": "interswitch:Refund/reference", "@type": "xsd:string" },
+        "parentPaymentId": { "@id": "interswitch:Refund/parentPaymentId", "@type": "xsd:string" },
+        "refundType": { "@id": "interswitch:Refund/type", "@type": "xsd:string" },
+        "refundAmount": { "@id": "interswitch:Refund/amount", "@type": "xsd:integer" },
+        "status": { "@id": "interswitch:Refund/status", "@type": "xsd:string" }
+      }
+    },
+
+    "Transfer": {
+      "@id": "interswitch:Transfer",
+      "@context": {
+        "transferCode": { "@id": "interswitch:Transfer/code", "@type": "xsd:string" },
+        "initiatingEntityCode": { "@id": "interswitch:Transfer/initiatingEntityCode", "@type": "xsd:string" },
+        "mac": { "@id": "interswitch:Transfer/mac", "@type": "xsd:string" }
+      }
+    },
+
+    "Biller": {
+      "@id": "interswitch:Biller",
+      "@context": {
+        "billerId": { "@id": "interswitch:Biller/id", "@type": "xsd:integer" },
+        "name": { "@id": "schema:name", "@type": "xsd:string" },
+        "categoryId": { "@id": "interswitch:Biller/categoryId", "@type": "xsd:integer" }
+      }
+    },
+
+    "Card": {
+      "@id": "interswitch:Card",
+      "@context": {
+        "cardId": { "@id": "interswitch:Card/id", "@type": "xsd:string" },
+        "cardPanMasked": { "@id": "interswitch:Card/panMasked", "@type": "xsd:string" },
+        "cardScheme": { "@id": "interswitch:Card/scheme", "@type": "xsd:string" },
+        "cardType": { "@id": "interswitch:Card/type", "@type": "xsd:string" },
+        "status": { "@id": "interswitch:Card/status", "@type": "xsd:string" }
+      }
+    },
+
+    "Loan": {
+      "@id": "interswitch:Loan",
+      "@context": {
+        "loanId": { "@id": "interswitch:Loan/id", "@type": "xsd:string" },
+        "providerId": { "@id": "interswitch:Loan/providerId", "@type": "xsd:string" },
+        "principal": { "@id": "interswitch:Loan/principal", "@type": "xsd:integer" },
+        "outstandingBalance": { "@id": "interswitch:Loan/outstandingBalance", "@type": "xsd:integer" },
+        "interestRate": { "@id": "interswitch:Loan/interestRate", "@type": "xsd:decimal" },
+        "tenorDays": { "@id": "interswitch:Loan/tenorDays", "@type": "xsd:integer" },
+        "status": { "@id": "interswitch:Loan/status", "@type": "xsd:string" }
+      }
+    },
+
+    "WebhookEvent": {
+      "@id": "interswitch:WebhookEvent",
+      "@context": {
+        "event": { "@id": "interswitch:WebhookEvent/type", "@type": "xsd:string" },
+        "uuid": { "@id": "interswitch:WebhookEvent/uuid", "@type": "xsd:string" },
+        "timestamp": { "@id": "dcterms:date", "@type": "xsd:dateTime" }
+      }
+    }
+  }
+}

@@ -1,0 +1,129 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Interswitch
+providerId: interswitch
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Payments
+  - Quickteller Business
+  - Verve
+  - Africa
+description: |
+  Public Interswitch / Quickteller Business pricing is negotiated at sign-up.
+  Headline rails — Webpay / Web Checkout card collection, Quickteller transfers,
+  Bills Payment, and Paycode — carry the regulated CBN merchant service charge
+  (currently capped at 0.5% with a NGN 1,000 cap for local card transactions
+  under the CBN Guide to Charges) plus a small per-transaction interchange and
+  switching fee. International card collection (Visa / Mastercard) is charged
+  at higher rates (typically 3.0%–3.8% + processor fees). Confirm exact rates
+  with your Interswitch relationship manager before going live.
+sources:
+  - https://www.interswitchgroup.com
+  - https://docs.interswitchgroup.com/docs/home
+  - https://www.cbn.gov.ng/Out/2020/CCD/Guide%20to%20Charges%20by%20Banks,%20OFIs%20and%20NBFI.pdf
+plans:
+  - id: interswitch-webpay-local
+    name: Web Checkout — Local Cards
+    type: usage-based
+    description: Card collection via Web Checkout / Webpay for Verve, Visa, and Mastercard issued by Nigerian banks.
+    entries:
+      - label: Local card transaction fee
+        name: local_card_fee
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: NG
+        unit: 1
+        price: '0.50'
+        priceUnit: percent
+        cap: '1000'
+        capCurrency: NGN
+        description: 0.5% of transaction amount, capped at NGN 1,000 per CBN Guide to Charges.
+        userMultiplied: false
+  - id: interswitch-webpay-international
+    name: Web Checkout — International Cards
+    type: usage-based
+    description: Visa and Mastercard issued outside Nigeria; rates set per merchant agreement.
+    entries:
+      - label: International card transaction fee
+        name: intl_card_fee
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '3.00'
+        priceUnit: percent
+        description: Indicative 3.0%–3.8% + fixed processor fee; negotiated per merchant.
+        userMultiplied: false
+  - id: interswitch-transfers
+    name: Quickteller Transfers
+    type: usage-based
+    description: NIBSS-rail single and bulk transfers to Nigerian bank accounts.
+    entries:
+      - label: NIP transfer fee (<= NGN 5,000)
+        name: nip_low
+        type: metered
+        metric: transfer
+        limit: -1
+        timeFrame: usage
+        geo: NG
+        unit: 1
+        price: '10.00'
+        priceUnit: NGN
+        description: Indicative CBN-regulated NIP fee for transfers up to NGN 5,000.
+      - label: NIP transfer fee (NGN 5,001–50,000)
+        name: nip_mid
+        type: metered
+        metric: transfer
+        limit: -1
+        timeFrame: usage
+        geo: NG
+        unit: 1
+        price: '25.00'
+        priceUnit: NGN
+      - label: NIP transfer fee (> NGN 50,000)
+        name: nip_high
+        type: metered
+        metric: transfer
+        limit: -1
+        timeFrame: usage
+        geo: NG
+        unit: 1
+        price: '50.00'
+        priceUnit: NGN
+  - id: interswitch-bills
+    name: Bills Payment
+    type: usage-based
+    description: Per-transaction switching fee on Quickteller bill payments. Specific fees vary by biller and category.
+    entries:
+      - label: Bill payment switching fee
+        name: bill_fee
+        type: metered
+        metric: transaction
+        limit: -1
+        timeFrame: usage
+        geo: NG
+        unit: 1
+        price: 'Custom'
+        description: Per-biller fee set by Interswitch and the biller; negotiated per merchant.
+  - id: interswitch-paycode
+    name: Paycode (Cardless)
+    type: usage-based
+    description: Cardless ATM withdrawal and merchant tokens. Per-token fee negotiated with Interswitch.
+    entries:
+      - label: Paycode token fee
+        name: paycode_fee
+        type: metered
+        metric: token
+        limit: -1
+        timeFrame: usage
+        geo: NG
+        unit: 1
+        price: 'Custom'
+        description: Per-token surcharge defined by the issuing partner.

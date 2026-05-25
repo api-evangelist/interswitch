@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Interswitch Card 360 API — Cards
+  description: Card lifecycle management — create, get, block, unblock, set PIN, balance, link, validate.
+  tags:
+  - Interswitch
+  - Cards
+  - Verve
+  - Issuing
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    INTERSWITCH_BEARER_TOKEN: INTERSWITCH_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: card-360-cards
+    baseUri: https://sandbox.interswitchng.com
+    resources:
+    - name: cards
+      path: /card-360/api/v1/cards
+      operations:
+      - name: createCard
+        method: POST
+        description: Issue a new card.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    - name: card-by-id
+      path: /card-360/api/v1/cards/{cardId}
+      operations:
+      - name: getCard
+        method: GET
+        description: Get a card by ID.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: cardId, in: path, type: string, required: true }
+    - name: card-block
+      path: /card-360/api/v1/cards/{cardId}/block
+      operations:
+      - name: blockCard
+        method: POST
+        description: Block a card.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: cardId, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: false }
+    - name: card-unblock
+      path: /card-360/api/v1/cards/{cardId}/unblock
+      operations:
+      - name: unblockCard
+        method: POST
+        description: Unblock a card.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: cardId, in: path, type: string, required: true }
+    - name: card-pin
+      path: /card-360/api/v1/cards/{cardId}/pin
+      operations:
+      - name: setCardPin
+        method: POST
+        description: Set or reset card PIN.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: cardId, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: card-balance
+      path: /card-360/api/v1/cards/{cardId}/balance
+      operations:
+      - name: getCardBalance
+        method: GET
+        description: Get card balance.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: cardId, in: path, type: string, required: true }
+    - name: card-link
+      path: /card-360/api/v1/cards/link
+      operations:
+      - name: linkCard
+        method: POST
+        description: Link an existing card PAN to a customer.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    - name: card-validate
+      path: /card-360/api/v1/cards/validate
+      operations:
+      - name: validateCard
+        method: POST
+        description: Validate a card PAN.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.INTERSWITCH_BEARER_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: card-360-cards-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: interswitch-create-card
+      description: Issue a new Verve, debit, or prepaid card.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: card-360-cards.createCard
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-get-card
+      description: Get a card by ID.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: card-360-cards.getCard
+      with: { cardId: tools.cardId }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-block-card
+      description: Block a card.
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: card-360-cards.blockCard
+      with: { cardId: tools.cardId, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-unblock-card
+      description: Unblock a card.
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: card-360-cards.unblockCard
+      with: { cardId: tools.cardId }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-set-card-pin
+      description: Set or reset card PIN.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: card-360-cards.setCardPin
+      with: { cardId: tools.cardId, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-get-card-balance
+      description: Get card balance.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: card-360-cards.getCardBalance
+      with: { cardId: tools.cardId }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-link-card
+      description: Link a card PAN to a customer.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: card-360-cards.linkCard
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-validate-card
+      description: Validate a card PAN.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: card-360-cards.validateCard
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]

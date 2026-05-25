@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Customer Insights API
+  description: |
+    Permissioned access to demography, financial history, average financial
+    history, and financial-habit signals derived from Interswitch's transaction
+    switch and Verve card network. Feeds credit decisioning, KYC enrichment,
+    and segmentation.
+  version: '2024-01-01'
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Demography
+  - name: Financial History
+  - name: Financial Habits
+paths:
+  /insights/api/v1/customers/{customerId}/demography:
+    get:
+      tags: [Demography]
+      summary: Get Customer Demography
+      operationId: getCustomerDemography
+      parameters:
+        - { in: path, name: customerId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Demographic record.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customerId: { type: string }
+                  ageBand: { type: string }
+                  gender: { type: string }
+                  state: { type: string }
+                  lga: { type: string }
+                  occupationGroup: { type: string }
+  /insights/api/v1/customers/{customerId}/financial-history:
+    get:
+      tags: [Financial History]
+      summary: Get Financial History
+      operationId: getFinancialHistory
+      parameters:
+        - { in: path, name: customerId, required: true, schema: { type: string } }
+        - { in: query, name: months, schema: { type: integer, default: 12 } }
+      responses:
+        '200':
+          description: Spending and inflow history.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  monthlyInflows: { type: array, items: { type: number } }
+                  monthlyOutflows: { type: array, items: { type: number } }
+                  categories: { type: object, additionalProperties: { type: number } }
+  /insights/api/v1/customers/{customerId}/financial-history/average:
+    get:
+      tags: [Financial History]
+      summary: Get Average Financial History
+      operationId: getAverageFinancialHistory
+      parameters:
+        - { in: path, name: customerId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Average inflow/outflow metrics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  averageMonthlyInflow: { type: number }
+                  averageMonthlyOutflow: { type: number }
+                  averageBalance: { type: number }
+                  windowMonths: { type: integer }
+  /insights/api/v1/customers/{customerId}/financial-habits:
+    get:
+      tags: [Financial Habits]
+      summary: Get Financial Habits
+      operationId: getFinancialHabits
+      parameters:
+        - { in: path, name: customerId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Behavioral signals.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  spendingPersona: { type: string }
+                  recurringBills: { type: array, items: { type: string } }
+                  channelPreference: { type: string, enum: [POS, WEB, MOBILE, ATM, USSD] }
+                  weekendVsWeekdayRatio: { type: number }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

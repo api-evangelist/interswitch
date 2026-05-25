@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Interswitch Recurring Payments API — Subscriptions
+  description: Tokenize cards and charge them on schedule for subscription billing.
+  tags:
+  - Interswitch
+  - Recurring
+  - Subscriptions
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    INTERSWITCH_BEARER_TOKEN: INTERSWITCH_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: recurring-payments-subscriptions
+    baseUri: https://qa.interswitchng.com
+    resources:
+    - name: tokenize
+      path: /api/v2/purchases/validations/recurrents
+      operations:
+      - name: tokenizeCardForRecurring
+        method: POST
+        description: Tokenize a card for recurring charges.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    - name: charge
+      path: /api/v2/purchases/recurrents
+      operations:
+      - name: chargeRecurringToken
+        method: POST
+        description: Charge a previously tokenized card.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.INTERSWITCH_BEARER_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: recurring-payments-subscriptions-rest
+    port: 8080
+    resources:
+    - path: /v1/recurring/tokens
+      name: tokenize
+      operations:
+      - method: POST
+        name: tokenizeCardForRecurring
+        call: recurring-payments-subscriptions.tokenizeCardForRecurring
+        with: { body: rest.body }
+        outputParameters: [{ type: object, mapping: $. }]
+    - path: /v1/recurring/charges
+      name: charge
+      operations:
+      - method: POST
+        name: chargeRecurringToken
+        call: recurring-payments-subscriptions.chargeRecurringToken
+        with: { body: rest.body }
+        outputParameters: [{ type: object, mapping: $. }]
+  - type: mcp
+    namespace: recurring-payments-subscriptions-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: interswitch-tokenize-card-for-recurring
+      description: Tokenize a card for recurring charges.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: recurring-payments-subscriptions.tokenizeCardForRecurring
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-charge-recurring-token
+      description: Charge a previously tokenized card.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: recurring-payments-subscriptions.chargeRecurringToken
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]

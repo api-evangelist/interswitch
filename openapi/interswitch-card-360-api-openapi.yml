@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Card 360 API
+  description: |
+    Card issuer and cardholder lifecycle management for Verve, debit, and
+    prepaid cards — create cards, set/reset PIN, block/unblock, balance
+    inquiry, card linking, and card validation. Lets fintechs and banks
+    issue and operate Verve cards programmatically on the Interswitch
+    issuer-processor.
+  version: '2024-01-01'
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Cards
+  - name: PIN
+  - name: Balance
+  - name: Linking
+paths:
+  /card-360/api/v1/cards:
+    post:
+      tags: [Cards]
+      summary: Create Card
+      description: Issue a new Verve, debit, or prepaid card to a customer profile.
+      operationId: createCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, cardType, productCode]
+              properties:
+                customerId: { type: string }
+                cardType: { type: string, enum: [debit, prepaid, verve] }
+                productCode: { type: string }
+                customerName: { type: string }
+                deliveryAddress: { type: string }
+      responses:
+        '201':
+          description: Card created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Card' }
+  /card-360/api/v1/cards/{cardId}:
+    get:
+      tags: [Cards]
+      summary: Get Card
+      operationId: getCard
+      parameters:
+        - { in: path, name: cardId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Card details.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Card' }
+  /card-360/api/v1/cards/{cardId}/block:
+    post:
+      tags: [Cards]
+      summary: Block Card
+      operationId: blockCard
+      parameters:
+        - { in: path, name: cardId, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string }
+      responses:
+        '200': { description: Card blocked. }
+  /card-360/api/v1/cards/{cardId}/unblock:
+    post:
+      tags: [Cards]
+      summary: Unblock Card
+      operationId: unblockCard
+      parameters:
+        - { in: path, name: cardId, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Card unblocked. }
+  /card-360/api/v1/cards/{cardId}/pin:
+    post:
+      tags: [PIN]
+      summary: Set Or Reset Card PIN
+      operationId: setCardPin
+      parameters:
+        - { in: path, name: cardId, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [pinBlock]
+              properties:
+                pinBlock: { type: string, description: ISO-9564 PIN block. }
+      responses:
+        '200': { description: PIN updated. }
+  /card-360/api/v1/cards/{cardId}/balance:
+    get:
+      tags: [Balance]
+      summary: Get Card Balance
+      operationId: getCardBalance
+      parameters:
+        - { in: path, name: cardId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Balance.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance: { type: integer, description: Minor currency units. }
+                  currency: { type: string }
+                  availableBalance: { type: integer }
+  /card-360/api/v1/cards/link:
+    post:
+      tags: [Linking]
+      summary: Link Card To Customer
+      operationId: linkCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [cardPan, customerId]
+              properties:
+                cardPan: { type: string }
+                customerId: { type: string }
+      responses:
+        '200': { description: Linked. }
+  /card-360/api/v1/cards/validate:
+    post:
+      tags: [Cards]
+      summary: Validate Card
+      operationId: validateCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [cardPan]
+              properties:
+                cardPan: { type: string }
+      responses:
+        '200':
+          description: Card validation result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid: { type: boolean }
+                  cardScheme: { type: string, enum: [VERVE, VISA, MASTERCARD] }
+                  cardType: { type: string }
+                  issuerBank: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Card:
+      type: object
+      properties:
+        cardId: { type: string }
+        cardPanMasked: { type: string }
+        cardScheme: { type: string, enum: [VERVE, VISA, MASTERCARD] }
+        cardType: { type: string, enum: [debit, prepaid, verve] }
+        status: { type: string, enum: [ACTIVE, BLOCKED, EXPIRED, INACTIVE] }
+        expiryMonth: { type: string }
+        expiryYear: { type: string }
+        customerId: { type: string }
+        createdAt: { type: string, format: date-time }

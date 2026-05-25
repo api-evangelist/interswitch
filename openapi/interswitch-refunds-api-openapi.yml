@@ -1,0 +1,85 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Refunds API
+  description: |
+    Refund successful Quickteller Business transactions in full or in part.
+    Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE,
+    COMPLETE_MANUAL, and FAILED states; auto-refunds settle T+1.
+  version: '2024-01-01'
+servers:
+  - url: https://qa.interswitchng.com
+    description: Sandbox / QA
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Refunds
+paths:
+  /paymentgateway/api/v1/refunds:
+    post:
+      tags: [Refunds]
+      summary: Create Refund
+      operationId: createRefund
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refundReference, parentPaymentId, refundType]
+              properties:
+                refundReference: { type: string, description: Unique refund identifier. }
+                parentPaymentId: { type: string, description: ID of the original successful payment. }
+                refundType: { type: string, enum: [PARTIAL, FULL] }
+                refundAmount: { type: integer, description: Required for PARTIAL; minor currency units. }
+                reason: { type: string }
+      responses:
+        '201':
+          description: Refund created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '400':
+          description: Validation failure (e.g. 10400).
+        '500':
+          description: Server error (e.g. 10500).
+  /paymentgateway/api/v1/refunds/{refundReference}:
+    get:
+      tags: [Refunds]
+      summary: Get Refund
+      operationId: getRefund
+      parameters:
+        - in: path
+          name: refundReference
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Refund details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Refund:
+      type: object
+      properties:
+        refundReference: { type: string }
+        parentPaymentId: { type: string }
+        refundType: { type: string, enum: [PARTIAL, FULL] }
+        refundAmount: { type: integer }
+        currency: { type: string }
+        status:
+          type: string
+          enum: [SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, FAILED]
+        createdAt: { type: string, format: date-time }
+        completedAt: { type: string, format: date-time }
+        responseCode: { type: string }
+        responseMessage: { type: string }

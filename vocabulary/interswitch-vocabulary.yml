@@ -1,0 +1,99 @@
+specification: API Evangelist Vocabulary
+specificationVersion: '0.1'
+provider: Interswitch
+providerId: interswitch
+created: '2026-05-24'
+modified: '2026-05-24'
+description: Operational, capability, and domain vocabulary for the Interswitch developer platform.
+tags:
+  - Payments
+  - Africa
+  - Nigeria
+  - Fintech
+concepts:
+  - id: verve
+    name: Verve
+    description: Interswitch-owned domestic EMV chip-and-PIN card scheme accepted across Nigerian and select African ATMs, POS, and online merchants.
+  - id: quickteller
+    name: Quickteller
+    description: Interswitch's consumer and business payments brand spanning bills, airtime, transfers, and merchant payments.
+  - id: quickteller-business
+    name: Quickteller Business
+    description: Merchant dashboard for collections, payment links, invoices, refunds, webhooks, and settlement.
+  - id: webpay
+    name: Webpay / Web Checkout
+    description: Hosted payment page (inline JavaScript or Web Redirect) for accepting card payments online.
+  - id: paycode
+    name: Paycode (Pay with Mobile)
+    description: One-time cardless token used to withdraw cash at ATMs or pay at merchants without a card.
+  - id: smartfuel
+    name: Smartfuel
+    description: Interswitch's energy-sector solution for fuel-station automation.
+  - id: card-360
+    name: Card 360
+    description: Issuer-processor APIs covering card lifecycle (create, PIN, block, unblock, balance, link, validate).
+  - id: nip
+    name: NIBSS Instant Payment (NIP)
+    description: The Nigerian inter-bank instant transfer rail Interswitch's transfer APIs sit on top of.
+  - id: nuban
+    name: NUBAN
+    description: 10-digit Nigeria Uniform Bank Account Number addressed by the Transfers and Name Inquiry APIs.
+  - id: passport
+    name: Passport
+    description: Interswitch's OAuth 2.0 token service issuing bearer tokens for the developer APIs.
+  - id: interswitch-auth
+    name: InterswitchAuth
+    description: Legacy signed-header authentication scheme using Authorization, Timestamp, Nonce, Signature (SHA1), and SignatureMethod headers.
+services:
+  - id: web-checkout
+    name: Web Checkout
+  - id: payment-gateway
+    name: Payment Gateway
+  - id: transfers
+    name: Transfers
+  - id: bills-payment
+    name: Bills Payment
+  - id: airtime-recharge
+    name: Airtime Recharge
+  - id: paycode
+    name: Paycode
+  - id: refunds
+    name: Refunds
+  - id: recurring-payments
+    name: Recurring Payments
+  - id: card-360
+    name: Card 360
+  - id: lending
+    name: Lending Service
+  - id: customer-insights
+    name: Customer Insights
+  - id: transaction-search
+    name: Transaction Search
+tools:
+  - id: quickteller-business-dashboard
+    name: Quickteller Business Dashboard
+  - id: developer-console
+    name: Interswitch Developer Console
+  - id: api-marketplace
+    name: Interswitch API Marketplace
+  - id: inline-checkout-js
+    name: inline-checkout.js
+standards:
+  - id: emv
+    name: EMV Chip-and-PIN
+  - id: pci-dss
+    name: PCI DSS
+  - id: iso-8583
+    name: ISO 8583 (under the switch)
+  - id: iso-9564
+    name: ISO 9564 PIN Block
+  - id: oauth2
+    name: OAuth 2.0 (Client Credentials)
+  - id: 3ds
+    name: 3-D Secure
+  - id: hmac-sha512
+    name: HMAC-SHA512 (webhook signatures)
+  - id: sha1-signature
+    name: SHA1 Signature (InterswitchAuth)
+  - id: focus
+    name: FOCUS 1.3 (FinOps)

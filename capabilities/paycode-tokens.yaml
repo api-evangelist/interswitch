@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Interswitch Paycode API — Tokens
+  description: Generate, query, and cancel cardless Paycode (Pay with Mobile) tokens.
+  tags:
+  - Interswitch
+  - Paycode
+  - Cardless
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    INTERSWITCH_BEARER_TOKEN: INTERSWITCH_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: paycode-tokens
+    baseUri: https://sandbox.interswitchng.com
+    resources:
+    - name: subscriber-tokens
+      path: /api/v1/pwm/subscribers/{subscriberId}/tokens
+      operations:
+      - name: generatePaycodeToken
+        method: POST
+        description: Generate a one-time Paycode token.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: subscriberId, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: token-status
+      path: /api/v1/pwm/subscribers/{subscriberId}/tokens/status
+      operations:
+      - name: getPaycodeTokenStatus
+        method: GET
+        description: Get status of a Paycode token.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: subscriberId, in: path, type: string, required: true }
+        - { name: token, in: query, type: string, required: true }
+    - name: cancel-token
+      path: /cardless-service/api/v1/cardless-services/cancel-token
+      operations:
+      - name: cancelPaycodeToken
+        method: POST
+        description: Cancel a Paycode token.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: body, in: body, type: object, required: true }
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.INTERSWITCH_BEARER_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: paycode-tokens-rest
+    port: 8080
+    resources:
+    - path: /v1/subscribers/{subscriberId}/tokens
+      name: subscriber-tokens
+      operations:
+      - method: POST
+        name: generatePaycodeToken
+        call: paycode-tokens.generatePaycodeToken
+        with:
+          subscriberId: rest.path.subscriberId
+          body: rest.body
+        outputParameters: [{ type: object, mapping: $. }]
+    - path: /v1/subscribers/{subscriberId}/tokens/status
+      name: token-status
+      operations:
+      - method: GET
+        name: getPaycodeTokenStatus
+        call: paycode-tokens.getPaycodeTokenStatus
+        with:
+          subscriberId: rest.path.subscriberId
+          token: rest.query.token
+        outputParameters: [{ type: object, mapping: $. }]
+    - path: /v1/tokens/cancel
+      name: cancel-token
+      operations:
+      - method: POST
+        name: cancelPaycodeToken
+        call: paycode-tokens.cancelPaycodeToken
+        with: { body: rest.body }
+        outputParameters: [{ type: object, mapping: $. }]
+  - type: mcp
+    namespace: paycode-tokens-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: interswitch-generate-paycode-token
+      description: Generate a one-time Paycode token.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: paycode-tokens.generatePaycodeToken
+      with:
+        subscriberId: tools.subscriberId
+        body: tools.body
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-get-paycode-token-status
+      description: Get status of a Paycode token.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: paycode-tokens.getPaycodeTokenStatus
+      with:
+        subscriberId: tools.subscriberId
+        token: tools.token
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-cancel-paycode-token
+      description: Cancel a Paycode token.
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: paycode-tokens.cancelPaycodeToken
+      with: { body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]

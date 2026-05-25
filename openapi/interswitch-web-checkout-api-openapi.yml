@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Web Checkout API
+  description: |
+    Interswitch Web Checkout (formerly Webpay) is the company's hosted payment
+    gateway. Two integration modes are supported: an inline JavaScript popup
+    loaded from `inline-checkout.js`, and a Web Redirect form POST to
+    `/collections/w/pay`. After payment, merchants must perform a server-side
+    requery against `/collections/api/v1/gettransaction.json` and verify both
+    the response code (`00`) and the returned amount before delivering value.
+  version: '2024-01-01'
+  contact:
+    name: Interswitch Developer Support
+    url: https://www.interswitchgroup.com/support
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://newwebpay.interswitchng.com
+    description: Production
+security:
+  - InterswitchAuth: []
+tags:
+  - name: Checkout
+    description: Hosted checkout payment initiation
+  - name: Transactions
+    description: Transaction status query
+paths:
+  /collections/w/pay:
+    post:
+      tags: [Checkout]
+      summary: Initiate Web Redirect Payment
+      description: |
+        POST an HTML form (`application/x-www-form-urlencoded`) to redirect the
+        customer to the Interswitch hosted payment page. After payment, the
+        browser is redirected back to `site_redirect_url` with `txnref` in the
+        query string. Always confirm the transaction server-side via
+        `/collections/api/v1/gettransaction.json` before delivering value.
+      operationId: initiateWebRedirectPayment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+      responses:
+        '302':
+          description: Redirect to hosted payment page.
+        '400':
+          description: Validation error in the submitted form.
+  /collections/api/v1/gettransaction.json:
+    get:
+      tags: [Transactions]
+      summary: Get Transaction Status
+      description: |
+        Server-side transaction requery. Returns the authoritative status,
+        response code, and amount for a given transaction reference. Must be
+        called before delivering value; do not rely on the browser redirect
+        parameters.
+      operationId: getTransactionStatus
+      parameters:
+        - in: query
+          name: merchantcode
+          required: true
+          schema: { type: string }
+          description: Merchant code issued by Interswitch.
+        - in: query
+          name: transactionreference
+          required: true
+          schema: { type: string }
+          description: Original `txn_ref` submitted at checkout.
+        - in: query
+          name: amount
+          required: true
+          schema: { type: integer }
+          description: Original transaction amount in minor units (kobo).
+      responses:
+        '200':
+          description: Transaction status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionStatus'
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: |
+        Either `InterswitchAuth {base64(client_id)}` with companion `Timestamp`,
+        `Nonce`, `Signature`, and `SignatureMethod` headers (legacy), or
+        `Bearer {access_token}` obtained from the Passport OAuth token endpoint.
+  schemas:
+    CheckoutRequest:
+      type: object
+      required: [merchant_code, pay_item_id, txn_ref, amount, currency, cust_email, site_redirect_url]
+      properties:
+        merchant_code: { type: string, description: Merchant identifier from Quickteller Business. }
+        pay_item_id: { type: string, description: Pay item identifier configured on the merchant account. }
+        txn_ref: { type: string, description: Unique merchant transaction reference. }
+        amount: { type: integer, description: Amount in minor currency units (e.g. kobo for NGN). }
+        currency: { type: string, description: ISO 4217 numeric currency code (e.g. 566 for NGN). }
+        cust_email: { type: string, format: email }
+        site_redirect_url: { type: string, format: uri }
+    TransactionStatus:
+      type: object
+      properties:
+        ResponseCode: { type: string, description: '00 indicates a successful, approved transaction.' }
+        Amount: { type: integer, description: Settled amount in minor units. }
+        TransactionDate: { type: string, format: date-time }
+        MerchantReference: { type: string }
+        PaymentReference: { type: string }
+        RetrievalReferenceNumber: { type: string }
+        CardNumber: { type: string, description: Masked PAN of the card used. }
+        LeadBankCbnCode: { type: string }
+        LeadBankName: { type: string }

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/interswitch/interswitch-payment-schema.json",
+  "title": "Interswitch Payment",
+  "description": "Core payment object used across Interswitch Web Checkout, Payment Gateway, Refunds, and Recurring Payments.",
+  "type": "object",
+  "definitions": {
+    "Payment": {
+      "type": "object",
+      "required": ["transactionRef", "amount", "currency", "status"],
+      "properties": {
+        "paymentId": { "type": "string" },
+        "transactionRef": { "type": "string", "description": "Merchant-supplied unique reference." },
+        "amount": { "type": "integer", "description": "Amount in minor currency units (kobo for NGN)." },
+        "currency": { "type": "string", "description": "ISO 4217 alpha or numeric currency code." },
+        "merchantCode": { "type": "string" },
+        "payItemId": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerEmail": { "type": "string", "format": "email" },
+        "customerMobile": { "type": "string" },
+        "paymentMethod": { "$ref": "#/definitions/PaymentMethod" },
+        "status": { "type": "string", "enum": ["PENDING", "SUCCESSFUL", "FAILED", "REVERSED", "REFUNDED"] },
+        "responseCode": { "type": "string", "description": "00 / 90000 indicate success; see Interswitch response-codes guide." },
+        "responseMessage": { "type": "string" },
+        "authCode": { "type": "string" },
+        "retrievalReferenceNumber": { "type": "string" },
+        "cardPanMasked": { "type": "string" },
+        "cardScheme": { "type": "string", "enum": ["VERVE", "VISA", "MASTERCARD"] },
+        "settlementDate": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "PaymentMethod": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["card", "token", "googlePay", "transfer", "paycode"] },
+        "card": { "$ref": "#/definitions/Card" },
+        "token": { "type": "string" },
+        "tokenExpiryDate": { "type": "string", "format": "date" }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "pan": { "type": "string" },
+        "expiryMonth": { "type": "string" },
+        "expiryYear": { "type": "string" },
+        "cvv": { "type": "string" }
+      }
+    },
+    "Refund": {
+      "type": "object",
+      "required": ["refundReference", "parentPaymentId", "refundType"],
+      "properties": {
+        "refundReference": { "type": "string" },
+        "parentPaymentId": { "type": "string" },
+        "refundType": { "type": "string", "enum": ["PARTIAL", "FULL"] },
+        "refundAmount": { "type": "integer" },
+        "status": { "type": "string", "enum": ["SUCCESS", "PENDING", "PROCESSING", "COMPLETE", "COMPLETE_MANUAL", "FAILED"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Transfer": {
+      "type": "object",
+      "required": ["transferCode", "initiation", "termination"],
+      "properties": {
+        "transferCode": { "type": "string" },
+        "mac": { "type": "string" },
+        "initiatingEntityCode": { "type": "string" },
+        "initiation": {
+          "type": "object",
+          "properties": {
+            "amount": { "type": "integer" },
+            "currencyCode": { "type": "string" },
+            "channel": { "type": "string" },
+            "paymentMethodCode": { "type": "string" }
+          }
+        },
+        "termination": {
+          "type": "object",
+          "properties": {
+            "amount": { "type": "integer" },
+            "currencyCode": { "type": "string" },
+            "accountReceivable": {
+              "type": "object",
+              "properties": {
+                "accountNumber": { "type": "string" },
+                "accountType": { "type": "string" }
+              }
+            },
+            "entityCode": { "type": "string" },
+            "countryCode": { "type": "string" },
+            "paymentMethodCode": { "type": "string" }
+          }
+        },
+        "sender": {
+          "type": "object",
+          "properties": {
+            "phone": { "type": "string" },
+            "email": { "type": "string", "format": "email" },
+            "firstName": { "type": "string" },
+            "lastName": { "type": "string" }
+          }
+        }
+      }
+    },
+    "WebhookEvent": {
+      "type": "object",
+      "required": ["event", "uuid", "timestamp", "data"],
+      "properties": {
+        "event": { "type": "string", "enum": ["TRANSACTION", "SUBSCRIPTION", "PAYMENT_LINKS", "INVOICES"] },
+        "uuid": { "type": "string", "format": "uuid" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "data": { "type": "object" }
+      }
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/definitions/Payment" },
+    { "$ref": "#/definitions/Refund" },
+    { "$ref": "#/definitions/Transfer" },
+    { "$ref": "#/definitions/WebhookEvent" }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "Interswitch Web Checkout — Inline Sandbox Payment",
+  "description": "Minimal sandbox example showing a successful Verve card payment via inline-checkout.js followed by a mandatory server-side requery against /collections/api/v1/gettransaction.json.",
+  "request": {
+    "method": "POST",
+    "url": "https://sandbox.interswitchng.com/collections/w/pay",
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    "body": {
+      "merchant_code": "MX6072",
+      "pay_item_id": "9405967",
+      "txn_ref": "ORDER-20260524-0001",
+      "amount": 100000,
+      "currency": "566",
+      "cust_email": "demo@apievangelist.com",
+      "site_redirect_url": "https://merchant.example.com/payments/return"
+    }
+  },
+  "requery": {
+    "method": "GET",
+    "url": "https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json",
+    "query": {
+      "merchantcode": "MX6072",
+      "transactionreference": "ORDER-20260524-0001",
+      "amount": 100000
+    },
+    "response": {
+      "ResponseCode": "00",
+      "Amount": 100000,
+      "TransactionDate": "2026-05-24T12:34:56+01:00",
+      "MerchantReference": "ORDER-20260524-0001",
+      "PaymentReference": "FBN|WEB|MX6072|24-05-2026|123456|0001",
+      "RetrievalReferenceNumber": "614500000001",
+      "CardNumber": "627880******0095",
+      "LeadBankCbnCode": "011",
+      "LeadBankName": "First Bank of Nigeria"
+    }
+  },
+  "verification": [
+    "ResponseCode equals '00'.",
+    "Amount in the response matches the amount the merchant originally charged."
+  ]
+}

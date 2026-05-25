@@ -1,0 +1,126 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Interswitch Lending API — Loans
+  description: Provider discovery, offer evaluation, loan funding, and repayment for nano loans, salary lending, and value financing.
+  tags:
+  - Interswitch
+  - Lending
+  - Loans
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    INTERSWITCH_BEARER_TOKEN: INTERSWITCH_BEARER_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: lending-loans
+    baseUri: https://sandbox.interswitchng.com
+    resources:
+    - name: providers
+      path: /lending-service/api/v1/offers/providers
+      operations:
+      - name: listLoanProviders
+        method: GET
+        description: List available loan providers.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: array, value: $. }]
+    - name: offers
+      path: /lending-service/api/v3/offers
+      operations:
+      - name: listLoanOffers
+        method: GET
+        description: List loan offers for a customer.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: array, value: $. }]
+        inputParameters:
+        - { name: customerId, in: query, type: string, required: true }
+        - { name: amount, in: query, type: integer, required: false }
+    - name: accept-offer
+      path: /lending-service/api/v1/offers/{offerId}/accept
+      operations:
+      - name: acceptLoanOffer
+        method: POST
+        description: Accept a loan offer.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: offerId, in: path, type: string, required: true }
+    - name: fund-loan
+      path: /lending-service/api/v1/loans/{loanId}/fund
+      operations:
+      - name: fundLoan
+        method: POST
+        description: Disburse loan funds.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: loanId, in: path, type: string, required: true }
+    - name: debit-loan
+      path: /lending-service/api/v1/loans/{loanId}/debit
+      operations:
+      - name: debitLoanRepayment
+        method: POST
+        description: Debit repayment for a loan.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: loanId, in: path, type: string, required: true }
+        - { name: body, in: body, type: object, required: true }
+    - name: customer-status
+      path: /lending-service/api/v1/users/{customerId}/status
+      operations:
+      - name: getCustomerLoanStatus
+        method: GET
+        description: Get customer loan status.
+        outputRawFormat: json
+        outputParameters: [{ name: result, type: object, value: $. }]
+        inputParameters:
+        - { name: customerId, in: path, type: string, required: true }
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.INTERSWITCH_BEARER_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: lending-loans-mcp
+    port: 9090
+    transport: http
+    tools:
+    - name: interswitch-list-loan-providers
+      description: List available loan providers.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: lending-loans.listLoanProviders
+      outputParameters: [{ type: array, mapping: $. }]
+    - name: interswitch-list-loan-offers
+      description: List loan offers for a customer.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: lending-loans.listLoanOffers
+      with: { customerId: tools.customerId, amount: tools.amount }
+      outputParameters: [{ type: array, mapping: $. }]
+    - name: interswitch-accept-loan-offer
+      description: Accept a loan offer.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: lending-loans.acceptLoanOffer
+      with: { offerId: tools.offerId }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-fund-loan
+      description: Disburse loan funds.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: lending-loans.fundLoan
+      with: { loanId: tools.loanId }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-debit-loan-repayment
+      description: Debit repayment for a loan.
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: lending-loans.debitLoanRepayment
+      with: { loanId: tools.loanId, body: tools.body }
+      outputParameters: [{ type: object, mapping: $. }]
+    - name: interswitch-get-customer-loan-status
+      description: Get customer loan status.
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: lending-loans.getCustomerLoanStatus
+      with: { customerId: tools.customerId }
+      outputParameters: [{ type: object, mapping: $. }]

@@ -1,0 +1,54 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Interswitch
+providerId: interswitch
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Payments
+  - Rate Limiting
+  - Quotas
+description: |
+  Interswitch does not publish per-key request-per-second limits on its public
+  developer documentation. Limits are applied per merchant, per API, and per
+  environment by the Interswitch API Gateway. Production limits are negotiated
+  during onboarding; sandbox limits are intentionally low. The headers below
+  are observed on responses from the Quickteller and Payment Gateway APIs.
+sources:
+  - https://docs.interswitchgroup.com/docs/home
+  - https://docs.interswitchgroup.com/docs/authentication
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+algorithm: fixed-window
+limits:
+  - tier: Sandbox
+    api: All
+    rpm: 60
+    description: Indicative sandbox limit; subject to change.
+  - tier: Production
+    api: Web Checkout / Payment Gateway
+    rpm: Custom
+    description: Per-merchant limit negotiated during onboarding.
+  - tier: Production
+    api: Quickteller Bills Payment
+    rpm: Custom
+    description: Per-merchant limit; biller-side limits may also apply.
+  - tier: Production
+    api: Transfers
+    rpm: Custom
+    description: Per-merchant limit; NIBSS-side throughput caps apply.
+  - tier: Production
+    api: Card 360
+    rpm: Custom
+    description: Per-issuer limit set on the issuer-processor.
+notes:
+  - Bearer tokens issued by the Passport OAuth token endpoint are valid for 86,400 seconds (24 hours); refresh before expiry to avoid spikes against the token endpoint.
+  - The legacy InterswitchAuth signature scheme requires fresh `Nonce` and `Timestamp` headers on every call; reusing them triggers signature-validation failures, not rate-limit failures.

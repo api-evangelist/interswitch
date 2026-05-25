@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Lending API
+  description: |
+    Marketplace lending APIs connecting loan providers and distribution
+    channels — list providers, fetch offers, accept offers, fund loans, debit
+    for repayment, and inspect customer loan status. Supports PCI-DSS-licensed
+    and hosted-fields integrations and powers Nano Loans, Salary Lending, and
+    Value Financing.
+  version: '2024-01-01'
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Providers
+  - name: Offers
+  - name: Loans
+  - name: Customers
+  - name: Payments
+paths:
+  /lending-service/api/v1/offers/providers:
+    get:
+      tags: [Providers]
+      summary: List Loan Providers
+      operationId: listLoanProviders
+      responses:
+        '200':
+          description: Available lenders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    providerId: { type: string }
+                    name: { type: string }
+                    products: { type: array, items: { type: string } }
+  /lending-service/api/v3/offers:
+    get:
+      tags: [Offers]
+      summary: List Loan Offers For Customer
+      operationId: listLoanOffers
+      parameters:
+        - in: query
+          name: customerId
+          required: true
+          schema: { type: string }
+        - in: query
+          name: amount
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Loan offers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Offer' }
+  /lending-service/api/v1/offers/{offerId}/accept:
+    post:
+      tags: [Offers]
+      summary: Accept Loan Offer
+      operationId: acceptLoanOffer
+      parameters:
+        - { in: path, name: offerId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Loan created.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Loan' }
+  /lending-service/api/v1/loans/{loanId}/fund:
+    post:
+      tags: [Loans]
+      summary: Fund Loan
+      description: Disburse accepted loan funds to the borrower.
+      operationId: fundLoan
+      parameters:
+        - { in: path, name: loanId, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Funded. }
+  /lending-service/api/v1/loans/{loanId}/debit:
+    post:
+      tags: [Loans]
+      summary: Debit Loan Repayment
+      operationId: debitLoanRepayment
+      parameters:
+        - { in: path, name: loanId, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount]
+              properties:
+                amount: { type: integer }
+                paymentMethodId: { type: string }
+      responses:
+        '200': { description: Debited. }
+  /lending-service/api/v1/loans/{loanId}/update:
+    put:
+      tags: [Loans]
+      summary: Update Loan Status
+      operationId: updateLoanStatus
+      parameters:
+        - { in: path, name: loanId, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [ACTIVE, CLOSED, DEFAULTED, WRITTEN_OFF] }
+      responses:
+        '200': { description: Updated. }
+  /lending-service/api/v1/users/{customerId}/status:
+    get:
+      tags: [Customers]
+      summary: Get Customer Loan Status
+      operationId: getCustomerLoanStatus
+      parameters:
+        - { in: path, name: customerId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Active loan summary.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hasActiveLoan: { type: boolean }
+                  activeLoans: { type: array, items: { $ref: '#/components/schemas/Loan' } }
+  /lending-service/api/v1/users/{customerId}/payment-methods:
+    get:
+      tags: [Customers]
+      summary: List Customer Payment Methods
+      operationId: listCustomerPaymentMethods
+      parameters:
+        - { in: path, name: customerId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Payment methods.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    paymentMethodId: { type: string }
+                    type: { type: string, enum: [card, account] }
+                    last4: { type: string }
+  /lending-service/api/v2/payments/token:
+    post:
+      tags: [Payments]
+      summary: Generate Lending Payment Token
+      operationId: generateLendingPaymentToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, cardPan]
+              properties:
+                customerId: { type: string }
+                cardPan: { type: string }
+                expiryMonth: { type: string }
+                expiryYear: { type: string }
+                cvv: { type: string }
+      responses:
+        '200':
+          description: Token + OTP challenge.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pendingToken: { type: string }
+                  otpRequired: { type: boolean }
+  /lending-service/api/v2/payments/token/validate:
+    post:
+      tags: [Payments]
+      summary: Validate Lending Payment Token OTP
+      operationId: validateLendingPaymentTokenOtp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [pendingToken, otp]
+              properties:
+                pendingToken: { type: string }
+                otp: { type: string }
+      responses:
+        '200':
+          description: Confirmed token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentMethodId: { type: string }
+                  status: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Offer:
+      type: object
+      properties:
+        offerId: { type: string }
+        providerId: { type: string }
+        principal: { type: integer }
+        currency: { type: string }
+        interestRate: { type: number, format: float }
+        tenorDays: { type: integer }
+        productType: { type: string, enum: [NANO, SALARY, VALUE_FINANCING] }
+    Loan:
+      type: object
+      properties:
+        loanId: { type: string }
+        customerId: { type: string }
+        providerId: { type: string }
+        principal: { type: integer }
+        outstandingBalance: { type: integer }
+        currency: { type: string }
+        interestRate: { type: number, format: float }
+        tenorDays: { type: integer }
+        status: { type: string, enum: [PENDING, ACTIVE, CLOSED, DEFAULTED, WRITTEN_OFF] }
+        disbursedAt: { type: string, format: date-time }
+        dueAt: { type: string, format: date-time }

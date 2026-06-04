@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Card Payment With 3D Secure
+  summary: Authorize a card payment, step up to 3D Secure when required, then confirm the final payment status.
+  description: >-
+    Direct server-to-server card payment with conditional 3D Secure step-up. The
+    workflow authorizes the card payment, branches on the returned status: if the
+    issuer requires authentication it creates a 3D Secure session to obtain the
+    ACS redirect, otherwise it skips straight to confirmation. In both cases it
+    re-reads the payment to capture the final, authoritative status. All requests
+    are inlined and Bearer-authenticated with the Passport OAuth token.
+  version: 1.0.0
+sourceDescriptions:
+- name: paymentGatewayApi
+  url: ../openapi/interswitch-payment-gateway-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: card-payment-with-3ds
+  summary: Authorize a card payment, step up to 3D Secure if needed, and confirm.
+  description: >-
+    Creates a card payment, conditionally creates a 3D Secure session when the
+    issuer requires step-up, and reads back the final payment status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - transactionRef
+    - amount
+    - currency
+    - cardToken
+    - returnUrl
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      transactionRef:
+        type: string
+        description: Unique merchant transaction reference.
+      amount:
+        type: integer
+        description: Amount in minor currency units.
+      currency:
+        type: string
+        description: ISO currency code.
+      cardToken:
+        type: string
+        description: Tokenized card reference to charge.
+      returnUrl:
+        type: string
+        description: URL the issuer ACS returns to after 3D Secure step-up.
+  steps:
+  - stepId: authorizePayment
+    description: >-
+      Authorize and capture the card payment using a tokenized card. Branches to
+      3D Secure step-up when the status indicates authentication is required.
+    operationId: createCardPayment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionRef: $inputs.transactionRef
+        amount: $inputs.amount
+        currency: $inputs.currency
+        paymentMethod:
+          type: token
+          token: $inputs.cardToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentId: $response.body#/paymentId
+      status: $response.body#/status
+      responseCode: $response.body#/responseCode
+    onSuccess:
+    - name: needsStepUp
+      type: goto
+      stepId: stepUp3ds
+      criteria:
+      - context: $response.body
+        condition: $.status == "PENDING_AUTHENTICATION"
+        type: jsonpath
+    - name: noStepUp
+      type: goto
+      stepId: confirmPayment
+      criteria:
+      - context: $response.body
+        condition: $.status != "PENDING_AUTHENTICATION"
+        type: jsonpath
+  - stepId: stepUp3ds
+    description: >-
+      Create a 3D Secure session for the authorized payment to obtain the ACS
+      redirect details for issuer step-up authentication.
+    operationId: createThreeDSecureSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        paymentId: $steps.authorizePayment.outputs.paymentId
+        returnUrl: $inputs.returnUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      acsUrl: $response.body#/acsUrl
+      pareq: $response.body#/pareq
+      md: $response.body#/md
+  - stepId: confirmPayment
+    description: >-
+      Read back the payment to capture its final authoritative status after
+      authorization (and any step-up).
+    operationId: getPayment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: paymentId
+      in: path
+      value: $steps.authorizePayment.outputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalStatus: $response.body#/status
+      responseCode: $response.body#/responseCode
+      authCode: $response.body#/authCode
+  outputs:
+    paymentId: $steps.authorizePayment.outputs.paymentId
+    finalStatus: $steps.confirmPayment.outputs.finalStatus
+    acsUrl: $steps.stepUp3ds.outputs.acsUrl

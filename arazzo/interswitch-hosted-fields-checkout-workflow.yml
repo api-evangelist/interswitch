@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Hosted Fields Checkout
+  summary: Open a hosted-fields session to collect card data out of PCI scope, then confirm the resulting payment.
+  description: >-
+    PCI-minimizing checkout flow on the Payment Gateway. The workflow creates a
+    hosted-fields session so the browser collects raw card data and posts it
+    directly to Interswitch, keeping the merchant out of PCI scope, then reads
+    back the payment by id to confirm its authoritative status once the
+    browser-side authorization completes. The paymentId is supplied as an input
+    since it is produced by the browser-side hosted-fields submission. Requests
+    are Bearer-authenticated.
+  version: 1.0.0
+sourceDescriptions:
+- name: paymentGatewayApi
+  url: ../openapi/interswitch-payment-gateway-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: hosted-fields-checkout
+  summary: Create a hosted-fields session, then confirm the resulting payment.
+  description: >-
+    Creates a hosted-fields session for browser-side card capture, then reads the
+    resulting payment to confirm its final status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - transactionRef
+    - amount
+    - currency
+    - redirectUrl
+    - paymentId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      transactionRef:
+        type: string
+        description: Unique merchant transaction reference.
+      amount:
+        type: integer
+        description: Amount in minor currency units.
+      currency:
+        type: string
+        description: ISO currency code.
+      redirectUrl:
+        type: string
+        description: URL the hosted-fields page redirects to after capture.
+      paymentId:
+        type: string
+        description: Payment id produced by the browser-side hosted-fields submission.
+  steps:
+  - stepId: createSession
+    description: >-
+      Create a hosted-fields session so the browser can collect raw card data and
+      POST it directly to Interswitch, keeping the merchant out of PCI scope.
+    operationId: createHostedFieldsSession
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionRef: $inputs.transactionRef
+        amount: $inputs.amount
+        currency: $inputs.currency
+        redirectUrl: $inputs.redirectUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sessionId: $response.body#/sessionId
+      hostedFieldsUrl: $response.body#/hostedFieldsUrl
+      expiresAt: $response.body#/expiresAt
+  - stepId: confirmPayment
+    description: >-
+      Read the payment produced by the hosted-fields submission to confirm its
+      authoritative final status.
+    operationId: getPayment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: paymentId
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      responseCode: $response.body#/responseCode
+      authCode: $response.body#/authCode
+      amount: $response.body#/amount
+  outputs:
+    sessionId: $steps.createSession.outputs.sessionId
+    hostedFieldsUrl: $steps.createSession.outputs.hostedFieldsUrl
+    paymentStatus: $steps.confirmPayment.outputs.status

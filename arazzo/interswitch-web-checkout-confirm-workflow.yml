@@ -1,0 +1,115 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Web Checkout And Confirm
+  summary: Initiate a hosted Web Redirect payment, then server-side requery to confirm before delivering value.
+  description: >-
+    Implements the mandatory Web Checkout (Webpay) two-phase pattern. The
+    workflow posts the checkout form to redirect the customer to the hosted
+    payment page, then performs the authoritative server-side requery against the
+    gettransaction endpoint. It branches on the documented success code (00):
+    only an approved status with a matching amount should release value. The form
+    is sent as application/x-www-form-urlencoded per the spec.
+  version: 1.0.0
+sourceDescriptions:
+- name: webCheckoutApi
+  url: ../openapi/interswitch-web-checkout-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: checkout-and-confirm
+  summary: Initiate a hosted payment and confirm it server-side before delivering value.
+  description: >-
+    Posts the checkout form to start a hosted payment, then requeries the
+    transaction status and branches on the approved (00) response code.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - merchantCode
+    - payItemId
+    - txnRef
+    - amount
+    - currency
+    - custEmail
+    - siteRedirectUrl
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      merchantCode:
+        type: string
+        description: Merchant code issued by Interswitch.
+      payItemId:
+        type: string
+        description: Pay item identifier configured on the merchant account.
+      txnRef:
+        type: string
+        description: Unique merchant transaction reference.
+      amount:
+        type: integer
+        description: Amount in minor currency units (kobo).
+      currency:
+        type: string
+        description: ISO 4217 numeric currency code (e.g. 566 for NGN).
+      custEmail:
+        type: string
+        description: Customer email address.
+      siteRedirectUrl:
+        type: string
+        description: URL the hosted page redirects back to after payment.
+  steps:
+  - stepId: initiatePayment
+    description: >-
+      Post the checkout form to redirect the customer to the Interswitch hosted
+      payment page. A 302 redirect is the documented success response.
+    operationId: initiateWebRedirectPayment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        merchant_code: $inputs.merchantCode
+        pay_item_id: $inputs.payItemId
+        txn_ref: $inputs.txnRef
+        amount: $inputs.amount
+        currency: $inputs.currency
+        cust_email: $inputs.custEmail
+        site_redirect_url: $inputs.siteRedirectUrl
+    successCriteria:
+    - condition: $statusCode == 302
+  - stepId: confirmTransaction
+    description: >-
+      Authoritative server-side requery. Branches on ResponseCode: 00 means the
+      transaction is approved and value may be released.
+    operationId: getTransactionStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: merchantcode
+      in: query
+      value: $inputs.merchantCode
+    - name: transactionreference
+      in: query
+      value: $inputs.txnRef
+    - name: amount
+      in: query
+      value: $inputs.amount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      responseCode: $response.body#/ResponseCode
+      settledAmount: $response.body#/Amount
+      paymentReference: $response.body#/PaymentReference
+    onSuccess:
+    - name: approved
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.ResponseCode == "00"
+        type: jsonpath
+  outputs:
+    responseCode: $steps.confirmTransaction.outputs.responseCode
+    settledAmount: $steps.confirmTransaction.outputs.settledAmount
+    paymentReference: $steps.confirmTransaction.outputs.paymentReference

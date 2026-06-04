@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Recurring Tokenize And Charge
+  summary: Tokenize a card once, then charge the stored token for a recurring payment.
+  description: >-
+    Subscription billing flow. The workflow tokenizes a card by exchanging an
+    encrypted card payload for a reusable token plus expiry, then charges that
+    token for the recurring amount. The token and tokenExpiryDate from the first
+    step are threaded into the charge so the merchant never re-handles the PAN.
+    Both steps are Bearer-authenticated and inline their request bodies.
+  version: 1.0.0
+sourceDescriptions:
+- name: recurringPaymentsApi
+  url: ../openapi/interswitch-recurring-payments-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: tokenize-and-charge
+  summary: Tokenize a card and charge the resulting recurring token.
+  description: >-
+    Creates a recurring payment token from an encrypted card payload, then
+    charges that token for the supplied amount.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - tokenizeRef
+    - authData
+    - customerId
+    - amount
+    - currency
+    - transferRef
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      tokenizeRef:
+        type: string
+        description: Unique transaction reference for the tokenization request.
+      authData:
+        type: string
+        description: Encrypted card payload.
+      customerId:
+        type: string
+        description: Customer identifier the token belongs to.
+      amount:
+        type: integer
+        description: Charge amount in minor currency units.
+      currency:
+        type: string
+        description: Currency code (NGN).
+      transferRef:
+        type: string
+        description: Unique reference for the recurring charge.
+  steps:
+  - stepId: tokenizeCard
+    description: >-
+      Exchange the encrypted card payload for a reusable token and expiry. The
+      token replaces the raw PAN for future charges.
+    operationId: tokenizeCardForRecurring
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionRef: $inputs.tokenizeRef
+        authData: $inputs.authData
+        customerId: $inputs.customerId
+        currency: $inputs.currency
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+      tokenExpiryDate: $response.body#/tokenExpiryDate
+      cardLast4: $response.body#/cardLast4
+  - stepId: chargeToken
+    description: >-
+      Charge the stored token for the recurring amount, threading the token and
+      its expiry from the tokenization step.
+    operationId: chargeRecurringToken
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        amount: $inputs.amount
+        currency: $inputs.currency
+        token: $steps.tokenizeCard.outputs.token
+        tokenExpiryDate: $steps.tokenizeCard.outputs.tokenExpiryDate
+        transferRef: $inputs.transferRef
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentId: $response.body#/paymentId
+      status: $response.body#/status
+      responseCode: $response.body#/responseCode
+      authCode: $response.body#/authCode
+  outputs:
+    token: $steps.tokenizeCard.outputs.token
+    paymentId: $steps.chargeToken.outputs.paymentId
+    chargeStatus: $steps.chargeToken.outputs.status

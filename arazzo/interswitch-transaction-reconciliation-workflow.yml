@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Transaction Reconciliation
+  summary: Find a transaction by merchant reference, then pull its full detail for reconciliation.
+  description: >-
+    Back-office reconciliation flow over the Transaction Search API. The workflow
+    locates a transaction by its merchant reference, then — when a match is found
+    — pulls the full transaction detail (status, response code, settlement date,
+    masked PAN) for settlement reconciliation. It branches on whether the
+    reference search returned any transactions. All requests are
+    Bearer-authenticated.
+  version: 1.0.0
+sourceDescriptions:
+- name: transactionSearchApi
+  url: ../openapi/interswitch-transaction-search-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reconcile-transaction
+  summary: Search by reference, then fetch full transaction detail.
+  description: >-
+    Searches for a transaction by reference and, when found, retrieves its full
+    detail for reconciliation.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - reference
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      reference:
+        type: string
+        description: The merchant transaction reference to reconcile.
+  steps:
+  - stepId: searchByReference
+    description: >-
+      Search for the transaction by its merchant reference. Branches on whether
+      any matching transactions were returned.
+    operationId: searchTransactionByReference
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: reference
+      in: query
+      value: $inputs.reference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactionId: $response.body#/transactions/0/transactionId
+      transactions: $response.body#/transactions
+    onSuccess:
+    - name: found
+      type: goto
+      stepId: getDetail
+      criteria:
+      - context: $response.body
+        condition: $.transactions.length > 0
+        type: jsonpath
+    - name: notFound
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.transactions.length == 0
+        type: jsonpath
+  - stepId: getDetail
+    description: Retrieve the full transaction detail for the matched transaction.
+    operationId: getTransactionDetail
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: transactionId
+      in: path
+      value: $steps.searchByReference.outputs.transactionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      responseCode: $response.body#/responseCode
+      amount: $response.body#/amount
+      settlementDate: $response.body#/settlementDate
+      cardPanMasked: $response.body#/cardPanMasked
+  outputs:
+    transactionId: $steps.searchByReference.outputs.transactionId
+    status: $steps.getDetail.outputs.status
+    settlementDate: $steps.getDetail.outputs.settlementDate

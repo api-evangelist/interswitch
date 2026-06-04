@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Lending Offer To Disbursement
+  summary: Fetch a customer's loan offers, accept one, fund the loan, then confirm the customer's loan status.
+  description: >-
+    Marketplace lending origination flow. The workflow fetches the loan offers
+    available to a customer, accepts the chosen offer to create a loan,
+    disburses the accepted funds, and then reads the customer's loan status to
+    confirm an active loan now exists. The offerId is supplied as an input and
+    the resulting loanId is threaded into funding. All requests are
+    Bearer-authenticated.
+  version: 1.0.0
+sourceDescriptions:
+- name: lendingApi
+  url: ../openapi/interswitch-lending-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: offer-to-disbursement
+  summary: Accept a loan offer, fund the loan, and confirm the active loan.
+  description: >-
+    Lists offers for a customer, accepts the chosen offer, funds the resulting
+    loan, and confirms the customer now has an active loan.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - customerId
+    - offerId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      customerId:
+        type: string
+        description: Customer the offers are listed and the loan is created for.
+      offerId:
+        type: string
+        description: The loan offer to accept.
+      amount:
+        type: integer
+        description: Optional requested principal used to filter offers.
+  steps:
+  - stepId: listOffers
+    description: Fetch the loan offers available to the customer.
+    operationId: listLoanOffers
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: customerId
+      in: query
+      value: $inputs.customerId
+    - name: amount
+      in: query
+      value: $inputs.amount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      offers: $response.body
+  - stepId: acceptOffer
+    description: Accept the chosen offer, creating a loan in PENDING status.
+    operationId: acceptLoanOffer
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: offerId
+      in: path
+      value: $inputs.offerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      loanId: $response.body#/loanId
+      status: $response.body#/status
+      principal: $response.body#/principal
+  - stepId: fundLoan
+    description: Disburse the accepted loan funds to the borrower.
+    operationId: fundLoan
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: loanId
+      in: path
+      value: $steps.acceptOffer.outputs.loanId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmStatus
+    description: Read the customer's loan status to confirm an active loan exists.
+    operationId: getCustomerLoanStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: customerId
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/hasActiveLoan == true
+    outputs:
+      hasActiveLoan: $response.body#/hasActiveLoan
+      activeLoans: $response.body#/activeLoans
+  outputs:
+    loanId: $steps.acceptOffer.outputs.loanId
+    hasActiveLoan: $steps.confirmStatus.outputs.hasActiveLoan

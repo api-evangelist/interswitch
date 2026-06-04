@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Airtime Recharge
+  summary: Discover an airtime telco, pick a denomination, and recharge a phone number.
+  description: >-
+    Direct virtual top-up flow for MTN, Airtel, Glo, and 9mobile. The workflow
+    lists the airtime billers under category 4, reads the supported
+    denominations for the chosen telco to resolve a paymentCode, and then submits
+    the recharge advice for the recipient phone number. Each step inlines its
+    request and outputs so the flow is fully self-describing.
+  version: 1.0.0
+sourceDescriptions:
+- name: airtimeRechargeApi
+  url: ../openapi/interswitch-airtime-recharge-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: recharge-airtime
+  summary: List telcos, resolve a denomination, and top up a phone number.
+  description: >-
+    Reads the airtime billers, fetches the denominations for the selected telco,
+    and submits a recharge advice for the recipient.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - billerId
+    - paymentCode
+    - recipientPhone
+    - customerEmail
+    - customerMobile
+    - amount
+    - requestReference
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      billerId:
+        type: integer
+        description: The airtime telco biller id (under category 4).
+      paymentCode:
+        type: string
+        description: The denomination payment code to charge (from the telco's payment items).
+      recipientPhone:
+        type: string
+        description: Recipient mobile number in international format (sent as customerId).
+      customerEmail:
+        type: string
+        description: Purchaser email for the receipt.
+      customerMobile:
+        type: string
+        description: Purchaser mobile number.
+      amount:
+        type: integer
+        description: Recharge amount in minor currency units.
+      requestReference:
+        type: string
+        description: Unique merchant request reference.
+  steps:
+  - stepId: listTelcos
+    description: List the airtime billers under category 4 (MTN, Airtel, Glo, 9mobile).
+    operationId: listAirtimeTelcos
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      telcos: $response.body
+  - stepId: listDenominations
+    description: >-
+      Read the supported denominations for the selected telco to confirm the
+      paymentCode being charged.
+    operationId: listAirtimeDenominations
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: billerId
+      in: path
+      value: $inputs.billerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      denominations: $response.body
+  - stepId: recharge
+    description: >-
+      Submit the recharge advice. The recipient phone number is supplied as
+      customerId per the airtime advice contract.
+    operationId: rechargeAirtime
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        paymentCode: $inputs.paymentCode
+        customerId: $inputs.recipientPhone
+        customerEmail: $inputs.customerEmail
+        customerMobile: $inputs.customerMobile
+        amount: $inputs.amount
+        requestReference: $inputs.requestReference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactionRef: $response.body#/transactionRef
+      responseCode: $response.body#/responseCode
+      amount: $response.body#/amount
+  outputs:
+    transactionRef: $steps.recharge.outputs.transactionRef
+    responseCode: $steps.recharge.outputs.responseCode

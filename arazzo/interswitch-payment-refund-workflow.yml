@@ -1,0 +1,127 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Payment Refund And Track
+  summary: Confirm an original payment, raise a refund against it, then poll the refund to a terminal state.
+  description: >-
+    Cross-API refund lifecycle. The workflow first reads the original payment
+    from the Payment Gateway to confirm it succeeded, raises a refund against it
+    in the Refunds API, and then re-reads the refund to observe its status
+    progressing through the documented PENDING / PROCESSING states toward a
+    terminal SUCCESS / COMPLETE / FAILED state. Because operations span two
+    descriptions, steps reference operations through their source descriptions.
+  version: 1.0.0
+sourceDescriptions:
+- name: paymentGatewayApi
+  url: ../openapi/interswitch-payment-gateway-api-openapi.yml
+  type: openapi
+- name: refundsApi
+  url: ../openapi/interswitch-refunds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: refund-and-track
+  summary: Confirm a payment, raise a refund, and track the refund to a terminal state.
+  description: >-
+    Reads the original payment, creates a refund referencing it, then re-reads
+    the refund and branches on its terminal status.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - paymentId
+    - refundReference
+    - refundType
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      paymentId:
+        type: string
+        description: Id of the original successful payment to refund.
+      refundReference:
+        type: string
+        description: Unique refund identifier.
+      refundType:
+        type: string
+        description: PARTIAL or FULL refund type.
+      refundAmount:
+        type: integer
+        description: Refund amount in minor units (required for PARTIAL).
+      reason:
+        type: string
+        description: Optional reason for the refund.
+  steps:
+  - stepId: confirmPayment
+    description: Read the original payment to confirm it succeeded before refunding.
+    operationId: $sourceDescriptions.paymentGatewayApi.getPayment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: paymentId
+      in: path
+      value: $inputs.paymentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentStatus: $response.body#/status
+      paidAmount: $response.body#/amount
+  - stepId: createRefund
+    description: >-
+      Raise a refund against the confirmed payment. A 201 indicates the refund
+      was created and entered its lifecycle.
+    operationId: $sourceDescriptions.refundsApi.createRefund
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        refundReference: $inputs.refundReference
+        parentPaymentId: $inputs.paymentId
+        refundType: $inputs.refundType
+        refundAmount: $inputs.refundAmount
+        reason: $inputs.reason
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      refundReference: $response.body#/refundReference
+      status: $response.body#/status
+  - stepId: trackRefund
+    description: >-
+      Re-read the refund to observe its status. Branches when the refund reaches
+      a terminal SUCCESS / COMPLETE / FAILED state.
+    operationId: $sourceDescriptions.refundsApi.getRefund
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: refundReference
+      in: path
+      value: $steps.createRefund.outputs.refundReference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      completedAt: $response.body#/completedAt
+      responseCode: $response.body#/responseCode
+    onSuccess:
+    - name: settled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "SUCCESS" || $.status == "COMPLETE" || $.status == "COMPLETE_MANUAL"
+        type: jsonpath
+    onFailure:
+    - name: retryTrack
+      type: retry
+      stepId: trackRefund
+      retryAfter: 5
+      retryLimit: 5
+      criteria:
+      - context: $response.body
+        condition: $.status == "PENDING" || $.status == "PROCESSING"
+        type: jsonpath
+  outputs:
+    refundReference: $steps.createRefund.outputs.refundReference
+    refundStatus: $steps.trackRefund.outputs.status

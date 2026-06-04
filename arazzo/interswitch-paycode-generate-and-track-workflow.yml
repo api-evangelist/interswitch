@@ -1,0 +1,139 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Paycode Generate And Track
+  summary: Generate a cardless Paycode token, poll its status, and cancel it if it is not yet used.
+  description: >-
+    Cardless cash (Pay with Mobile) flow. The workflow generates a one-time
+    Paycode token for a subscriber, polls the token status to see whether it has
+    been redeemed, and — when the token is still unused — cancels it to release
+    the hold. The subscriberId and generated token are threaded across steps. All
+    requests are Bearer-authenticated and inline their parameters and bodies.
+  version: 1.0.0
+sourceDescriptions:
+- name: paycodeApi
+  url: ../openapi/interswitch-paycode-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: generate-and-track-paycode
+  summary: Generate a Paycode token, check its status, and cancel it if unused.
+  description: >-
+    Creates a one-time Paycode token, polls its status, and cancels the token
+    when it remains unredeemed.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - subscriberId
+    - frontEndPartnerId
+    - paymentMethodCode
+    - amount
+    - tokenLifeTimeInMinutes
+    - oneTimePin
+    - transactionRef
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      subscriberId:
+        type: string
+        description: Subscriber the token is generated for.
+      frontEndPartnerId:
+        type: string
+        description: Front-end partner id (e.g. WEMA).
+      paymentMethodCode:
+        type: string
+        description: Payment method code for the cardless transaction.
+      amount:
+        type: integer
+        description: Token amount in minor currency units.
+      tokenLifeTimeInMinutes:
+        type: integer
+        description: Token lifetime in minutes.
+      oneTimePin:
+        type: string
+        description: One-time PIN guarding the token.
+      transactionRef:
+        type: string
+        description: Unique transaction reference (also used as ttid).
+  steps:
+  - stepId: generateToken
+    description: Create a one-time Paycode token for the subscriber.
+    operationId: generatePaycodeToken
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: subscriberId
+      in: path
+      value: $inputs.subscriberId
+    requestBody:
+      contentType: application/json
+      payload:
+        frontEndPartnerId: $inputs.frontEndPartnerId
+        paymentMethodCode: $inputs.paymentMethodCode
+        amount: $inputs.amount
+        tokenLifeTimeInMinutes: $inputs.tokenLifeTimeInMinutes
+        oneTimePin: $inputs.oneTimePin
+        ttid: $inputs.transactionRef
+        transactionRef: $inputs.transactionRef
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/payWithMobileToken
+      subscriberId: $response.body#/subscriberId
+      responseCode: $response.body#/responseCode
+  - stepId: checkStatus
+    description: >-
+      Poll the token status. Ends the workflow when the token has been used;
+      otherwise proceeds to cancel the unused token.
+    operationId: getPaycodeTokenStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: subscriberId
+      in: path
+      value: $inputs.subscriberId
+    - name: token
+      in: query
+      value: $steps.generateToken.outputs.token
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      channel: $response.body#/channel
+    onSuccess:
+    - name: alreadyUsed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "USED"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: cancelToken
+      criteria:
+      - context: $response.body
+        condition: $.status != "USED"
+        type: jsonpath
+  - stepId: cancelToken
+    description: Cancel the unused Paycode token to release the hold.
+    operationId: cancelPaycodeToken
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        referenceId: $inputs.transactionRef
+        frontEndPartner: $inputs.frontEndPartnerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      responseCode: $response.body#/responseCode
+      responseMessage: $response.body#/responseMessage
+  outputs:
+    token: $steps.generateToken.outputs.token
+    tokenStatus: $steps.checkStatus.outputs.status
+    cancelResponseCode: $steps.cancelToken.outputs.responseCode

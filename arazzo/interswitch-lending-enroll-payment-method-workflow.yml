@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Lending Enroll Payment Method
+  summary: Generate a lending payment token, confirm it with an OTP, then debit a loan repayment with it.
+  description: >-
+    Repayment-method enrollment flow on the Lending API. The workflow generates a
+    payment token from the borrower's card (which returns an OTP challenge),
+    validates the OTP to confirm a reusable paymentMethodId, and then debits a
+    loan repayment using that payment method. The pendingToken is threaded from
+    generation into validation, and the confirmed paymentMethodId into the debit.
+    All requests are Bearer-authenticated.
+  version: 1.0.0
+sourceDescriptions:
+- name: lendingApi
+  url: ../openapi/interswitch-lending-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: enroll-and-debit-repayment
+  summary: Tokenize a repayment card, confirm OTP, and debit a loan repayment.
+  description: >-
+    Generates a lending payment token, validates the OTP to obtain a confirmed
+    payment method, and debits a repayment against the loan.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - loanId
+    - customerId
+    - cardPan
+    - otp
+    - amount
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      loanId:
+        type: string
+        description: The loan to debit the repayment from.
+      customerId:
+        type: string
+        description: Borrower the payment method belongs to.
+      cardPan:
+        type: string
+        description: Card PAN to tokenize as a repayment method.
+      expiryMonth:
+        type: string
+        description: Card expiry month.
+      expiryYear:
+        type: string
+        description: Card expiry year.
+      cvv:
+        type: string
+        description: Card CVV.
+      otp:
+        type: string
+        description: OTP supplied by the borrower to confirm the token.
+      amount:
+        type: integer
+        description: Repayment amount in minor currency units.
+  steps:
+  - stepId: generateToken
+    description: >-
+      Generate a payment token from the borrower's card. Returns a pendingToken
+      and an OTP challenge flag.
+    operationId: generateLendingPaymentToken
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        customerId: $inputs.customerId
+        cardPan: $inputs.cardPan
+        expiryMonth: $inputs.expiryMonth
+        expiryYear: $inputs.expiryYear
+        cvv: $inputs.cvv
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      pendingToken: $response.body#/pendingToken
+      otpRequired: $response.body#/otpRequired
+  - stepId: validateOtp
+    description: Validate the OTP to confirm the token and obtain a reusable payment method.
+    operationId: validateLendingPaymentTokenOtp
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        pendingToken: $steps.generateToken.outputs.pendingToken
+        otp: $inputs.otp
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentMethodId: $response.body#/paymentMethodId
+      status: $response.body#/status
+  - stepId: debitRepayment
+    description: Debit a loan repayment using the confirmed payment method.
+    operationId: debitLoanRepayment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: loanId
+      in: path
+      value: $inputs.loanId
+    requestBody:
+      contentType: application/json
+      payload:
+        amount: $inputs.amount
+        paymentMethodId: $steps.validateOtp.outputs.paymentMethodId
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    paymentMethodId: $steps.validateOtp.outputs.paymentMethodId
+    paymentMethodStatus: $steps.validateOtp.outputs.status

@@ -1,0 +1,142 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Transfer With Name Inquiry
+  summary: Resolve a bank code, confirm the recipient account name, then send a single transfer.
+  description: >-
+    The recommended Quickteller Send Money flow. The workflow lists CBN bank
+    codes, performs a name inquiry on the recipient NUBAN account to confirm the
+    account holder before any money moves, and then submits a single transfer
+    addressed to that account. The SHA-512 mac and entity codes are supplied as
+    inputs since they are computed by the integrator. responseCode 90000 marks a
+    successful transfer.
+  version: 1.0.0
+sourceDescriptions:
+- name: transfersApi
+  url: ../openapi/interswitch-transfers-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: transfer-with-name-inquiry
+  summary: Confirm the recipient account name, then disburse a single transfer.
+  description: >-
+    Lists banks, resolves the recipient account name via name inquiry, and sends
+    a single transfer to the confirmed recipient bank account.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - terminalId
+    - bankCode
+    - accountNumber
+    - transferCode
+    - mac
+    - initiatingEntityCode
+    - amount
+    - currencyCode
+    - recipientEntityCode
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      terminalId:
+        type: string
+        description: Terminal id header required on transfer requests.
+      bankCode:
+        type: string
+        description: 6-digit CBN bank code of the recipient bank.
+      accountNumber:
+        type: string
+        description: Recipient NUBAN account number.
+      transferCode:
+        type: string
+        description: Transfer code identifying the transfer product.
+      mac:
+        type: string
+        description: SHA-512 hash of the canonical transfer fields.
+      initiatingEntityCode:
+        type: string
+        description: Code of the entity initiating the transfer (e.g. PBL).
+      amount:
+        type: integer
+        description: Transfer amount in minor currency units.
+      currencyCode:
+        type: string
+        description: ISO currency code for the transfer.
+      recipientEntityCode:
+        type: string
+        description: Recipient bank entity code used on termination.
+  steps:
+  - stepId: listBanks
+    description: Return CBN bank codes and names addressable by the transfer endpoints.
+    operationId: listBanks
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      banks: $response.body
+  - stepId: confirmName
+    description: >-
+      Resolve the registered account name on the recipient account before
+      transferring. A 90000 responseCode confirms a valid account.
+    operationId: nameInquiry
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        accountId: $inputs.accountNumber
+        bankCode: $inputs.bankCode
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/responseCode == "90000"
+    outputs:
+      accountName: $response.body#/accountName
+      accountId: $response.body#/accountId
+  - stepId: sendTransfer
+    description: >-
+      Submit the single transfer to the confirmed recipient account. The
+      terminalId is supplied as a header; responseCode 90000 indicates success.
+    operationId: sendSingleTransfer
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: terminalId
+      in: header
+      value: $inputs.terminalId
+    requestBody:
+      contentType: application/json
+      payload:
+        transferCode: $inputs.transferCode
+        mac: $inputs.mac
+        initiatingEntityCode: $inputs.initiatingEntityCode
+        initiation:
+          amount: $inputs.amount
+          currencyCode: $inputs.currencyCode
+          paymentMethodCode: CA
+        termination:
+          amount: $inputs.amount
+          currencyCode: $inputs.currencyCode
+          accountReceivable:
+            accountNumber: $steps.confirmName.outputs.accountId
+            accountType: SAVINGS
+          entityCode: $inputs.recipientEntityCode
+          paymentMethodCode: AC
+        sender:
+          firstName: Sender
+          lastName: Account
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/ResponseCode == "90000"
+    outputs:
+      transactionRef: $response.body#/TransactionRef
+      responseCode: $response.body#/ResponseCode
+      transferDate: $response.body#/TransferDate
+  outputs:
+    recipientName: $steps.confirmName.outputs.accountName
+    transactionRef: $steps.sendTransfer.outputs.transactionRef
+    responseCode: $steps.sendTransfer.outputs.responseCode

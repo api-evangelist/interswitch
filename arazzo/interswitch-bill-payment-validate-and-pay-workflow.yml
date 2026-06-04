@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Validate Customer And Pay Bill
+  summary: Look up a biller's payment item, validate the customer, then submit a bill payment advice.
+  description: >-
+    The canonical Quickteller bills-payment flow. The workflow first reads the
+    payment items for a biller to obtain the paymentCode, validates the
+    customer's reference (smartcard, meter, account, or phone) against the biller
+    so value is never sent to a bad account, and only then submits the payment
+    advice. Every step inlines its request and asserts the documented success
+    code (90000) so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billsPaymentApi
+  url: ../openapi/interswitch-bills-payment-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: validate-and-pay-bill
+  summary: Resolve a payment item, validate the customer, and pay a Nigerian biller.
+  description: >-
+    Reads the biller's payment items, validates the supplied customer identifier
+    against the biller, and submits a payment advice for the validated customer.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - billerId
+    - paymentCode
+    - customerId
+    - customerEmail
+    - customerMobile
+    - amount
+    - requestReference
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      billerId:
+        type: integer
+        description: The biller whose payment items are being resolved (e.g. DSTV).
+      paymentCode:
+        type: string
+        description: The biller payment code to charge (from the biller's payment items).
+      customerId:
+        type: string
+        description: The customer reference at the biller (smartcard, meter, account, or phone).
+      customerEmail:
+        type: string
+        description: Customer email for the payment receipt.
+      customerMobile:
+        type: string
+        description: Customer mobile number.
+      amount:
+        type: integer
+        description: Amount in minor currency units (kobo).
+      requestReference:
+        type: string
+        description: Unique merchant request reference, prefixed with the merchant prefix.
+  steps:
+  - stepId: listPaymentItems
+    description: >-
+      Read the supported payment items (packages, amounts, denominations) for
+      the biller to confirm the paymentCode being charged is valid.
+    operationId: listBillerPaymentItems
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: billerId
+      in: path
+      value: $inputs.billerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentItems: $response.body
+  - stepId: validateCustomer
+    description: >-
+      Verify the customer reference with the biller before charging. The biller
+      returns the customer's full name when the reference is recognised.
+    operationId: validateCustomer
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        paymentCode: $inputs.paymentCode
+        customerId: $inputs.customerId
+        amount: $inputs.amount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fullName: $response.body#/fullName
+      validationResponseCode: $response.body#/responseCode
+  - stepId: payBill
+    description: >-
+      Submit the payment advice for the validated customer. responseCode 90000
+      indicates the payment was accepted.
+    operationId: submitBillPaymentAdvice
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        paymentCode: $inputs.paymentCode
+        customerId: $inputs.customerId
+        customerEmail: $inputs.customerEmail
+        customerMobile: $inputs.customerMobile
+        amount: $inputs.amount
+        requestReference: $inputs.requestReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/responseCode == "90000"
+    outputs:
+      transactionRef: $response.body#/transactionRef
+      responseCode: $response.body#/responseCode
+  outputs:
+    customerName: $steps.validateCustomer.outputs.fullName
+    transactionRef: $steps.payBill.outputs.transactionRef
+    responseCode: $steps.payBill.outputs.responseCode

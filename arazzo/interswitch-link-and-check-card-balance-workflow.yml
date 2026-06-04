@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Interswitch Link And Check Card Balance
+  summary: Validate a card PAN, link it to a customer, then read the linked card's balance.
+  description: >-
+    Card linking flow on Card 360. The workflow validates a card PAN to confirm
+    its scheme and issuer, links the validated PAN to a customer profile, and
+    reads the card balance. Because the validate and balance endpoints key off
+    different identifiers (PAN vs cardId), the cardId used for the balance lookup
+    is supplied as an input. All requests are Bearer-authenticated and inline
+    their bodies.
+  version: 1.0.0
+sourceDescriptions:
+- name: card360Api
+  url: ../openapi/interswitch-card-360-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: link-and-check-balance
+  summary: Validate a card PAN, link it to a customer, and read the card balance.
+  description: >-
+    Validates a card PAN, links it to the customer profile, and reads the
+    balance for the associated card id.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - cardPan
+    - customerId
+    - cardId
+    properties:
+      accessToken:
+        type: string
+        description: Bearer access token from the Passport OAuth token endpoint.
+      cardPan:
+        type: string
+        description: The card PAN to validate and link.
+      customerId:
+        type: string
+        description: Customer profile the card is linked to.
+      cardId:
+        type: string
+        description: Card id used for the balance inquiry once linked.
+  steps:
+  - stepId: validateCard
+    description: >-
+      Validate the card PAN to confirm its scheme and issuer before linking.
+    operationId: validateCard
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        cardPan: $inputs.cardPan
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $response.body#/valid == true
+    outputs:
+      valid: $response.body#/valid
+      cardScheme: $response.body#/cardScheme
+      issuerBank: $response.body#/issuerBank
+  - stepId: linkCard
+    description: Link the validated card PAN to the customer profile.
+    operationId: linkCard
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        cardPan: $inputs.cardPan
+        customerId: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: checkBalance
+    description: Read the card balance for the linked card.
+    operationId: getCardBalance
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.accessToken
+    - name: cardId
+      in: path
+      value: $inputs.cardId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      balance: $response.body#/balance
+      availableBalance: $response.body#/availableBalance
+      currency: $response.body#/currency
+  outputs:
+    cardScheme: $steps.validateCard.outputs.cardScheme
+    balance: $steps.checkBalance.outputs.balance
+    availableBalance: $steps.checkBalance.outputs.availableBalance

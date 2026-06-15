@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Bills Payment API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Biller Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/categorys"
+          },
+          "docs": "List Biller Categories"
+        },
+        {
+          "info": {
+            "name": "List Billers In Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/categorys/:categoryId/billers",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Billers In Category"
+        },
+        {
+          "info": {
+            "name": "List All Billers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/billers"
+          },
+          "docs": "List All Billers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Biller Payment Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/billers/:billerId/paymentitems",
+            "params": [
+              {
+                "name": "billerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns supported amounts, packages, or denominations for the biller (e.g. DSTV Compact, MTN-100 airtime)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customer Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/customers/validations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify a customer ID (smartcard number, meter number, account number, phone) with the biller before charging."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Bill Payment Advice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/payments/advices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit Bill Payment Advice"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1105 @@
+{
+  "item": [
+    {
+      "id": "eb40a52c-e19e-466b-bd4d-845bf785cadb",
+      "name": "Providers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "766fe3bf-aa07-4f6e-a864-01b7dd8d010d",
+          "name": "List Loan Providers",
+          "request": {
+            "name": "List Loan Providers",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "offers",
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0087ae43-618e-4c47-a1c4-c9e3273f5598",
+              "name": "Available lenders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "offers",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"providerId\": \"string\",\n    \"name\": \"string\",\n    \"products\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"providerId\": \"string\",\n    \"name\": \"string\",\n    \"products\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "05fabba4-4857-44c8-b356-f40f626a777b",
+      "name": "Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c3a90db-3564-4643-8c45-dd4b6c18112c",
+          "name": "List Loan Offers For Customer",
+          "request": {
+            "name": "List Loan Offers For Customer",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v3",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a72665ef-2363-492e-a934-726aa4883859",
+              "name": "Loan offers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v3",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"offerId\": \"string\",\n    \"providerId\": \"string\",\n    \"principal\": 342,\n    \"currency\": \"string\",\n    \"interestRate\": 9796.054542338881,\n    \"tenorDays\": 2341,\n    \"productType\": \"VALUE_FINANCING\"\n  },\n  {\n    \"offerId\": \"string\",\n    \"providerId\": \"string\",\n    \"principal\": 1535,\n    \"currency\": \"string\",\n    \"interestRate\": 8696.315381156648,\n    \"tenorDays\": 3996,\n    \"productType\": \"VALUE_FINANCING\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ce9343d-87b1-4def-8d2b-8342b75def43",
+          "name": "Accept Loan Offer",
+          "request": {
+            "name": "Accept Loan Offer",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "offers",
+                ":offerId",
+                "accept"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "offerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03fa16ab-027f-418d-8c6d-46824762ddfa",
+              "name": "Loan created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "offers",
+                    ":offerId",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "offerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"loanId\": \"string\",\n  \"customerId\": \"string\",\n  \"providerId\": \"string\",\n  \"principal\": 8452,\n  \"outstandingBalance\": 4622,\n  \"currency\": \"string\",\n  \"interestRate\": 5586.4405249453275,\n  \"tenorDays\": 5365,\n  \"status\": \"WRITTEN_OFF\",\n  \"disbursedAt\": \"2025-11-18T16:41:44.423Z\",\n  \"dueAt\": \"1967-08-11T02:05:22.157Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8175f6a6-7763-4052-b336-928d1c328846",
+      "name": "Loans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0002c31b-e64f-4495-a8fa-c7aba2561c89",
+          "name": "Fund Loan",
+          "request": {
+            "name": "Fund Loan",
+            "description": {
+              "content": "Disburse accepted loan funds to the borrower.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "loans",
+                ":loanId",
+                "fund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "loanId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69a1c15f-c15e-40fa-a292-a503be3fe150",
+              "name": "Funded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "loans",
+                    ":loanId",
+                    "fund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46210fa0-5b38-4771-9fb2-28b182040824",
+          "name": "Debit Loan Repayment",
+          "request": {
+            "name": "Debit Loan Repayment",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "loans",
+                ":loanId",
+                "debit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "loanId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"paymentMethodId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1eb4e02-f8bd-4fa8-b005-d4ecd3b9038b",
+              "name": "Debited.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "loans",
+                    ":loanId",
+                    "debit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"paymentMethodId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b4dff95-f411-4c0b-8474-f62554a4785d",
+          "name": "Update Loan Status",
+          "request": {
+            "name": "Update Loan Status",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "loans",
+                ":loanId",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "loanId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce0e79d7-e6da-4b77-a080-840a53c2da4e",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "loans",
+                    ":loanId",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "loanId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9e36472c-4ec2-4dfc-88db-3cf7b60af2c0",
+      "name": "Customers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "696e9440-80b1-4b22-9c02-e7bbb093b721",
+          "name": "Get Customer Loan Status",
+          "request": {
+            "name": "Get Customer Loan Status",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "users",
+                ":customerId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2dda0bb-ce12-4205-93c7-dad3612554d6",
+              "name": "Active loan summary.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "users",
+                    ":customerId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hasActiveLoan\": true,\n  \"activeLoans\": [\n    {\n      \"loanId\": \"string\",\n      \"customerId\": \"string\",\n      \"providerId\": \"string\",\n      \"principal\": 6576,\n      \"outstandingBalance\": 2479,\n      \"currency\": \"string\",\n      \"interestRate\": 3489.2731994996616,\n      \"tenorDays\": 9609,\n      \"status\": \"WRITTEN_OFF\",\n      \"disbursedAt\": \"2011-03-16T22:56:56.817Z\",\n      \"dueAt\": \"1950-03-07T04:54:35.131Z\"\n    },\n    {\n      \"loanId\": \"string\",\n      \"customerId\": \"string\",\n      \"providerId\": \"string\",\n      \"principal\": 7419,\n      \"outstandingBalance\": 2952,\n      \"currency\": \"string\",\n      \"interestRate\": 9649.587210598767,\n      \"tenorDays\": 2894,\n      \"status\": \"CLOSED\",\n      \"disbursedAt\": \"1993-01-02T19:34:18.999Z\",\n      \"dueAt\": \"1991-06-10T19:19:23.506Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ed5e4d0-8bae-4f91-8a15-86c429c91523",
+          "name": "List Customer Payment Methods",
+          "request": {
+            "name": "List Customer Payment Methods",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "users",
+                ":customerId",
+                "payment-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8116a827-450c-4ac9-820a-08a21a069ebe",
+              "name": "Payment methods.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "users",
+                    ":customerId",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"paymentMethodId\": \"string\",\n    \"type\": \"account\",\n    \"last4\": \"string\"\n  },\n  {\n    \"paymentMethodId\": \"string\",\n    \"type\": \"card\",\n    \"last4\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "89220d8b-10dc-4567-81b3-d9ab0fe7f7f1",
+      "name": "Payments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7395daf-fc1a-4c00-8f7b-db2488bed5b0",
+          "name": "Generate Lending Payment Token",
+          "request": {
+            "name": "Generate Lending Payment Token",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v2",
+                "payments",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"cardPan\": \"<string>\",\n  \"expiryMonth\": \"<string>\",\n  \"expiryYear\": \"<string>\",\n  \"cvv\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ecef9f27-f407-4186-ace3-844257fdc216",
+              "name": "Token + OTP challenge.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v2",
+                    "payments",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"cardPan\": \"<string>\",\n  \"expiryMonth\": \"<string>\",\n  \"expiryYear\": \"<string>\",\n  \"cvv\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pendingToken\": \"string\",\n  \"otpRequired\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fb7678b-c283-4d34-8ce9-7215108a2ca4",
+          "name": "Validate Lending Payment Token OTP",
+          "request": {
+            "name": "Validate Lending Payment Token OTP",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v2",
+                "payments",
+                "token",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pendingToken\": \"<string>\",\n  \"otp\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86ebb57f-5670-4250-8d83-e56324385a27",
+              "name": "Confirmed token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v2",
+                    "payments",
+                    "token",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pendingToken\": \"<string>\",\n  \"otp\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentMethodId\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8072837e-aaef-4aad-a2a9-5e624829c655",
+    "name": "Interswitch Lending API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketplace lending APIs connecting loan providers and distribution\nchannels — list providers, fetch offers, accept offers, fund loans, debit\nfor repayment, and inspect customer loan status. Supports PCI-DSS-licensed\nand hosted-fields integrations and powers Nano Loans, Salary Lending, and\nValue Financing.\n",
+      "type": "text/plain"
+    }
+  }
+}

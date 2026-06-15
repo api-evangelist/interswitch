@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Transaction Search API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Quick Transaction Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qa.interswitchng.com/transaction-search/api/v1/search/quick",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Quick Transaction Search"
+        },
+        {
+          "info": {
+            "name": "Search By Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qa.interswitchng.com/transaction-search/api/v1/search/reference",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search By Reference"
+        },
+        {
+          "info": {
+            "name": "Bulk Transaction Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/transaction-search/api/v1/search/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Transaction Search"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Detail",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transaction Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qa.interswitchng.com/transaction-search/api/v1/transactions/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Transaction Detail"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

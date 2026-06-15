@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Customer Insights API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Demography",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Customer Demography",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/insights/api/v1/customers/:customerId/demography",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Customer Demography"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Financial History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Financial History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/insights/api/v1/customers/:customerId/financial-history",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "months",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Financial History"
+        },
+        {
+          "info": {
+            "name": "Get Average Financial History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/insights/api/v1/customers/:customerId/financial-history/average",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Average Financial History"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Financial Habits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Financial Habits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/insights/api/v1/customers/:customerId/financial-habits",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Financial Habits"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

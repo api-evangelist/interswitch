@@ -1,0 +1,528 @@
+{
+  "info": {
+    "_postman_id": "439607cc-9671-46e2-8600-99616eefff63",
+    "name": "Interswitch Transfers API",
+    "description": "Quickteller Send Money APIs covering Single Transfer, Bulk Transfer, Name\nInquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to\ndisburse funds across NIBSS-Instant-Payment-connected Nigerian bank\naccounts with SHA-512 MAC authentication on each request.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:09:56.000Z",
+    "updatedAt": "2026-06-05T15:09:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-439607cc-9671-46e2-8600-99616eefff63"
+  },
+  "item": [
+    {
+      "name": "quicktellerservice",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "v5",
+              "item": [
+                {
+                  "name": "transactions",
+                  "item": [
+                    {
+                      "name": "TransferFunds",
+                      "item": [
+                        {
+                          "name": "Send Single Transfer",
+                          "id": "56fcda10-7e1b-4fef-8d1d-c9724abbc358",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "terminalId",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"transferCode\": \"<string>\",\n  \"mac\": \"<string>\",\n  \"initiatingEntityCode\": \"<string>\",\n  \"initiation\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"termination\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"accountReceivable\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\"\n    },\n    \"entityCode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"sender\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/quicktellerservice/api/v5/transactions/TransferFunds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "quicktellerservice",
+                                "api",
+                                "v5",
+                                "transactions",
+                                "TransferFunds"
+                              ]
+                            },
+                            "description": "Move funds from a sender wallet or account to a single recipient bank\naccount. `mac` is the SHA-512 hash of the canonical message; consult the\nInterswitch transfer integration guide for the exact field order.\n"
+                          },
+                          "response": [
+                            {
+                              "id": "4fbbd705-f624-44bc-b1f5-b928701439d3",
+                              "name": "Transfer response.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "terminalId",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"transferCode\": \"<string>\",\n  \"mac\": \"<string>\",\n  \"initiatingEntityCode\": \"<string>\",\n  \"initiation\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"termination\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"accountReceivable\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\"\n    },\n    \"entityCode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"sender\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/quicktellerservice/api/v5/transactions/TransferFunds",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "quicktellerservice",
+                                    "api",
+                                    "v5",
+                                    "transactions",
+                                    "TransferFunds"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ResponseCode\": \"<string>\",\n  \"TransactionRef\": \"<string>\",\n  \"TransferDate\": \"<dateTime>\",\n  \"Amount\": \"<integer>\"\n}",
+                              "createdAt": "2026-06-05T15:09:57.000Z",
+                              "updatedAt": "2026-06-05T15:09:57.000Z",
+                              "uid": "35240-4fbbd705-f624-44bc-b1f5-b928701439d3"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:09:57.000Z",
+                          "updatedAt": "2026-06-05T15:09:57.000Z",
+                          "uid": "35240-56fcda10-7e1b-4fef-8d1d-c9724abbc358"
+                        }
+                      ],
+                      "id": "3e5961d0-b0c1-4db6-bce8-846ce1bb68eb",
+                      "createdAt": "2026-06-05T15:09:57.000Z",
+                      "updatedAt": "2026-06-05T15:09:57.000Z",
+                      "uid": "35240-3e5961d0-b0c1-4db6-bce8-846ce1bb68eb"
+                    },
+                    {
+                      "name": "BulkTransfer",
+                      "item": [
+                        {
+                          "name": "Send Bulk Transfer",
+                          "id": "9f0b82cb-1f2e-4ae9-b656-6416863e6055",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "terminalId",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"batchReference\": \"<string>\",\n  \"items\": [\n    {\n      \"transferCode\": \"<string>\",\n      \"mac\": \"<string>\",\n      \"initiatingEntityCode\": \"<string>\",\n      \"initiation\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"channel\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"termination\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"<string>\",\n          \"accountType\": \"<string>\"\n        },\n        \"entityCode\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"sender\": {\n        \"phone\": \"<string>\",\n        \"email\": \"<email>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      }\n    },\n    {\n      \"transferCode\": \"<string>\",\n      \"mac\": \"<string>\",\n      \"initiatingEntityCode\": \"<string>\",\n      \"initiation\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"channel\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"termination\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"<string>\",\n          \"accountType\": \"<string>\"\n        },\n        \"entityCode\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"sender\": {\n        \"phone\": \"<string>\",\n        \"email\": \"<email>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      }\n    }\n  ],\n  \"initiatingEntityCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/quicktellerservice/api/v5/transactions/BulkTransfer",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "quicktellerservice",
+                                "api",
+                                "v5",
+                                "transactions",
+                                "BulkTransfer"
+                              ]
+                            },
+                            "description": "Disburse to up to thousands of recipients in a single request."
+                          },
+                          "response": [
+                            {
+                              "id": "7ae66b99-6bd2-4191-9b9b-34ff59fc6e9d",
+                              "name": "Batch accepted.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "terminalId",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"batchReference\": \"<string>\",\n  \"items\": [\n    {\n      \"transferCode\": \"<string>\",\n      \"mac\": \"<string>\",\n      \"initiatingEntityCode\": \"<string>\",\n      \"initiation\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"channel\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"termination\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"<string>\",\n          \"accountType\": \"<string>\"\n        },\n        \"entityCode\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"sender\": {\n        \"phone\": \"<string>\",\n        \"email\": \"<email>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      }\n    },\n    {\n      \"transferCode\": \"<string>\",\n      \"mac\": \"<string>\",\n      \"initiatingEntityCode\": \"<string>\",\n      \"initiation\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"channel\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"termination\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"<string>\",\n          \"accountType\": \"<string>\"\n        },\n        \"entityCode\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"sender\": {\n        \"phone\": \"<string>\",\n        \"email\": \"<email>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      }\n    }\n  ],\n  \"initiatingEntityCode\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/quicktellerservice/api/v5/transactions/BulkTransfer",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "quicktellerservice",
+                                    "api",
+                                    "v5",
+                                    "transactions",
+                                    "BulkTransfer"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"batchId\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"acceptedCount\": \"<integer>\",\n  \"rejectedCount\": \"<integer>\"\n}",
+                              "createdAt": "2026-06-05T15:09:57.000Z",
+                              "updatedAt": "2026-06-05T15:09:57.000Z",
+                              "uid": "35240-7ae66b99-6bd2-4191-9b9b-34ff59fc6e9d"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:09:57.000Z",
+                          "updatedAt": "2026-06-05T15:09:57.000Z",
+                          "uid": "35240-9f0b82cb-1f2e-4ae9-b656-6416863e6055"
+                        }
+                      ],
+                      "id": "33740588-bbbf-47cb-a470-d78d4bfe7663",
+                      "createdAt": "2026-06-05T15:09:57.000Z",
+                      "updatedAt": "2026-06-05T15:09:57.000Z",
+                      "uid": "35240-33740588-bbbf-47cb-a470-d78d4bfe7663"
+                    },
+                    {
+                      "name": "NameInquiry",
+                      "item": [
+                        {
+                          "name": "Resolve Account Name",
+                          "id": "8cd193f6-82c8-4000-b0fb-ee7b050d6bab",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountId\": \"<string>\",\n  \"bankCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/quicktellerservice/api/v5/transactions/NameInquiry",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "quicktellerservice",
+                                "api",
+                                "v5",
+                                "transactions",
+                                "NameInquiry"
+                              ]
+                            },
+                            "description": "Look up the registered name on a bank account before initiating a transfer to it."
+                          },
+                          "response": [
+                            {
+                              "id": "789e13ab-65cc-400f-953d-ca349dd8b9a1",
+                              "name": "Account holder details.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"accountId\": \"<string>\",\n  \"bankCode\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/quicktellerservice/api/v5/transactions/NameInquiry",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "quicktellerservice",
+                                    "api",
+                                    "v5",
+                                    "transactions",
+                                    "NameInquiry"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"accountName\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"responseCode\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:09:57.000Z",
+                              "updatedAt": "2026-06-05T15:09:57.000Z",
+                              "uid": "35240-789e13ab-65cc-400f-953d-ca349dd8b9a1"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:09:57.000Z",
+                          "updatedAt": "2026-06-05T15:09:57.000Z",
+                          "uid": "35240-8cd193f6-82c8-4000-b0fb-ee7b050d6bab"
+                        }
+                      ],
+                      "id": "ff6821c4-bd19-4609-8124-86b23b4072c4",
+                      "createdAt": "2026-06-05T15:09:57.000Z",
+                      "updatedAt": "2026-06-05T15:09:57.000Z",
+                      "uid": "35240-ff6821c4-bd19-4609-8124-86b23b4072c4"
+                    }
+                  ],
+                  "id": "8e07447c-1851-431e-bd8c-a629bb5adb6e",
+                  "createdAt": "2026-06-05T15:09:57.000Z",
+                  "updatedAt": "2026-06-05T15:09:57.000Z",
+                  "uid": "35240-8e07447c-1851-431e-bd8c-a629bb5adb6e"
+                },
+                {
+                  "name": "banks",
+                  "item": [
+                    {
+                      "name": "List Banks",
+                      "id": "66f891eb-db44-4a45-ae30-833be0820d00",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/quicktellerservice/api/v5/banks",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "quicktellerservice",
+                            "api",
+                            "v5",
+                            "banks"
+                          ]
+                        },
+                        "description": "Return CBN bank codes and bank names that can be addressed via the transfer endpoints."
+                      },
+                      "response": [
+                        {
+                          "id": "e2f155df-f340-471c-9413-4201d730dda2",
+                          "name": "List of banks.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/quicktellerservice/api/v5/banks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "quicktellerservice",
+                                "api",
+                                "v5",
+                                "banks"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"bankCode\": \"<string>\",\n    \"bankName\": \"<string>\",\n    \"cbnCode\": \"<string>\"\n  },\n  {\n    \"bankCode\": \"<string>\",\n    \"bankName\": \"<string>\",\n    \"cbnCode\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:09:57.000Z",
+                          "updatedAt": "2026-06-05T15:09:57.000Z",
+                          "uid": "35240-e2f155df-f340-471c-9413-4201d730dda2"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:09:57.000Z",
+                      "updatedAt": "2026-06-05T15:09:57.000Z",
+                      "uid": "35240-66f891eb-db44-4a45-ae30-833be0820d00"
+                    }
+                  ],
+                  "id": "d414afb3-54b9-4193-8248-e2bee1d39ec5",
+                  "createdAt": "2026-06-05T15:09:57.000Z",
+                  "updatedAt": "2026-06-05T15:09:57.000Z",
+                  "uid": "35240-d414afb3-54b9-4193-8248-e2bee1d39ec5"
+                }
+              ],
+              "id": "c46074ec-5bd8-4782-9b31-9883ceba273d",
+              "createdAt": "2026-06-05T15:09:57.000Z",
+              "updatedAt": "2026-06-05T15:09:57.000Z",
+              "uid": "35240-c46074ec-5bd8-4782-9b31-9883ceba273d"
+            }
+          ],
+          "id": "be83c8cc-74ff-480d-9c5a-e6c9c3c544dd",
+          "createdAt": "2026-06-05T15:09:57.000Z",
+          "updatedAt": "2026-06-05T15:09:57.000Z",
+          "uid": "35240-be83c8cc-74ff-480d-9c5a-e6c9c3c544dd"
+        }
+      ],
+      "id": "9efe892d-2f4a-48fe-91d0-1efaef128eb4",
+      "createdAt": "2026-06-05T15:09:57.000Z",
+      "updatedAt": "2026-06-05T15:09:57.000Z",
+      "uid": "35240-9efe892d-2f4a-48fe-91d0-1efaef128eb4"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://qa.interswitchng.com"
+    }
+  ]
+}

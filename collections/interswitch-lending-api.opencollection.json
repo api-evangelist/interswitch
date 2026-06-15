@@ -1,0 +1,236 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Lending API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Loan Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/offers/providers"
+          },
+          "docs": "List Loan Providers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Loan Offers For Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v3/offers",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Loan Offers For Customer"
+        },
+        {
+          "info": {
+            "name": "Accept Loan Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/offers/:offerId/accept",
+            "params": [
+              {
+                "name": "offerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accept Loan Offer"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Loans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fund Loan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/loans/:loanId/fund",
+            "params": [
+              {
+                "name": "loanId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disburse accepted loan funds to the borrower."
+        },
+        {
+          "info": {
+            "name": "Debit Loan Repayment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/loans/:loanId/debit",
+            "params": [
+              {
+                "name": "loanId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Debit Loan Repayment"
+        },
+        {
+          "info": {
+            "name": "Update Loan Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/loans/:loanId/update",
+            "params": [
+              {
+                "name": "loanId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Loan Status"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Customer Loan Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/users/:customerId/status",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Customer Loan Status"
+        },
+        {
+          "info": {
+            "name": "List Customer Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/users/:customerId/payment-methods",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Customer Payment Methods"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Lending Payment Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v2/payments/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate Lending Payment Token"
+        },
+        {
+          "info": {
+            "name": "Validate Lending Payment Token OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v2/payments/token/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate Lending Payment Token OTP"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

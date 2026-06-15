@@ -1,0 +1,660 @@
+{
+  "item": [
+    {
+      "id": "9772eaa2-db5b-4dc8-951e-fb5427679b5c",
+      "name": "Billers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "388cb59c-6145-48ce-a70f-91fd7ac45bd8",
+          "name": "List Biller Categories",
+          "request": {
+            "name": "List Biller Categories",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "categorys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73d30152-2c32-4d06-81b5-70558a8c0d8c",
+              "name": "Biller categories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "categorys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"categoryId\": 8200,\n    \"categoryName\": \"string\"\n  },\n  {\n    \"categoryId\": 427,\n    \"categoryName\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3efe58fa-67e9-4bbe-8f3d-5c91671c424d",
+          "name": "List Billers In Category",
+          "request": {
+            "name": "List Billers In Category",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "categorys",
+                ":categoryId",
+                "billers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "categoryId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "833437cb-cc36-4e15-bb5f-79d2edb5eb93",
+              "name": "Billers in the requested category.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "categorys",
+                    ":categoryId",
+                    "billers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "categoryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billerId\": 1450,\n    \"name\": \"string\",\n    \"categoryId\": 6443,\n    \"currencyCode\": \"string\",\n    \"customerField1\": \"string\",\n    \"customerField2\": \"string\"\n  },\n  {\n    \"billerId\": 9977,\n    \"name\": \"string\",\n    \"categoryId\": 9633,\n    \"currencyCode\": \"string\",\n    \"customerField1\": \"string\",\n    \"customerField2\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64853a23-7fe4-47b2-a51c-0cf1939b7020",
+          "name": "List All Billers",
+          "request": {
+            "name": "List All Billers",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "billers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8532a6e-8c3d-44a7-9896-b791ba2504bf",
+              "name": "All billers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "billers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billerId\": 1450,\n    \"name\": \"string\",\n    \"categoryId\": 6443,\n    \"currencyCode\": \"string\",\n    \"customerField1\": \"string\",\n    \"customerField2\": \"string\"\n  },\n  {\n    \"billerId\": 9977,\n    \"name\": \"string\",\n    \"categoryId\": 9633,\n    \"currencyCode\": \"string\",\n    \"customerField1\": \"string\",\n    \"customerField2\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0d659120-dc78-4205-b94c-6df0dc39fb12",
+      "name": "Payment Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3093f46-2633-4988-9089-46c9a35f9343",
+          "name": "List Biller Payment Items",
+          "request": {
+            "name": "List Biller Payment Items",
+            "description": {
+              "content": "Returns supported amounts, packages, or denominations for the biller (e.g. DSTV Compact, MTN-100 airtime).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "billers",
+                ":billerId",
+                "paymentitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "billerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0938476-7859-435c-95ce-d77ffc800559",
+              "name": "Payment items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "billers",
+                    ":billerId",
+                    "paymentitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "billerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"paymentItemId\": 4397,\n    \"paymentCode\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 5506,\n    \"currencyCode\": \"string\",\n    \"isAmountFixed\": true\n  },\n  {\n    \"paymentItemId\": 4467,\n    \"paymentCode\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 3855,\n    \"currencyCode\": \"string\",\n    \"isAmountFixed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d9461ad4-86ce-4abd-9681-d84254102512",
+      "name": "Customer Validation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "847168e9-1bba-4560-8b69-a151aab7dac6",
+          "name": "Validate Customer",
+          "request": {
+            "name": "Validate Customer",
+            "description": {
+              "content": "Verify a customer ID (smartcard number, meter number, account number, phone) with the biller before charging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "customers",
+                "validations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7bdff356-1bd4-4351-bd17-faff192996f1",
+              "name": "Customer record at the biller.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "customers",
+                    "validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fullName\": \"string\",\n  \"customerId\": \"string\",\n  \"responseCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d07b1dfc-9187-4b95-85e5-0838a7e6b837",
+      "name": "Payments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc1b0273-7d27-4676-b5c6-7c106c7ddbd9",
+          "name": "Submit Bill Payment Advice",
+          "request": {
+            "name": "Submit Bill Payment Advice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "payments",
+                "advices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerMobile\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"requestReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c327972-5e61-4d9c-858b-0805b10029bb",
+              "name": "Payment advice response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "payments",
+                    "advices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerMobile\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"requestReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": \"string\",\n  \"transactionRef\": \"string\",\n  \"rawOutput\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e7c9e4e-0e53-47e5-8f92-752a756ab5f4",
+    "name": "Interswitch Bills Payment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Quickteller bills payment service — list billers, get payment items,\nvalidate customer references, and submit payment advices for hundreds of\nNigerian billers including DSTV, GOTV, PHCN, water boards, school fees,\nand government TSA payments.\n",
+      "type": "text/plain"
+    }
+  }
+}

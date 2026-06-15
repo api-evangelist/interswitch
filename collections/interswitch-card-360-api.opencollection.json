@@ -1,0 +1,191 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Card 360 API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Issue a new Verve, debit, or prepaid card to a customer profile."
+        },
+        {
+          "info": {
+            "name": "Get Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/:cardId",
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Card"
+        },
+        {
+          "info": {
+            "name": "Block Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/:cardId/block",
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Block Card"
+        },
+        {
+          "info": {
+            "name": "Unblock Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/:cardId/unblock",
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unblock Card"
+        },
+        {
+          "info": {
+            "name": "Validate Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate Card"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PIN",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Or Reset Card PIN",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/:cardId/pin",
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Or Reset Card PIN"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Balance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Card Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/:cardId/balance",
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Card Balance"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Linking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Link Card To Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/link",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Link Card To Customer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

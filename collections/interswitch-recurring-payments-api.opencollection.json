@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Recurring Payments API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokenization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tokenize Card For Recurring",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/api/v2/purchases/validations/recurrents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace sensitive card data with a unique payment token that can be used for future recurring charges."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recurring Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Charge Recurring Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/api/v2/purchases/recurrents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Charge Recurring Token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

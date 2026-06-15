@@ -1,0 +1,480 @@
+{
+  "item": [
+    {
+      "id": "5ca7192c-01ea-4913-a09c-0cdbb4346e13",
+      "name": "Demography",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75e7ad70-af1b-4f01-8d24-e2115d89dbdb",
+          "name": "Get Customer Demography",
+          "request": {
+            "name": "Get Customer Demography",
+            "description": {},
+            "url": {
+              "path": [
+                "insights",
+                "api",
+                "v1",
+                "customers",
+                ":customerId",
+                "demography"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e699e37d-c102-4d04-bc48-91cc671e6b80",
+              "name": "Demographic record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "api",
+                    "v1",
+                    "customers",
+                    ":customerId",
+                    "demography"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"ageBand\": \"string\",\n  \"gender\": \"string\",\n  \"state\": \"string\",\n  \"lga\": \"string\",\n  \"occupationGroup\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2e133348-2cdc-45a4-82fe-e5c0b7c1743c",
+      "name": "Financial History",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab8525a3-c91c-4797-93de-206f261cd1f0",
+          "name": "Get Financial History",
+          "request": {
+            "name": "Get Financial History",
+            "description": {},
+            "url": {
+              "path": [
+                "insights",
+                "api",
+                "v1",
+                "customers",
+                ":customerId",
+                "financial-history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "months",
+                  "value": "12"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84e1c081-dd94-42d3-bb12-6c9233d6aa07",
+              "name": "Spending and inflow history.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "api",
+                    "v1",
+                    "customers",
+                    ":customerId",
+                    "financial-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "months",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"monthlyInflows\": [\n    1589.635681257382,\n    7478.572896878818\n  ],\n  \"monthlyOutflows\": [\n    309.13251828492804,\n    3982.5783432656003\n  ],\n  \"categories\": {\n    \"key_0\": 6642.171735018331,\n    \"key_1\": 2304.35306174395,\n    \"key_2\": 2809.7639766906314,\n    \"key_3\": 2256.808426460134,\n    \"key_4\": 2371.71405921793\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2ad1f3f-265a-4cda-9f9e-1e6cc70d7d65",
+          "name": "Get Average Financial History",
+          "request": {
+            "name": "Get Average Financial History",
+            "description": {},
+            "url": {
+              "path": [
+                "insights",
+                "api",
+                "v1",
+                "customers",
+                ":customerId",
+                "financial-history",
+                "average"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "776757d0-3aeb-4a00-a621-507fcbdf25ad",
+              "name": "Average inflow/outflow metrics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "api",
+                    "v1",
+                    "customers",
+                    ":customerId",
+                    "financial-history",
+                    "average"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"averageMonthlyInflow\": 2343.9917900773253,\n  \"averageMonthlyOutflow\": 4416.736872013564,\n  \"averageBalance\": 6273.986831433967,\n  \"windowMonths\": 8227\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c0aadaec-b3ef-4108-8d0f-201a6a408a22",
+      "name": "Financial Habits",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c72b3ba8-a504-4f4f-8531-d2991348dcdb",
+          "name": "Get Financial Habits",
+          "request": {
+            "name": "Get Financial Habits",
+            "description": {},
+            "url": {
+              "path": [
+                "insights",
+                "api",
+                "v1",
+                "customers",
+                ":customerId",
+                "financial-habits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6d2d8fa-6fd2-407c-acde-0aaf48e74f21",
+              "name": "Behavioral signals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "api",
+                    "v1",
+                    "customers",
+                    ":customerId",
+                    "financial-habits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"spendingPersona\": \"string\",\n  \"recurringBills\": [\n    \"string\",\n    \"string\"\n  ],\n  \"channelPreference\": \"POS\",\n  \"weekendVsWeekdayRatio\": 1065.065180000634\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af2be184-d3da-456a-9e25-395daad38c9c",
+    "name": "Interswitch Customer Insights API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Permissioned access to demography, financial history, average financial\nhistory, and financial-habit signals derived from Interswitch's transaction\nswitch and Verve card network. Feeds credit decisioning, KYC enrichment,\nand segmentation.\n",
+      "type": "text/plain"
+    }
+  }
+}

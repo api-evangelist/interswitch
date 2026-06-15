@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Transfers API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Single Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/quicktellerservice/api/v5/transactions/TransferFunds",
+            "headers": [
+              {
+                "name": "terminalId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move funds from a sender wallet or account to a single recipient bank\naccount. `mac` is the SHA-512 hash of the canonical message; consult the\nInterswitch transfer integration guide for the exact field order.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Bulk Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/quicktellerservice/api/v5/transactions/BulkTransfer",
+            "headers": [
+              {
+                "name": "terminalId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disburse to up to thousands of recipients in a single request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Name Inquiry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Resolve Account Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/quicktellerservice/api/v5/transactions/NameInquiry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Look up the registered name on a bank account before initiating a transfer to it."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bank Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Banks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qa.interswitchng.com/quicktellerservice/api/v5/banks"
+          },
+          "docs": "Return CBN bank codes and bank names that can be addressed via the transfer endpoints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

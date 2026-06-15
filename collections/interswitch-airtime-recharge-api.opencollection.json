@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Airtime Recharge API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Airtime",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Airtime Telcos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/categorys/4/billers"
+          },
+          "docs": "List billers under category 4 (airtime) — MTN, Airtel, Glo, 9mobile."
+        },
+        {
+          "info": {
+            "name": "List Airtime Denominations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/billers/:billerId/paymentitems",
+            "params": [
+              {
+                "name": "billerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns supported denominations for the telco (e.g. MTN-100, MTN-200)."
+        },
+        {
+          "info": {
+            "name": "Recharge Airtime",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/payments/advices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recharge Airtime"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "E-Pins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Purchase E-Pin Voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/payments/advices/epin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Purchase recharge e-pins instead of direct top-up."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

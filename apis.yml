@@ -1,399 +1,437 @@
 aid: interswitch
 url: https://raw.githubusercontent.com/api-evangelist/interswitch/refs/heads/main/apis.yml
 apis:
-- aid: interswitch:interswitch-web-checkout-api
-  name: Interswitch Web Checkout API
-  tags:
-  - Payments
-  - Checkout
-  - Webpay
-  - Africa
-  - Nigeria
-  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/web-checkout
-    type: Documentation
-  - url: https://docs.interswitchgroup.com/docs/quickstart
-    type: GettingStarted
-  - url: openapi/interswitch-web-checkout-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/interswitch-payment-schema.json
-    type: JSONSchema
-  - url: json-ld/interswitch-context.jsonld
-    type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/web-checkout-payments.yaml
-  description: Interswitch Web Checkout (formerly Webpay) is the company's hosted payment gateway. Two integration modes — inline JavaScript popup (`newwebpay.interswitchng.com/inline-checkout.js`) and Web Redirect form POST to `/collections/w/pay` — plus a server-side requery endpoint at `/collections/api/v1/gettransaction.json` for authoritative confirmation. Supports Verve, Visa, and Mastercard, with mandatory server-side verification before delivering value.
-- aid: interswitch:interswitch-payment-gateway-api
-  name: Interswitch Payment Gateway API
-  tags:
-  - Payments
-  - Card Payments
-  - Hosted Fields
-  - 3D Secure
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/accept-payments
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/accept-payments
-    type: Documentation
-  - url: openapi/interswitch-payment-gateway-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/interswitch-payment-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/payment-gateway-payments.yaml
-  description: Server-to-server card payment APIs for PCI-DSS-licensed merchants — direct Card Payments, Hosted Fields, 3D Secure step-up, Google Pay, and Pay Bill payment-link generation. Base path `/paymentgateway` on the Interswitch QA/production hosts with OAuth 2.0 client_credentials authentication via the Passport token endpoint.
-- aid: interswitch:interswitch-transfers-api
-  name: Interswitch Transfers API
-  tags:
-  - Transfers
-  - Payouts
-  - Disbursement
-  - Bank Transfer
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/single-transfer
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/single-transfer
-    type: Documentation
-  - url: openapi/interswitch-transfers-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/transfers-transfers.yaml
-  description: Quickteller Send Money APIs covering Single Transfer (POST /quicktellerservice/api/v5/transactions/TransferFunds), Bulk Transfer, Name Inquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to disburse funds across NIBSS-Instant-Payment-connected Nigerian bank accounts with SHA-512 MAC authentication on each request.
-- aid: interswitch:interswitch-bills-payment-api
-  name: Interswitch Bills Payment API
-  tags:
-  - Bills
-  - Quickteller
-  - Utilities
-  - Cable TV
-  - Value Added Services
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/bills-payment
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/bills-payment
-    type: Documentation
-  - url: openapi/interswitch-bills-payment-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/bills-payment-quickteller.yaml
-  description: Quickteller bills payment service — list billers (`GET /api/v2/quickteller/billers`), get payment items, validate customer references, and submit payment advices for DSTV, GOTV, PHCN, water boards, school fees, government TSA payments, and hundreds of other Nigerian billers. Uses the InterswitchAuth legacy signature scheme (Authorization + Timestamp + Nonce + Signature + SignatureMethod + TerminalID headers).
-- aid: interswitch:interswitch-airtime-recharge-api
-  name: Interswitch Airtime Recharge API
-  tags:
-  - Airtime
-  - Top-up
-  - Virtual Top-up
-  - E-Pins
-  - Telco
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/airtime-recharge
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/airtime-recharge
-    type: Documentation
-  - url: openapi/interswitch-airtime-recharge-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/airtime-recharge-quickteller.yaml
-  description: Virtual top-up (direct airtime and data) and e-pin voucher delivery for MTN, Airtel, Glo, and 9mobile. Same biller/category/payment-item flow as Bills Payment, with category ID 4 reserved for airtime billers; phone number is supplied as `customer_id` on the `/api/v2/quickteller/payments/advices` payload.
-- aid: interswitch:interswitch-paycode-api
-  name: Interswitch Paycode API
-  tags:
-  - Paycode
-  - Cardless
-  - Cash Withdrawal
-  - Tokens
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/single-paycode
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/single-paycode
-    type: Documentation
-  - url: openapi/interswitch-paycode-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/paycode-tokens.yaml
-  description: Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate single or bulk one-time tokens via `POST /api/v1/pwm/subscribers/{subscriberId}/tokens`, query token status, and cancel tokens at `/cardless-service/api/v1/cardless-services/cancel-token`. Powers ATM cardless withdrawal across the Interswitch-acquired ATM network.
-- aid: interswitch:interswitch-refunds-api
-  name: Interswitch Refunds API
-  tags:
-  - Refunds
-  - Payments
-  - Quickteller Business
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/refunds
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/refunds
-    type: Documentation
-  - url: openapi/interswitch-refunds-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/refunds-refunds.yaml
-  description: Refund successful Quickteller Business transactions in full or in part via `POST /paymentgateway/api/v1/refunds`. Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, and FAILED states; auto-refunds settle T+1.
-- aid: interswitch:interswitch-recurring-payments-api
-  name: Interswitch Recurring Payments API
-  tags:
-  - Recurring
-  - Subscriptions
-  - Tokenization
-  - Card On File
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/recurring-payments
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/recurring-payments
-    type: Documentation
-  - url: openapi/interswitch-recurring-payments-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/recurring-payments-subscriptions.yaml
-  description: Tokenize Verve, Visa, and Mastercard cards at `POST /api/v2/purchases/validations/recurrents` then charge them on schedule via `POST /api/v2/purchases/recurrents`. Token + expiry pair replaces raw PAN so subscription merchants stay outside PCI scope.
-- aid: interswitch:interswitch-card-360-api
-  name: Interswitch Card 360 API
-  tags:
-  - Cards
-  - Issuing
-  - Card Management
-  - Verve
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/home
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/home
-    type: Documentation
-  - url: openapi/interswitch-card-360-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/card-360-cards.yaml
-  description: Card issuer and cardholder lifecycle management for Verve, debit, and prepaid cards — create cards, set/reset PIN, block/unblock, balance inquiry, card linking, and card validation. Lets fintechs and banks issue and operate Verve cards programmatically on the Interswitch issuer-processor.
-- aid: interswitch:interswitch-lending-api
-  name: Interswitch Lending API
-  tags:
-  - Lending
-  - Nano Loans
-  - Salary Lending
-  - Credit
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/nano-loans
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/nano-loans
-    type: Documentation
-  - url: openapi/interswitch-lending-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/lending-loans.yaml
-  description: Marketplace lending APIs connecting loan providers and distribution channels under `/lending-service/api/v1` — list providers, fetch offers (`GET /lending-service/api/v3/offers`), accept offers, fund loans, debit for repayment, and inspect customer loan status. Supports both PCI-DSS-licensed and hosted-fields integrations and powers Nano Loans, Salary Lending, and Value Financing.
-- aid: interswitch:interswitch-customer-insights-api
-  name: Interswitch Customer Insights API
-  tags:
-  - Customer Insights
-  - Credit Decisioning
-  - Data
-  - Demographics
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/customer-insights
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/customer-insights
-    type: Documentation
-  - url: openapi/interswitch-customer-insights-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/customer-insights-insights.yaml
-  description: Permissioned access to demography, financial history, average financial history, and financial-habit signals derived from Interswitch's transaction switch and Verve card network. Feeds credit decisioning, KYC enrichment, and segmentation for fintechs, lenders, and retail risk teams.
-- aid: interswitch:interswitch-transaction-search-api
-  name: Interswitch Transaction Search API
-  tags:
-  - Transactions
-  - Search
-  - Settlement
-  - Reconciliation
-  - Africa
-  humanURL: https://docs.interswitchgroup.com/docs/transaction-search
-  properties:
-  - url: https://docs.interswitchgroup.com/docs/transaction-search
-    type: Documentation
-  - url: openapi/interswitch-transaction-search-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/transaction-search-transactions.yaml
-  description: Back-office transaction and settlement verification APIs — Quick Search, Reference Search, Bulk Search, and Transaction Detail lookups across Quickteller Business, Webpay, Transfers, and Bills Payment. Bearer-token authenticated and intended for finance, ops, and dispute teams.
+  - aid: interswitch:interswitch-web-checkout-api
+    name: Interswitch Web Checkout API
+    tags:
+      - Payments
+      - Checkout
+      - Webpay
+      - Africa
+      - Nigeria
+    humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/web-checkout
+        type: Documentation
+      - url: https://docs.interswitchgroup.com/docs/quickstart
+        type: GettingStarted
+      - url: openapi/interswitch-web-checkout-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/interswitch-payment-schema.json
+        type: JSONSchema
+      - url: json-ld/interswitch-context.jsonld
+        type: JSONLD
+    description: >-
+      Interswitch Web Checkout (formerly Webpay) is the company's hosted payment gateway. Two integration modes — inline
+      JavaScript popup (`newwebpay.interswitchng.com/inline-checkout.js`) and Web Redirect form POST to
+      `/collections/w/pay` — plus a server-side requery endpoint at `/collections/api/v1/gettransaction.json` for
+      authoritative confirmation. Supports Verve, Visa, and Mastercard, with mandatory server-side verification before
+      delivering value.
+  - aid: interswitch:interswitch-payment-gateway-api
+    name: Interswitch Payment Gateway API
+    tags:
+      - Payments
+      - Card Payments
+      - Hosted Fields
+      - 3D Secure
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/accept-payments
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/accept-payments
+        type: Documentation
+      - url: openapi/interswitch-payment-gateway-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/interswitch-payment-schema.json
+        type: JSONSchema
+    description: >-
+      Server-to-server card payment APIs for PCI-DSS-licensed merchants — direct Card Payments, Hosted Fields, 3D Secure
+      step-up, Google Pay, and Pay Bill payment-link generation. Base path `/paymentgateway` on the Interswitch
+      QA/production hosts with OAuth 2.0 client_credentials authentication via the Passport token endpoint.
+  - aid: interswitch:interswitch-transfers-api
+    name: Interswitch Transfers API
+    tags:
+      - Transfers
+      - Payouts
+      - Disbursement
+      - Bank Transfer
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/single-transfer
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/single-transfer
+        type: Documentation
+      - url: openapi/interswitch-transfers-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Quickteller Send Money APIs covering Single Transfer (POST /quicktellerservice/api/v5/transactions/TransferFunds),
+      Bulk Transfer, Name Inquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to disburse funds across
+      NIBSS-Instant-Payment-connected Nigerian bank accounts with SHA-512 MAC authentication on each request.
+  - aid: interswitch:interswitch-bills-payment-api
+    name: Interswitch Bills Payment API
+    tags:
+      - Bills
+      - Quickteller
+      - Utilities
+      - Cable TV
+      - Value Added Services
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/bills-payment
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/bills-payment
+        type: Documentation
+      - url: openapi/interswitch-bills-payment-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Quickteller bills payment service — list billers (`GET /api/v2/quickteller/billers`), get payment items, validate
+      customer references, and submit payment advices for DSTV, GOTV, PHCN, water boards, school fees, government TSA
+      payments, and hundreds of other Nigerian billers. Uses the InterswitchAuth legacy signature scheme (Authorization
+      + Timestamp + Nonce + Signature + SignatureMethod + TerminalID headers).
+  - aid: interswitch:interswitch-airtime-recharge-api
+    name: Interswitch Airtime Recharge API
+    tags:
+      - Airtime
+      - Top-up
+      - Virtual Top-up
+      - E-Pins
+      - Telco
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/airtime-recharge
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/airtime-recharge
+        type: Documentation
+      - url: openapi/interswitch-airtime-recharge-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Virtual top-up (direct airtime and data) and e-pin voucher delivery for MTN, Airtel, Glo, and 9mobile. Same
+      biller/category/payment-item flow as Bills Payment, with category ID 4 reserved for airtime billers; phone number
+      is supplied as `customer_id` on the `/api/v2/quickteller/payments/advices` payload.
+  - aid: interswitch:interswitch-paycode-api
+    name: Interswitch Paycode API
+    tags:
+      - Paycode
+      - Cardless
+      - Cash Withdrawal
+      - Tokens
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/single-paycode
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/single-paycode
+        type: Documentation
+      - url: openapi/interswitch-paycode-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate single or bulk one-time tokens via `POST
+      /api/v1/pwm/subscribers/{subscriberId}/tokens`, query token status, and cancel tokens at
+      `/cardless-service/api/v1/cardless-services/cancel-token`. Powers ATM cardless withdrawal across the
+      Interswitch-acquired ATM network.
+  - aid: interswitch:interswitch-refunds-api
+    name: Interswitch Refunds API
+    tags:
+      - Refunds
+      - Payments
+      - Quickteller Business
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/refunds
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/refunds
+        type: Documentation
+      - url: openapi/interswitch-refunds-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Refund successful Quickteller Business transactions in full or in part via `POST /paymentgateway/api/v1/refunds`.
+      Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, and FAILED states;
+      auto-refunds settle T+1.
+  - aid: interswitch:interswitch-recurring-payments-api
+    name: Interswitch Recurring Payments API
+    tags:
+      - Recurring
+      - Subscriptions
+      - Tokenization
+      - Card On File
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/recurring-payments
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/recurring-payments
+        type: Documentation
+      - url: openapi/interswitch-recurring-payments-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Tokenize Verve, Visa, and Mastercard cards at `POST /api/v2/purchases/validations/recurrents` then charge them on
+      schedule via `POST /api/v2/purchases/recurrents`. Token + expiry pair replaces raw PAN so subscription merchants
+      stay outside PCI scope.
+  - aid: interswitch:interswitch-card-360-api
+    name: Interswitch Card 360 API
+    tags:
+      - Cards
+      - Issuing
+      - Card Management
+      - Verve
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/home
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/home
+        type: Documentation
+      - url: openapi/interswitch-card-360-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Card issuer and cardholder lifecycle management for Verve, debit, and prepaid cards — create cards, set/reset PIN,
+      block/unblock, balance inquiry, card linking, and card validation. Lets fintechs and banks issue and operate Verve
+      cards programmatically on the Interswitch issuer-processor.
+  - aid: interswitch:interswitch-lending-api
+    name: Interswitch Lending API
+    tags:
+      - Lending
+      - Nano Loans
+      - Salary Lending
+      - Credit
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/nano-loans
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/nano-loans
+        type: Documentation
+      - url: openapi/interswitch-lending-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Marketplace lending APIs connecting loan providers and distribution channels under `/lending-service/api/v1` —
+      list providers, fetch offers (`GET /lending-service/api/v3/offers`), accept offers, fund loans, debit for
+      repayment, and inspect customer loan status. Supports both PCI-DSS-licensed and hosted-fields integrations and
+      powers Nano Loans, Salary Lending, and Value Financing.
+  - aid: interswitch:interswitch-customer-insights-api
+    name: Interswitch Customer Insights API
+    tags:
+      - Customer Insights
+      - Credit Decisioning
+      - Data
+      - Demographics
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/customer-insights
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/customer-insights
+        type: Documentation
+      - url: openapi/interswitch-customer-insights-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Permissioned access to demography, financial history, average financial history, and financial-habit signals
+      derived from Interswitch's transaction switch and Verve card network. Feeds credit decisioning, KYC enrichment,
+      and segmentation for fintechs, lenders, and retail risk teams.
+  - aid: interswitch:interswitch-transaction-search-api
+    name: Interswitch Transaction Search API
+    tags:
+      - Transactions
+      - Search
+      - Settlement
+      - Reconciliation
+      - Africa
+    humanURL: https://docs.interswitchgroup.com/docs/transaction-search
+    properties:
+      - url: https://docs.interswitchgroup.com/docs/transaction-search
+        type: Documentation
+      - url: openapi/interswitch-transaction-search-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Back-office transaction and settlement verification APIs — Quick Search, Reference Search, Bulk Search, and
+      Transaction Detail lookups across Quickteller Business, Webpay, Transfers, and Bills Payment. Bearer-token
+      authenticated and intended for finance, ops, and dispute teams.
 name: Interswitch
 tags:
-- Payments
-- Payment Infrastructure
-- Card Network
-- Verve
-- Quickteller
-- Webpay
-- Bills Payment
-- Transfers
-- Lending
-- Fintech
-- Africa
-- Nigeria
+  - Payments
+  - Payment Infrastructure
+  - Card Network
+  - Verve
+  - Quickteller
+  - Webpay
+  - Bills Payment
+  - Transfers
+  - Lending
+  - Fintech
+  - Africa
+  - Nigeria
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/interswitch-airtime-recharge-workflow.yml
-    name: Interswitch Airtime Recharge
-    summary: Discover an airtime telco, pick a denomination, and recharge a phone number.
-  - url: arazzo/interswitch-bill-payment-validate-and-pay-workflow.yml
-    name: Interswitch Validate Customer And Pay Bill
-    summary: Look up a biller's payment item, validate the customer, then submit a bill payment advice.
-  - url: arazzo/interswitch-card-payment-with-3ds-workflow.yml
-    name: Interswitch Card Payment With 3D Secure
-    summary: Authorize a card payment, step up to 3D Secure when required, then confirm the final payment status.
-  - url: arazzo/interswitch-hosted-fields-checkout-workflow.yml
-    name: Interswitch Hosted Fields Checkout
-    summary: Open a hosted-fields session to collect card data out of PCI scope, then confirm the resulting payment.
-  - url: arazzo/interswitch-issue-and-activate-card-workflow.yml
-    name: Interswitch Issue And Activate Card
-    summary: Issue a new card to a customer, set its PIN, then read back the activated card.
-  - url: arazzo/interswitch-lending-enroll-payment-method-workflow.yml
-    name: Interswitch Lending Enroll Payment Method
-    summary: Generate a lending payment token, confirm it with an OTP, then debit a loan repayment with it.
-  - url: arazzo/interswitch-lending-offer-to-disbursement-workflow.yml
-    name: Interswitch Lending Offer To Disbursement
-    summary: Fetch a customer's loan offers, accept one, fund the loan, then confirm the customer's loan status.
-  - url: arazzo/interswitch-link-and-check-card-balance-workflow.yml
-    name: Interswitch Link And Check Card Balance
-    summary: Validate a card PAN, link it to a customer, then read the linked card's balance.
-  - url: arazzo/interswitch-paycode-generate-and-track-workflow.yml
-    name: Interswitch Paycode Generate And Track
-    summary: Generate a cardless Paycode token, poll its status, and cancel it if it is not yet used.
-  - url: arazzo/interswitch-payment-refund-workflow.yml
-    name: Interswitch Payment Refund And Track
-    summary: Confirm an original payment, raise a refund against it, then poll the refund to a terminal state.
-  - url: arazzo/interswitch-recurring-tokenize-and-charge-workflow.yml
-    name: Interswitch Recurring Tokenize And Charge
-    summary: Tokenize a card once, then charge the stored token for a recurring payment.
-  - url: arazzo/interswitch-transaction-reconciliation-workflow.yml
-    name: Interswitch Transaction Reconciliation
-    summary: Find a transaction by merchant reference, then pull its full detail for reconciliation.
-  - url: arazzo/interswitch-transfer-with-name-inquiry-workflow.yml
-    name: Interswitch Transfer With Name Inquiry
-    summary: Resolve a bank code, confirm the recipient account name, then send a single transfer.
-  - url: arazzo/interswitch-web-checkout-confirm-workflow.yml
-    name: Interswitch Web Checkout And Confirm
-    summary: Initiate a hosted Web Redirect payment, then server-side requery to confirm before delivering value.
-- url: https://www.interswitchgroup.com
-  type: Portal
-- url: https://docs.interswitchgroup.com/docs/home
-  name: Interswitch Developer Documentation
-  type: Documentation
-- url: https://docs.interswitchgroup.com/reference
-  name: Interswitch API Reference
-  type: Documentation
-- url: https://developer.interswitchgroup.com
-  name: Interswitch Developer Console
-  type: SignUp
-- url: https://developer.interswitchgroup.com/marketplace
-  name: Interswitch API Marketplace
-  type: Portal
-- url: https://docs.interswitchgroup.com/docs/authentication
-  name: Authentication
-  type: Authentication
-- url: https://passport-sandbox.interswitchng.com/passport/oauth/token
-  name: Passport OAuth Token (Sandbox)
-  type: Authentication
-- url: https://docs.interswitchgroup.com/docs/webhooks
-  name: Webhooks
-  type: Webhooks
-- url: https://docs.interswitchgroup.com/docs/response-codes
-  name: Response Codes
-  type: Errors
-- url: https://docs.interswitchgroup.com/llms.txt
-  name: llms.txt
-  type: Documentation
-- url: https://join.slack.com/t/iswdevelopercommunity/shared_invite/zt-2lbdgbkjq-7Byrv6unYM2nX5RwK4MQ7g
-  name: Interswitch Developer Slack
-  type: Forum
-- url: https://www.interswitchgroup.com/blog
-  type: Blog
-- url: https://www.interswitchgroup.com/news
-  type: PressReleases
-- url: https://www.interswitchgroup.com/support
-  type: Support
-- url: https://www.interswitchgroup.com/company/careers
-  type: Careers
-- url: https://www.interswitchgroup.com/privacy-policy
-  type: PrivacyPolicy
-- url: https://www.interswitchgroup.com/terms-of-use
-  type: TermsOfService
-- url: https://www.interswitchgroup.com/compliance
-  type: Compliance
-- url: https://www.linkedin.com/company/interswitch-group
-  type: LinkedIn
-- url: https://x.com/interswitchgrp
-  type: Twitter
-- url: https://www.youtube.com/@InterswitchGroup
-  type: YouTube
-- url: https://github.com/techquest/integrating-to-ipg
-  name: Integrating to the Interswitch Payment Gateway (community)
-  type: CodeExamples
-- url: https://github.com/techquest/payment_php
-  name: Interswitch PHP Payment SDK (community)
-  type: SDK
-- url: https://github.com/techquest/isw-laravel-sdk
-  name: Interswitch Laravel SDK (community)
-  type: SDK
-- url: https://github.com/techquest/isw-react-sdk
-  name: Interswitch React SDK (community)
-  type: SDK
-- url: https://github.com/akinmail/isw-payment-sdk-android
-  name: Interswitch Android Payment SDK (community)
-  type: SDK
-- url: https://github.com/akinmail/isw-payment-sdk-ios
-  name: Interswitch iOS Payment SDK (community)
-  type: SDK
-- url: plans/interswitch-plans-pricing.yml
-  type: Plans
-- url: rate-limits/interswitch-rate-limits.yml
-  type: RateLimits
-- url: finops/interswitch-finops.yml
-  type: FinOps
-- url: vocabulary/interswitch-vocabulary.yml
-  type: Vocabulary
-- url: rules/interswitch-rules.yml
-  type: Spectral
-- type: Features
-  data:
-  - Verve — Africa's first and largest domestic EMV chip-and-PIN card scheme, accepted at Interswitch-acquired ATMs, POS terminals, and online merchants across Nigeria
-  - Quickteller — multi-rail consumer and business payments platform spanning bills, airtime, transfers, and merchant payments
-  - Quickteller Business — merchant dashboard for collections, payment links, invoices, refunds, and webhooks
-  - Web Checkout (Webpay) — hosted payment page with inline JavaScript popup and Web Redirect modes; Verve, Visa, and Mastercard acceptance
-  - Payment Gateway — server-to-server card payments, Hosted Fields, 3D Secure, Google Pay
-  - Transfers — Single, Bulk, Name Inquiry, and Bank Code Resolution endpoints over the NIBSS Instant Payment rails
-  - Bills Payment — hundreds of Nigerian billers (DSTV, GOTV, PHCN, school fees, TSA government payments)
-  - Airtime & Data Recharge — direct top-up and e-pin voucher delivery for MTN, Airtel, Glo, and 9mobile
-  - Paycode (Pay with Mobile) — cardless ATM withdrawal and merchant token generation, single and bulk
-  - Card 360 — issuer-processor card management for Verve, debit, and prepaid cards (create, PIN, block, link, balance)
-  - Lending Service — nano loans, salary lending, value financing under `/lending-service/api/v1` and `/v3`
-  - Customer Insights — demography, financial history, and financial-habit data products for credit decisioning
-  - Transaction Search — Quick, Reference, Bulk, and Detail lookups for back-office reconciliation
-  - Recurring Payments — Verve / Visa / Mastercard tokenization plus scheduled charges for subscriptions
-  - Refunds — full and partial refund lifecycle with T+1 auto-settlement
-  - Webhooks — HMAC-SHA512-signed events for TRANSACTION, SUBSCRIPTION, PAYMENT LINKS, and INVOICES
-  - Authentication — OAuth 2.0 client-credentials via the Passport token service plus legacy InterswitchAuth signature scheme (SHA1-signed headers)
-  - Sandbox environment at `sandbox.interswitchng.com` and `qa.interswitchng.com` with public test credentials
-  - Smartfuel, Quickteller Homes, Smart City, and TransSwitch verticals served by the same core APIs
-  - QR code interoperability across Nigerian banks
-  sources:
-  - https://www.interswitchgroup.com
-  - https://docs.interswitchgroup.com/docs/home
-  - https://docs.interswitchgroup.com/docs/authentication
-  - https://docs.interswitchgroup.com/docs/webhooks
-  - https://docs.interswitchgroup.com/llms.txt
-  - https://developer.interswitchgroup.com
-  updated: '2026-05-24'
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/interswitch/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/interswitch-airtime-recharge-workflow.yml
+        name: Interswitch Airtime Recharge
+        summary: Discover an airtime telco, pick a denomination, and recharge a phone number.
+      - url: arazzo/interswitch-bill-payment-validate-and-pay-workflow.yml
+        name: Interswitch Validate Customer And Pay Bill
+        summary: Look up a biller's payment item, validate the customer, then submit a bill payment advice.
+      - url: arazzo/interswitch-card-payment-with-3ds-workflow.yml
+        name: Interswitch Card Payment With 3D Secure
+        summary: Authorize a card payment, step up to 3D Secure when required, then confirm the final payment status.
+      - url: arazzo/interswitch-hosted-fields-checkout-workflow.yml
+        name: Interswitch Hosted Fields Checkout
+        summary: Open a hosted-fields session to collect card data out of PCI scope, then confirm the resulting payment.
+      - url: arazzo/interswitch-issue-and-activate-card-workflow.yml
+        name: Interswitch Issue And Activate Card
+        summary: Issue a new card to a customer, set its PIN, then read back the activated card.
+      - url: arazzo/interswitch-lending-enroll-payment-method-workflow.yml
+        name: Interswitch Lending Enroll Payment Method
+        summary: Generate a lending payment token, confirm it with an OTP, then debit a loan repayment with it.
+      - url: arazzo/interswitch-lending-offer-to-disbursement-workflow.yml
+        name: Interswitch Lending Offer To Disbursement
+        summary: Fetch a customer's loan offers, accept one, fund the loan, then confirm the customer's loan status.
+      - url: arazzo/interswitch-link-and-check-card-balance-workflow.yml
+        name: Interswitch Link And Check Card Balance
+        summary: Validate a card PAN, link it to a customer, then read the linked card's balance.
+      - url: arazzo/interswitch-paycode-generate-and-track-workflow.yml
+        name: Interswitch Paycode Generate And Track
+        summary: Generate a cardless Paycode token, poll its status, and cancel it if it is not yet used.
+      - url: arazzo/interswitch-payment-refund-workflow.yml
+        name: Interswitch Payment Refund And Track
+        summary: Confirm an original payment, raise a refund against it, then poll the refund to a terminal state.
+      - url: arazzo/interswitch-recurring-tokenize-and-charge-workflow.yml
+        name: Interswitch Recurring Tokenize And Charge
+        summary: Tokenize a card once, then charge the stored token for a recurring payment.
+      - url: arazzo/interswitch-transaction-reconciliation-workflow.yml
+        name: Interswitch Transaction Reconciliation
+        summary: Find a transaction by merchant reference, then pull its full detail for reconciliation.
+      - url: arazzo/interswitch-transfer-with-name-inquiry-workflow.yml
+        name: Interswitch Transfer With Name Inquiry
+        summary: Resolve a bank code, confirm the recipient account name, then send a single transfer.
+      - url: arazzo/interswitch-web-checkout-confirm-workflow.yml
+        name: Interswitch Web Checkout And Confirm
+        summary: Initiate a hosted Web Redirect payment, then server-side requery to confirm before delivering value.
+  - url: https://www.interswitchgroup.com
+    type: Portal
+  - url: https://docs.interswitchgroup.com/docs/home
+    name: Interswitch Developer Documentation
+    type: Documentation
+  - url: https://docs.interswitchgroup.com/reference
+    name: Interswitch API Reference
+    type: Documentation
+  - url: https://developer.interswitchgroup.com
+    name: Interswitch Developer Console
+    type: SignUp
+  - url: https://developer.interswitchgroup.com/marketplace
+    name: Interswitch API Marketplace
+    type: Portal
+  - url: https://docs.interswitchgroup.com/docs/authentication
+    name: Authentication
+    type: Authentication
+  - url: https://passport-sandbox.interswitchng.com/passport/oauth/token
+    name: Passport OAuth Token (Sandbox)
+    type: Authentication
+  - url: https://docs.interswitchgroup.com/docs/webhooks
+    name: Webhooks
+    type: Webhooks
+  - url: https://docs.interswitchgroup.com/docs/response-codes
+    name: Response Codes
+    type: Errors
+  - url: https://docs.interswitchgroup.com/llms.txt
+    name: llms.txt
+    type: Documentation
+  - url: https://join.slack.com/t/iswdevelopercommunity/shared_invite/zt-2lbdgbkjq-7Byrv6unYM2nX5RwK4MQ7g
+    name: Interswitch Developer Slack
+    type: Forum
+  - url: https://www.interswitchgroup.com/blog
+    type: Blog
+  - url: https://www.interswitchgroup.com/news
+    type: PressReleases
+  - url: https://www.interswitchgroup.com/support
+    type: Support
+  - url: https://www.interswitchgroup.com/company/careers
+    type: Careers
+  - url: https://www.interswitchgroup.com/privacy-policy
+    type: PrivacyPolicy
+  - url: https://www.interswitchgroup.com/terms-of-use
+    type: TermsOfService
+  - url: https://www.interswitchgroup.com/compliance
+    type: Compliance
+  - url: https://www.linkedin.com/company/interswitch-group
+    type: LinkedIn
+  - url: https://x.com/interswitchgrp
+    type: Twitter
+  - url: https://www.youtube.com/@InterswitchGroup
+    type: YouTube
+  - url: https://github.com/techquest/integrating-to-ipg
+    name: Integrating to the Interswitch Payment Gateway (community)
+    type: CodeExamples
+  - url: https://github.com/techquest/payment_php
+    name: Interswitch PHP Payment SDK (community)
+    type: SDK
+  - url: https://github.com/techquest/isw-laravel-sdk
+    name: Interswitch Laravel SDK (community)
+    type: SDK
+  - url: https://github.com/techquest/isw-react-sdk
+    name: Interswitch React SDK (community)
+    type: SDK
+  - url: https://github.com/akinmail/isw-payment-sdk-android
+    name: Interswitch Android Payment SDK (community)
+    type: SDK
+  - url: https://github.com/akinmail/isw-payment-sdk-ios
+    name: Interswitch iOS Payment SDK (community)
+    type: SDK
+  - url: plans/interswitch-plans-pricing.yml
+    type: Plans
+  - url: rate-limits/interswitch-rate-limits.yml
+    type: RateLimits
+  - url: finops/interswitch-finops.yml
+    type: FinOps
+  - url: vocabulary/interswitch-vocabulary.yml
+    type: Vocabulary
+  - url: rules/interswitch-rules.yml
+    type: Spectral
+  - type: Features
+    data:
+      - >-
+        Verve — Africa's first and largest domestic EMV chip-and-PIN card scheme, accepted at Interswitch-acquired ATMs,
+        POS terminals, and online merchants across Nigeria
+      - >-
+        Quickteller — multi-rail consumer and business payments platform spanning bills, airtime, transfers, and
+        merchant payments
+      - Quickteller Business — merchant dashboard for collections, payment links, invoices, refunds, and webhooks
+      - >-
+        Web Checkout (Webpay) — hosted payment page with inline JavaScript popup and Web Redirect modes; Verve, Visa,
+        and Mastercard acceptance
+      - Payment Gateway — server-to-server card payments, Hosted Fields, 3D Secure, Google Pay
+      - Transfers — Single, Bulk, Name Inquiry, and Bank Code Resolution endpoints over the NIBSS Instant Payment rails
+      - Bills Payment — hundreds of Nigerian billers (DSTV, GOTV, PHCN, school fees, TSA government payments)
+      - Airtime & Data Recharge — direct top-up and e-pin voucher delivery for MTN, Airtel, Glo, and 9mobile
+      - Paycode (Pay with Mobile) — cardless ATM withdrawal and merchant token generation, single and bulk
+      - >-
+        Card 360 — issuer-processor card management for Verve, debit, and prepaid cards (create, PIN, block, link,
+        balance)
+      - Lending Service — nano loans, salary lending, value financing under `/lending-service/api/v1` and `/v3`
+      - Customer Insights — demography, financial history, and financial-habit data products for credit decisioning
+      - Transaction Search — Quick, Reference, Bulk, and Detail lookups for back-office reconciliation
+      - Recurring Payments — Verve / Visa / Mastercard tokenization plus scheduled charges for subscriptions
+      - Refunds — full and partial refund lifecycle with T+1 auto-settlement
+      - Webhooks — HMAC-SHA512-signed events for TRANSACTION, SUBSCRIPTION, PAYMENT LINKS, and INVOICES
+      - >-
+        Authentication — OAuth 2.0 client-credentials via the Passport token service plus legacy InterswitchAuth
+        signature scheme (SHA1-signed headers)
+      - Sandbox environment at `sandbox.interswitchng.com` and `qa.interswitchng.com` with public test credentials
+      - Smartfuel, Quickteller Homes, Smart City, and TransSwitch verticals served by the same core APIs
+      - QR code interoperability across Nigerian banks
+    sources:
+      - https://www.interswitchgroup.com
+      - https://docs.interswitchgroup.com/docs/home
+      - https://docs.interswitchgroup.com/docs/authentication
+      - https://docs.interswitchgroup.com/docs/webhooks
+      - https://docs.interswitchgroup.com/llms.txt
+      - https://developer.interswitchgroup.com
+    updated: '2026-05-24'
 created: '2026-05-24'
 modified: '2026-05-24'
 position: Producing
-description: Interswitch is Nigeria's foundational digital payments and transaction-switching company, founded in 2002 and regulated by the Central Bank of Nigeria. It owns the Verve card scheme (Africa's first domestic EMV chip-and-PIN brand), the Quickteller consumer and business payments platform, the Webpay / Web Checkout gateway, the Paycode cardless service, and the underlying transaction switch that connects Nigerian banks, fintechs, billers, and merchants. The Interswitch developer platform exposes REST APIs for accepting payments, sending transfers, paying bills, recharging airtime, generating cardless tokens, issuing Verve cards (Card 360), originating loans, accessing customer insights, and searching transactions — all under OAuth 2.0 client-credentials authentication via the Passport token service and HMAC-SHA512-signed webhooks. The company is expanding from Nigeria into Ghana, Kenya, Uganda, and other African markets.
+description: >-
+  Interswitch is Nigeria's foundational digital payments and transaction-switching company, founded in 2002 and
+  regulated by the Central Bank of Nigeria. It owns the Verve card scheme (Africa's first domestic EMV chip-and-PIN
+  brand), the Quickteller consumer and business payments platform, the Webpay / Web Checkout gateway, the Paycode
+  cardless service, and the underlying transaction switch that connects Nigerian banks, fintechs, billers, and
+  merchants. The Interswitch developer platform exposes REST APIs for accepting payments, sending transfers, paying
+  bills, recharging airtime, generating cardless tokens, issuing Verve cards (Card 360), originating loans, accessing
+  customer insights, and searching transactions — all under OAuth 2.0 client-credentials authentication via the Passport
+  token service and HMAC-SHA512-signed webhooks. The company is expanding from Nigeria into Ghana, Kenya, Uganda, and
+  other African markets.
 maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
-  X: apievangelist
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    X: apievangelist
+    url: https://apievangelist.com
 specificationVersion: '0.16'

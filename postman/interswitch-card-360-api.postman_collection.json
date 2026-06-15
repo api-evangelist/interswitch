@@ -1,0 +1,928 @@
+{
+  "info": {
+    "_postman_id": "d6e2d913-e3eb-4862-acec-a869a7e9bc2e",
+    "name": "Interswitch Card 360 API",
+    "description": "Card issuer and cardholder lifecycle management for Verve, debit, and\nprepaid cards \u2014 create cards, set/reset PIN, block/unblock, balance\ninquiry, card linking, and card validation. Lets fintechs and banks\nissue and operate Verve cards programmatically on the Interswitch\nissuer-processor.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:10:04.000Z",
+    "updatedAt": "2026-06-05T15:10:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d6e2d913-e3eb-4862-acec-a869a7e9bc2e"
+  },
+  "item": [
+    {
+      "name": "card-360",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "cards",
+                  "item": [
+                    {
+                      "name": "{cardId}",
+                      "item": [
+                        {
+                          "name": "block",
+                          "item": [
+                            {
+                              "name": "Block Card",
+                              "id": "1919986c-c1c9-4df8-870a-a9bdc71241a5",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/block",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    ":cardId",
+                                    "block"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "93018a8b-6644-4438-9ad8-aaab8d0cf664",
+                                      "key": "cardId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "baa26ab6-7612-4b64-948d-47c584de0b1d",
+                                  "name": "Card blocked.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"reason\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/block",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "card-360",
+                                        "api",
+                                        "v1",
+                                        "cards",
+                                        ":cardId",
+                                        "block"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cardId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:10:05.000Z",
+                                  "updatedAt": "2026-06-05T15:10:05.000Z",
+                                  "uid": "35240-baa26ab6-7612-4b64-948d-47c584de0b1d"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-1919986c-c1c9-4df8-870a-a9bdc71241a5"
+                            }
+                          ],
+                          "id": "355784ba-daaa-4f9e-a608-64c68dc687eb",
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-355784ba-daaa-4f9e-a608-64c68dc687eb"
+                        },
+                        {
+                          "name": "unblock",
+                          "item": [
+                            {
+                              "name": "Unblock Card",
+                              "id": "59eca5e5-d71f-4295-b201-0106b2d18b6c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/unblock",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    ":cardId",
+                                    "unblock"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0cd1fc5b-7ec1-46d7-875b-491decbcf07b",
+                                      "key": "cardId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "0a37a00d-21b0-4c29-bbd0-41fa9e8c98ac",
+                                  "name": "Card unblocked.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/unblock",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "card-360",
+                                        "api",
+                                        "v1",
+                                        "cards",
+                                        ":cardId",
+                                        "unblock"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cardId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:10:05.000Z",
+                                  "updatedAt": "2026-06-05T15:10:05.000Z",
+                                  "uid": "35240-0a37a00d-21b0-4c29-bbd0-41fa9e8c98ac"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-59eca5e5-d71f-4295-b201-0106b2d18b6c"
+                            }
+                          ],
+                          "id": "70b3e301-e464-4b51-9d42-f0cff2319fc8",
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-70b3e301-e464-4b51-9d42-f0cff2319fc8"
+                        },
+                        {
+                          "name": "pin",
+                          "item": [
+                            {
+                              "name": "Set Or Reset Card PIN",
+                              "id": "6af14e6b-c1f5-43df-a5c8-f5a73d7ed4fc",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"pinBlock\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/pin",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    ":cardId",
+                                    "pin"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "9a9981ef-a78f-45e4-a7fe-d140bb20b591",
+                                      "key": "cardId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "0e1d544e-8b6a-4272-92c5-59161f2838a4",
+                                  "name": "PIN updated.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"pinBlock\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/pin",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "card-360",
+                                        "api",
+                                        "v1",
+                                        "cards",
+                                        ":cardId",
+                                        "pin"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cardId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:10:05.000Z",
+                                  "updatedAt": "2026-06-05T15:10:05.000Z",
+                                  "uid": "35240-0e1d544e-8b6a-4272-92c5-59161f2838a4"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-6af14e6b-c1f5-43df-a5c8-f5a73d7ed4fc"
+                            }
+                          ],
+                          "id": "7424d64b-cd17-4390-9250-971050f82136",
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-7424d64b-cd17-4390-9250-971050f82136"
+                        },
+                        {
+                          "name": "balance",
+                          "item": [
+                            {
+                              "name": "Get Card Balance",
+                              "id": "918c4ab4-8712-421e-8377-c685127c6595",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/balance",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    ":cardId",
+                                    "balance"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c092a403-c58b-40ed-ba1f-859083d65270",
+                                      "key": "cardId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "886f0971-7ab0-4f70-944d-8ff9c9fe2096",
+                                  "name": "Balance.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId/balance",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "card-360",
+                                        "api",
+                                        "v1",
+                                        "cards",
+                                        ":cardId",
+                                        "balance"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cardId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"balance\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"availableBalance\": \"<integer>\"\n}",
+                                  "createdAt": "2026-06-05T15:10:05.000Z",
+                                  "updatedAt": "2026-06-05T15:10:05.000Z",
+                                  "uid": "35240-886f0971-7ab0-4f70-944d-8ff9c9fe2096"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-918c4ab4-8712-421e-8377-c685127c6595"
+                            }
+                          ],
+                          "id": "70f0f384-25fd-4164-8180-bb6bc0196ffc",
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-70f0f384-25fd-4164-8180-bb6bc0196ffc"
+                        },
+                        {
+                          "name": "Get Card",
+                          "id": "4f7771b1-3411-49fd-a300-a982199a3191",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "card-360",
+                                "api",
+                                "v1",
+                                "cards",
+                                ":cardId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ab5398d4-a6b1-4492-b4b2-3482162b37c2",
+                                  "key": "cardId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "8fc30a23-5a60-48fd-a0cc-77691b460127",
+                              "name": "Card details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/:cardId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    ":cardId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cardId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"cardId\": \"<string>\",\n  \"cardPanMasked\": \"<string>\",\n  \"cardScheme\": \"MASTERCARD\",\n  \"cardType\": \"verve\",\n  \"status\": \"INACTIVE\",\n  \"expiryMonth\": \"<string>\",\n  \"expiryYear\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-8fc30a23-5a60-48fd-a0cc-77691b460127"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-4f7771b1-3411-49fd-a300-a982199a3191"
+                        }
+                      ],
+                      "id": "35b96666-6f2b-42c9-9fe8-396b457b6a8d",
+                      "createdAt": "2026-06-05T15:10:05.000Z",
+                      "updatedAt": "2026-06-05T15:10:05.000Z",
+                      "uid": "35240-35b96666-6f2b-42c9-9fe8-396b457b6a8d"
+                    },
+                    {
+                      "name": "link",
+                      "item": [
+                        {
+                          "name": "Link Card To Customer",
+                          "id": "0808eb5d-287e-4201-a7cd-123334897b21",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"cardPan\": \"<string>\",\n  \"customerId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/card-360/api/v1/cards/link",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "card-360",
+                                "api",
+                                "v1",
+                                "cards",
+                                "link"
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "24c26fd8-049f-4443-9ab2-d299d55da34f",
+                              "name": "Linked.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cardPan\": \"<string>\",\n  \"customerId\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/link",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    "link"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-24c26fd8-049f-4443-9ab2-d299d55da34f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-0808eb5d-287e-4201-a7cd-123334897b21"
+                        }
+                      ],
+                      "id": "1d87f21b-f021-406d-835b-84a6a38257ea",
+                      "createdAt": "2026-06-05T15:10:05.000Z",
+                      "updatedAt": "2026-06-05T15:10:05.000Z",
+                      "uid": "35240-1d87f21b-f021-406d-835b-84a6a38257ea"
+                    },
+                    {
+                      "name": "validate",
+                      "item": [
+                        {
+                          "name": "Validate Card",
+                          "id": "42e3d820-6d1f-4a9c-955e-85fa5c39ecce",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"cardPan\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/card-360/api/v1/cards/validate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "card-360",
+                                "api",
+                                "v1",
+                                "cards",
+                                "validate"
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "10a88675-12be-4f2c-94db-f4782b3c31a9",
+                              "name": "Card validation result.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cardPan\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/card-360/api/v1/cards/validate",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "card-360",
+                                    "api",
+                                    "v1",
+                                    "cards",
+                                    "validate"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"valid\": \"<boolean>\",\n  \"cardScheme\": \"VISA\",\n  \"cardType\": \"<string>\",\n  \"issuerBank\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:10:05.000Z",
+                              "updatedAt": "2026-06-05T15:10:05.000Z",
+                              "uid": "35240-10a88675-12be-4f2c-94db-f4782b3c31a9"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-42e3d820-6d1f-4a9c-955e-85fa5c39ecce"
+                        }
+                      ],
+                      "id": "f99ae659-ce3e-4d0f-8c96-86186e8b17fe",
+                      "createdAt": "2026-06-05T15:10:05.000Z",
+                      "updatedAt": "2026-06-05T15:10:05.000Z",
+                      "uid": "35240-f99ae659-ce3e-4d0f-8c96-86186e8b17fe"
+                    },
+                    {
+                      "name": "Create Card",
+                      "id": "7ef31362-1101-48c7-a1ba-0ff777f1bbb1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"cardType\": \"prepaid\",\n  \"productCode\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"deliveryAddress\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/card-360/api/v1/cards",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "card-360",
+                            "api",
+                            "v1",
+                            "cards"
+                          ]
+                        },
+                        "description": "Issue a new Verve, debit, or prepaid card to a customer profile."
+                      },
+                      "response": [
+                        {
+                          "id": "0f82e07c-a0ac-4dc2-8834-b8140a2f2761",
+                          "name": "Card created.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"customerId\": \"<string>\",\n  \"cardType\": \"prepaid\",\n  \"productCode\": \"<string>\",\n  \"customerName\": \"<string>\",\n  \"deliveryAddress\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/card-360/api/v1/cards",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "card-360",
+                                "api",
+                                "v1",
+                                "cards"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"cardId\": \"<string>\",\n  \"cardPanMasked\": \"<string>\",\n  \"cardScheme\": \"MASTERCARD\",\n  \"cardType\": \"verve\",\n  \"status\": \"INACTIVE\",\n  \"expiryMonth\": \"<string>\",\n  \"expiryYear\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:10:05.000Z",
+                          "updatedAt": "2026-06-05T15:10:05.000Z",
+                          "uid": "35240-0f82e07c-a0ac-4dc2-8834-b8140a2f2761"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:10:05.000Z",
+                      "updatedAt": "2026-06-05T15:10:05.000Z",
+                      "uid": "35240-7ef31362-1101-48c7-a1ba-0ff777f1bbb1"
+                    }
+                  ],
+                  "id": "8e261414-c3a4-4ae9-9657-ea0f65c157b8",
+                  "createdAt": "2026-06-05T15:10:05.000Z",
+                  "updatedAt": "2026-06-05T15:10:05.000Z",
+                  "uid": "35240-8e261414-c3a4-4ae9-9657-ea0f65c157b8"
+                }
+              ],
+              "id": "56cf0e78-9efd-4fd4-b47f-c1e07a5558be",
+              "createdAt": "2026-06-05T15:10:05.000Z",
+              "updatedAt": "2026-06-05T15:10:05.000Z",
+              "uid": "35240-56cf0e78-9efd-4fd4-b47f-c1e07a5558be"
+            }
+          ],
+          "id": "642fe36d-ec4f-4085-8ac3-d65b6a863380",
+          "createdAt": "2026-06-05T15:10:05.000Z",
+          "updatedAt": "2026-06-05T15:10:05.000Z",
+          "uid": "35240-642fe36d-ec4f-4085-8ac3-d65b6a863380"
+        }
+      ],
+      "id": "8c530ebb-1b01-4aaf-a761-1e4f0ce3dda0",
+      "createdAt": "2026-06-05T15:10:05.000Z",
+      "updatedAt": "2026-06-05T15:10:05.000Z",
+      "uid": "35240-8c530ebb-1b01-4aaf-a761-1e4f0ce3dda0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.interswitchng.com"
+    }
+  ]
+}

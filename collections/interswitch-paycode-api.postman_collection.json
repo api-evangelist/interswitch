@@ -1,0 +1,509 @@
+{
+  "item": [
+    {
+      "id": "340191e2-21fe-4709-b75a-851b40ef9b17",
+      "name": "Tokens",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dd7ea76-6b93-4870-b55e-a66086dabf4e",
+          "name": "Generate Paycode Token",
+          "request": {
+            "name": "Generate Paycode Token",
+            "description": {
+              "content": "Create a one-time access code for a cardless transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pwm",
+                "subscribers",
+                ":subscriberId",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"frontEndPartnerId\": \"<string>\",\n  \"paymentMethodCode\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"tokenLifeTimeInMinutes\": \"<integer>\",\n  \"oneTimePin\": \"<string>\",\n  \"ttid\": \"<string>\",\n  \"transactionRef\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "830cd623-dff4-4fb2-9deb-dfc9bc337a1d",
+              "name": "Token created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pwm",
+                    "subscribers",
+                    ":subscriberId",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frontEndPartnerId\": \"WEMA\",\n  \"paymentMethodCode\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"tokenLifeTimeInMinutes\": \"<integer>\",\n  \"oneTimePin\": \"<string>\",\n  \"ttid\": \"<string>\",\n  \"transactionRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payWithMobileToken\": \"string\",\n  \"subscriberId\": \"string\",\n  \"tokenLifeTimeInMinutes\": 6946,\n  \"responseCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82e07f44-811b-4b4f-bd44-2720cfa2f80c",
+          "name": "Get Token Status",
+          "request": {
+            "name": "Get Token Status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pwm",
+                "subscribers",
+                ":subscriberId",
+                "tokens",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6a3b15c-4744-4bb1-8367-05299c1990ae",
+              "name": "Token status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pwm",
+                    "subscribers",
+                    ":subscriberId",
+                    "tokens",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"channel\": \"string\",\n  \"surchargeAmount\": 2612,\n  \"settlementCode\": \"string\",\n  \"paymentMethodCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01ff6f36-8065-4595-bcba-92f4240d3656",
+          "name": "Cancel Paycode Token",
+          "request": {
+            "name": "Cancel Paycode Token",
+            "description": {},
+            "url": {
+              "path": [
+                "cardless-service",
+                "api",
+                "v1",
+                "cardless-services",
+                "cancel-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceId\": \"<string>\",\n  \"frontEndPartner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e98ee373-5607-4738-870d-5b8a9830227b",
+              "name": "Cancellation response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardless-service",
+                    "api",
+                    "v1",
+                    "cardless-services",
+                    "cancel-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"<string>\",\n  \"frontEndPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": \"string\",\n  \"responseMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "967a1ac7-87ed-4a51-9040-1eb63d499a5b",
+          "name": "Generate Bulk Paycode Tokens",
+          "request": {
+            "name": "Generate Bulk Paycode Tokens",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "pwm",
+                "subscribers",
+                ":subscriberId",
+                "tokens",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriberId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"frontEndPartnerId\": \"<string>\",\n  \"items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"tokenLifeTimeInMinutes\": \"<integer>\",\n      \"referenceId\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"tokenLifeTimeInMinutes\": \"<integer>\",\n      \"referenceId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f88a459-6970-441c-8f88-5ce96527b9ae",
+              "name": "Bulk token batch.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "pwm",
+                    "subscribers",
+                    ":subscriberId",
+                    "tokens",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriberId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"frontEndPartnerId\": \"<string>\",\n  \"items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"tokenLifeTimeInMinutes\": \"<integer>\",\n      \"referenceId\": \"<string>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"tokenLifeTimeInMinutes\": \"<integer>\",\n      \"referenceId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batchId\": \"string\",\n  \"tokens\": [\n    {\n      \"referenceId\": \"string\",\n      \"payWithMobileToken\": \"string\"\n    },\n    {\n      \"referenceId\": \"string\",\n      \"payWithMobileToken\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd55abf6-a70b-447f-875f-7c3791b8ca98",
+    "name": "Interswitch Paycode API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate\nsingle or bulk one-time tokens, query token status, and cancel tokens.\nPowers cardless ATM withdrawal across the Interswitch-acquired ATM network.\n",
+      "type": "text/plain"
+    }
+  }
+}

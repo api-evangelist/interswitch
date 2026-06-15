@@ -1,0 +1,530 @@
+{
+  "info": {
+    "_postman_id": "bf7373dd-19d8-4936-8412-4fed3b4ff963",
+    "name": "Interswitch Transaction Search API",
+    "description": "Back-office transaction and settlement verification \u2014 Quick Search,\nReference Search, Bulk Search, and Transaction Detail lookups across\nQuickteller Business, Webpay, Transfers, and Bills Payment.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:10:08.000Z",
+    "updatedAt": "2026-06-05T15:10:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bf7373dd-19d8-4936-8412-4fed3b4ff963"
+  },
+  "item": [
+    {
+      "name": "transaction-search",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "search",
+                  "item": [
+                    {
+                      "name": "quick",
+                      "item": [
+                        {
+                          "name": "Quick Transaction Search",
+                          "id": "b487adcb-1436-47b7-a1cd-47a373795f45",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/transaction-search/api/v1/search/quick?from=<date>&to=<date>&status=<string>&limit=50&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "transaction-search",
+                                "api",
+                                "v1",
+                                "search",
+                                "quick"
+                              ],
+                              "query": [
+                                {
+                                  "key": "from",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "to",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "status",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "50"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "bc13b5d2-5d5b-4339-9c52-bef61e2cf7d5",
+                              "name": "Matching transactions.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/transaction-search/api/v1/search/quick?from=<date>&to=<date>&status=<string>&limit=50&cursor=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "transaction-search",
+                                    "api",
+                                    "v1",
+                                    "search",
+                                    "quick"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "from",
+                                      "value": "<date>"
+                                    },
+                                    {
+                                      "key": "to",
+                                      "value": "<date>"
+                                    },
+                                    {
+                                      "key": "status",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "limit",
+                                      "value": "50"
+                                    },
+                                    {
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"<string>\",\n      \"transactionRef\": \"<string>\",\n      \"type\": \"AIRTIME\",\n      \"status\": \"<string>\",\n      \"responseCode\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"customerId\": \"<string>\",\n      \"merchantCode\": \"<string>\",\n      \"terminalId\": \"<string>\",\n      \"cardPanMasked\": \"<string>\",\n      \"cardScheme\": \"<string>\",\n      \"settlementDate\": \"<date>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"transactionId\": \"<string>\",\n      \"transactionRef\": \"<string>\",\n      \"type\": \"PAYCODE\",\n      \"status\": \"<string>\",\n      \"responseCode\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"customerId\": \"<string>\",\n      \"merchantCode\": \"<string>\",\n      \"terminalId\": \"<string>\",\n      \"cardPanMasked\": \"<string>\",\n      \"cardScheme\": \"<string>\",\n      \"settlementDate\": \"<date>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:10:08.000Z",
+                              "updatedAt": "2026-06-05T15:10:08.000Z",
+                              "uid": "35240-bc13b5d2-5d5b-4339-9c52-bef61e2cf7d5"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:08.000Z",
+                          "updatedAt": "2026-06-05T15:10:08.000Z",
+                          "uid": "35240-b487adcb-1436-47b7-a1cd-47a373795f45"
+                        }
+                      ],
+                      "id": "9dbac613-d87c-4c0e-aa39-f90608a14f37",
+                      "createdAt": "2026-06-05T15:10:08.000Z",
+                      "updatedAt": "2026-06-05T15:10:08.000Z",
+                      "uid": "35240-9dbac613-d87c-4c0e-aa39-f90608a14f37"
+                    },
+                    {
+                      "name": "reference",
+                      "item": [
+                        {
+                          "name": "Search By Reference",
+                          "id": "abfaaa2a-22b1-4cf6-88c1-1e1e47616819",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/transaction-search/api/v1/search/reference?reference=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "transaction-search",
+                                "api",
+                                "v1",
+                                "search",
+                                "reference"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "reference",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "2cbc2d65-a63c-43b6-a22e-44f7f1172d2a",
+                              "name": "Matching transactions.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/transaction-search/api/v1/search/reference?reference=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "transaction-search",
+                                    "api",
+                                    "v1",
+                                    "search",
+                                    "reference"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "reference",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"<string>\",\n      \"transactionRef\": \"<string>\",\n      \"type\": \"TRANSFER\",\n      \"status\": \"<string>\",\n      \"responseCode\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"customerId\": \"<string>\",\n      \"merchantCode\": \"<string>\",\n      \"terminalId\": \"<string>\",\n      \"cardPanMasked\": \"<string>\",\n      \"cardScheme\": \"<string>\",\n      \"settlementDate\": \"<date>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"transactionId\": \"<string>\",\n      \"transactionRef\": \"<string>\",\n      \"type\": \"PAYCODE\",\n      \"status\": \"<string>\",\n      \"responseCode\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"customerId\": \"<string>\",\n      \"merchantCode\": \"<string>\",\n      \"terminalId\": \"<string>\",\n      \"cardPanMasked\": \"<string>\",\n      \"cardScheme\": \"<string>\",\n      \"settlementDate\": \"<date>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:10:08.000Z",
+                              "updatedAt": "2026-06-05T15:10:08.000Z",
+                              "uid": "35240-2cbc2d65-a63c-43b6-a22e-44f7f1172d2a"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:08.000Z",
+                          "updatedAt": "2026-06-05T15:10:08.000Z",
+                          "uid": "35240-abfaaa2a-22b1-4cf6-88c1-1e1e47616819"
+                        }
+                      ],
+                      "id": "8bb5f446-5391-4f95-b6a8-ea3359af984b",
+                      "createdAt": "2026-06-05T15:10:08.000Z",
+                      "updatedAt": "2026-06-05T15:10:08.000Z",
+                      "uid": "35240-8bb5f446-5391-4f95-b6a8-ea3359af984b"
+                    },
+                    {
+                      "name": "bulk",
+                      "item": [
+                        {
+                          "name": "Bulk Transaction Search",
+                          "id": "42a51fd2-945e-4975-b357-c94cc4ec8a4e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/transaction-search/api/v1/search/bulk",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "transaction-search",
+                                "api",
+                                "v1",
+                                "search",
+                                "bulk"
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "48f05ec7-0d28-468e-aa19-6fdace254d58",
+                              "name": "Results keyed by reference.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"references\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/transaction-search/api/v1/search/bulk",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "transaction-search",
+                                    "api",
+                                    "v1",
+                                    "search",
+                                    "bulk"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Excepteure9\": {\n    \"transactionId\": \"<string>\",\n    \"transactionRef\": \"<string>\",\n    \"type\": \"BILL\",\n    \"status\": \"<string>\",\n    \"responseCode\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"customerId\": \"<string>\",\n    \"merchantCode\": \"<string>\",\n    \"terminalId\": \"<string>\",\n    \"cardPanMasked\": \"<string>\",\n    \"cardScheme\": \"<string>\",\n    \"settlementDate\": \"<date>\",\n    \"createdAt\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:10:08.000Z",
+                              "updatedAt": "2026-06-05T15:10:08.000Z",
+                              "uid": "35240-48f05ec7-0d28-468e-aa19-6fdace254d58"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:08.000Z",
+                          "updatedAt": "2026-06-05T15:10:08.000Z",
+                          "uid": "35240-42a51fd2-945e-4975-b357-c94cc4ec8a4e"
+                        }
+                      ],
+                      "id": "5cf16415-81f4-47ef-bb68-dee20b86561d",
+                      "createdAt": "2026-06-05T15:10:08.000Z",
+                      "updatedAt": "2026-06-05T15:10:08.000Z",
+                      "uid": "35240-5cf16415-81f4-47ef-bb68-dee20b86561d"
+                    }
+                  ],
+                  "id": "b93119fb-0aaa-4502-bc2e-527eda43bce7",
+                  "createdAt": "2026-06-05T15:10:08.000Z",
+                  "updatedAt": "2026-06-05T15:10:08.000Z",
+                  "uid": "35240-b93119fb-0aaa-4502-bc2e-527eda43bce7"
+                },
+                {
+                  "name": "transactions",
+                  "item": [
+                    {
+                      "name": "{transactionId}",
+                      "item": [
+                        {
+                          "name": "Get Transaction Detail",
+                          "id": "e32d81e3-b2b8-4324-aaaa-fdfe33a334d8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/transaction-search/api/v1/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "transaction-search",
+                                "api",
+                                "v1",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6dc30374-8d81-438d-81d7-47b0e4a378c9",
+                                  "key": "transactionId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "624866da-fd91-4ceb-bf42-111472269b58",
+                              "name": "Full transaction detail.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/transaction-search/api/v1/transactions/:transactionId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "transaction-search",
+                                    "api",
+                                    "v1",
+                                    "transactions",
+                                    ":transactionId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "transactionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"transactionId\": \"<string>\",\n  \"transactionRef\": \"<string>\",\n  \"type\": \"AIRTIME\",\n  \"status\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"merchantCode\": \"<string>\",\n  \"terminalId\": \"<string>\",\n  \"cardPanMasked\": \"<string>\",\n  \"cardScheme\": \"<string>\",\n  \"settlementDate\": \"<date>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T15:10:08.000Z",
+                              "updatedAt": "2026-06-05T15:10:08.000Z",
+                              "uid": "35240-624866da-fd91-4ceb-bf42-111472269b58"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:08.000Z",
+                          "updatedAt": "2026-06-05T15:10:08.000Z",
+                          "uid": "35240-e32d81e3-b2b8-4324-aaaa-fdfe33a334d8"
+                        }
+                      ],
+                      "id": "3fd84272-b94a-440a-8f79-4f5c0031b425",
+                      "createdAt": "2026-06-05T15:10:08.000Z",
+                      "updatedAt": "2026-06-05T15:10:08.000Z",
+                      "uid": "35240-3fd84272-b94a-440a-8f79-4f5c0031b425"
+                    }
+                  ],
+                  "id": "66869ab7-2767-481c-9146-fdb618ee4aaa",
+                  "createdAt": "2026-06-05T15:10:08.000Z",
+                  "updatedAt": "2026-06-05T15:10:08.000Z",
+                  "uid": "35240-66869ab7-2767-481c-9146-fdb618ee4aaa"
+                }
+              ],
+              "id": "13a86002-fc62-4925-88f4-2da7c2e2f13d",
+              "createdAt": "2026-06-05T15:10:08.000Z",
+              "updatedAt": "2026-06-05T15:10:08.000Z",
+              "uid": "35240-13a86002-fc62-4925-88f4-2da7c2e2f13d"
+            }
+          ],
+          "id": "5c89a58c-ea9a-4851-bbba-db940bbfbec4",
+          "createdAt": "2026-06-05T15:10:08.000Z",
+          "updatedAt": "2026-06-05T15:10:08.000Z",
+          "uid": "35240-5c89a58c-ea9a-4851-bbba-db940bbfbec4"
+        }
+      ],
+      "id": "c0b751e9-2f9d-401c-bf75-48869dcda0e8",
+      "createdAt": "2026-06-05T15:10:08.000Z",
+      "updatedAt": "2026-06-05T15:10:08.000Z",
+      "uid": "35240-c0b751e9-2f9d-401c-bf75-48869dcda0e8"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://qa.interswitchng.com"
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "item": [
+    {
+      "id": "3fe8063a-acce-4367-b1d7-5c53aeefebbd",
+      "name": "Tokenization",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6136abab-b6cd-499c-907c-6420c5ec8e3d",
+          "name": "Tokenize Card For Recurring",
+          "request": {
+            "name": "Tokenize Card For Recurring",
+            "description": {
+              "content": "Replace sensitive card data with a unique payment token that can be used for future recurring charges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "purchases",
+                "validations",
+                "recurrents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"authData\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f8fbf07-c131-440b-a09f-1a28842615dd",
+              "name": "Token created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "purchases",
+                    "validations",
+                    "recurrents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"authData\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"tokenExpiryDate\": \"1952-05-25\",\n  \"cardBin\": \"string\",\n  \"cardLast4\": \"string\",\n  \"responseCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d27e3d5c-3299-4a39-b86d-da28571bdab6",
+      "name": "Recurring Charges",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eeae7d9d-3aa1-44b9-8a40-2f126204081e",
+          "name": "Charge Recurring Token",
+          "request": {
+            "name": "Charge Recurring Token",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "purchases",
+                "recurrents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"token\": \"<string>\",\n  \"tokenExpiryDate\": \"<date>\",\n  \"transferRef\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6fd9ab98-8513-4195-9e57-2bd8c8c230bc",
+              "name": "Charge result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "purchases",
+                    "recurrents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"token\": \"<string>\",\n  \"tokenExpiryDate\": \"<date>\",\n  \"transferRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentId\": \"string\",\n  \"status\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseMessage\": \"string\",\n  \"amount\": 1967,\n  \"authCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://qa.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af161a60-4fea-4ce4-9536-b8145cc1752b",
+    "name": "Interswitch Recurring Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tokenize Verve, Visa, and Mastercard cards then charge them on schedule\nvia a stored token + expiry pair. The token replaces the raw PAN so\nsubscription merchants stay outside PCI scope.\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Paycode API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Paycode Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v1/pwm/subscribers/:subscriberId/tokens",
+            "params": [
+              {
+                "name": "subscriberId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a one-time access code for a cardless transaction."
+        },
+        {
+          "info": {
+            "name": "Get Token Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v1/pwm/subscribers/:subscriberId/tokens/status",
+            "params": [
+              {
+                "name": "subscriberId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Token Status"
+        },
+        {
+          "info": {
+            "name": "Cancel Paycode Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/cardless-service/api/v1/cardless-services/cancel-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel Paycode Token"
+        },
+        {
+          "info": {
+            "name": "Generate Bulk Paycode Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v1/pwm/subscribers/:subscriberId/tokens/bulk",
+            "params": [
+              {
+                "name": "subscriberId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate Bulk Paycode Tokens"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

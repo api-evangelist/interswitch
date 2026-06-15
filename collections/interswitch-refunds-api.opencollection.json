@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Refunds API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/refunds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Refund"
+        },
+        {
+          "info": {
+            "name": "Get Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/refunds/:refundReference",
+            "params": [
+              {
+                "name": "refundReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Refund"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

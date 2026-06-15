@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Payment Gateway API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Card Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authorize and capture a card payment using a tokenized or hosted-field-collected card."
+        },
+        {
+          "info": {
+            "name": "Get Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/payments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Payment"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Hosted Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Hosted Fields Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/hosted-fields/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a hosted-fields session so the browser can collect raw card data and POST it directly to Interswitch, keeping the merchant out of PCI scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Three-D Secure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create 3D Secure Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/three-d-secure/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create 3D Secure Session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Payment Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://qa.interswitchng.com/paymentgateway/api/v1/payment-links",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a hosted Pay Bill payment link the merchant can email, SMS, or share."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

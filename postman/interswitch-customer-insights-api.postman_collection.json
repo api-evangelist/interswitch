@@ -1,0 +1,505 @@
+{
+  "info": {
+    "_postman_id": "bda090f3-c93a-4f51-b0a3-d414c03d2db4",
+    "name": "Interswitch Customer Insights API",
+    "description": "Permissioned access to demography, financial history, average financial\nhistory, and financial-habit signals derived from Interswitch's transaction\nswitch and Verve card network. Feeds credit decisioning, KYC enrichment,\nand segmentation.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:10:07.000Z",
+    "updatedAt": "2026-06-05T15:10:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bda090f3-c93a-4f51-b0a3-d414c03d2db4"
+  },
+  "item": [
+    {
+      "name": "insights",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "customers",
+                  "item": [
+                    {
+                      "name": "{customerId}",
+                      "item": [
+                        {
+                          "name": "demography",
+                          "item": [
+                            {
+                              "name": "Get Customer Demography",
+                              "id": "da0d014c-0fb4-468e-8daf-337f76034e7d",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/demography",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "insights",
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":customerId",
+                                    "demography"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1c72dc65-ea82-4ef2-9d70-2a5a733e444b",
+                                      "key": "customerId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "9dbc9eb6-a188-4e45-8577-101af25410e2",
+                                  "name": "Demographic record.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/demography",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "insights",
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":customerId",
+                                        "demography"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "customerId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"customerId\": \"<string>\",\n  \"ageBand\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"state\": \"<string>\",\n  \"lga\": \"<string>\",\n  \"occupationGroup\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T15:10:07.000Z",
+                                  "updatedAt": "2026-06-05T15:10:07.000Z",
+                                  "uid": "35240-9dbc9eb6-a188-4e45-8577-101af25410e2"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:07.000Z",
+                              "updatedAt": "2026-06-05T15:10:07.000Z",
+                              "uid": "35240-da0d014c-0fb4-468e-8daf-337f76034e7d"
+                            }
+                          ],
+                          "id": "a61def2a-2b77-4ff7-9555-0f7910e76ca6",
+                          "createdAt": "2026-06-05T15:10:07.000Z",
+                          "updatedAt": "2026-06-05T15:10:07.000Z",
+                          "uid": "35240-a61def2a-2b77-4ff7-9555-0f7910e76ca6"
+                        },
+                        {
+                          "name": "financial-history",
+                          "item": [
+                            {
+                              "name": "average",
+                              "item": [
+                                {
+                                  "name": "Get Average Financial History",
+                                  "id": "66eb057c-36ec-4afe-a2e6-65258f8c15b7",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/financial-history/average",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "insights",
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":customerId",
+                                        "financial-history",
+                                        "average"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "de01cbcc-7c49-4c55-9684-d6899171902d",
+                                          "key": "customerId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "7b22acb1-c025-4aec-8010-e842ff17b008",
+                                      "name": "Average inflow/outflow metrics.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/financial-history/average",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "insights",
+                                            "api",
+                                            "v1",
+                                            "customers",
+                                            ":customerId",
+                                            "financial-history",
+                                            "average"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "customerId"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"averageMonthlyInflow\": \"<number>\",\n  \"averageMonthlyOutflow\": \"<number>\",\n  \"averageBalance\": \"<number>\",\n  \"windowMonths\": \"<integer>\"\n}",
+                                      "createdAt": "2026-06-05T15:10:07.000Z",
+                                      "updatedAt": "2026-06-05T15:10:07.000Z",
+                                      "uid": "35240-7b22acb1-c025-4aec-8010-e842ff17b008"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:10:07.000Z",
+                                  "updatedAt": "2026-06-05T15:10:07.000Z",
+                                  "uid": "35240-66eb057c-36ec-4afe-a2e6-65258f8c15b7"
+                                }
+                              ],
+                              "id": "71de7599-c979-4d52-b5f5-f697dfd3c119",
+                              "createdAt": "2026-06-05T15:10:07.000Z",
+                              "updatedAt": "2026-06-05T15:10:07.000Z",
+                              "uid": "35240-71de7599-c979-4d52-b5f5-f697dfd3c119"
+                            },
+                            {
+                              "name": "Get Financial History",
+                              "id": "c036e11a-f27b-4c07-9c24-0ac5a2e0ede2",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/financial-history?months=12",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "insights",
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":customerId",
+                                    "financial-history"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "months",
+                                      "value": "12"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "dfd2b1f5-bfd7-4c9d-9cf2-f35bf067bd81",
+                                      "key": "customerId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "08be1411-af90-41cc-ac88-6941a3b980aa",
+                                  "name": "Spending and inflow history.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/financial-history?months=12",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "insights",
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":customerId",
+                                        "financial-history"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "months",
+                                          "value": "12"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "customerId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"monthlyInflows\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"monthlyOutflows\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"categories\": {\n    \"commodo_d\": \"<number>\",\n    \"occaecat_a\": \"<number>\"\n  }\n}",
+                                  "createdAt": "2026-06-05T15:10:07.000Z",
+                                  "updatedAt": "2026-06-05T15:10:07.000Z",
+                                  "uid": "35240-08be1411-af90-41cc-ac88-6941a3b980aa"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:07.000Z",
+                              "updatedAt": "2026-06-05T15:10:07.000Z",
+                              "uid": "35240-c036e11a-f27b-4c07-9c24-0ac5a2e0ede2"
+                            }
+                          ],
+                          "id": "eef75007-a919-4b3a-ba13-26e67f06a351",
+                          "createdAt": "2026-06-05T15:10:07.000Z",
+                          "updatedAt": "2026-06-05T15:10:07.000Z",
+                          "uid": "35240-eef75007-a919-4b3a-ba13-26e67f06a351"
+                        },
+                        {
+                          "name": "financial-habits",
+                          "item": [
+                            {
+                              "name": "Get Financial Habits",
+                              "id": "d3bd1fb8-574a-4cae-82c9-893414a90223",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/financial-habits",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "insights",
+                                    "api",
+                                    "v1",
+                                    "customers",
+                                    ":customerId",
+                                    "financial-habits"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "72d25da9-3916-4b52-be9e-4513a9a19111",
+                                      "key": "customerId",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "05d89dfa-c005-4283-951d-c4281be163f8",
+                                  "name": "Behavioral signals.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/insights/api/v1/customers/:customerId/financial-habits",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "insights",
+                                        "api",
+                                        "v1",
+                                        "customers",
+                                        ":customerId",
+                                        "financial-habits"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "customerId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"spendingPersona\": \"<string>\",\n  \"recurringBills\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"channelPreference\": \"WEB\",\n  \"weekendVsWeekdayRatio\": \"<number>\"\n}",
+                                  "createdAt": "2026-06-05T15:10:07.000Z",
+                                  "updatedAt": "2026-06-05T15:10:07.000Z",
+                                  "uid": "35240-05d89dfa-c005-4283-951d-c4281be163f8"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:10:07.000Z",
+                              "updatedAt": "2026-06-05T15:10:07.000Z",
+                              "uid": "35240-d3bd1fb8-574a-4cae-82c9-893414a90223"
+                            }
+                          ],
+                          "id": "fb96b335-3840-40cf-83ae-a2fb148f987e",
+                          "createdAt": "2026-06-05T15:10:07.000Z",
+                          "updatedAt": "2026-06-05T15:10:07.000Z",
+                          "uid": "35240-fb96b335-3840-40cf-83ae-a2fb148f987e"
+                        }
+                      ],
+                      "id": "0c645390-43e3-4a8f-88c5-be3c61618789",
+                      "createdAt": "2026-06-05T15:10:07.000Z",
+                      "updatedAt": "2026-06-05T15:10:07.000Z",
+                      "uid": "35240-0c645390-43e3-4a8f-88c5-be3c61618789"
+                    }
+                  ],
+                  "id": "a790a0ba-6161-49ec-aff0-ddc6c6f9b099",
+                  "createdAt": "2026-06-05T15:10:07.000Z",
+                  "updatedAt": "2026-06-05T15:10:07.000Z",
+                  "uid": "35240-a790a0ba-6161-49ec-aff0-ddc6c6f9b099"
+                }
+              ],
+              "id": "113aed0e-5dc7-4d45-97fc-de7306c419ad",
+              "createdAt": "2026-06-05T15:10:07.000Z",
+              "updatedAt": "2026-06-05T15:10:07.000Z",
+              "uid": "35240-113aed0e-5dc7-4d45-97fc-de7306c419ad"
+            }
+          ],
+          "id": "47119955-7d1d-4826-935e-ad6cae0cd29f",
+          "createdAt": "2026-06-05T15:10:07.000Z",
+          "updatedAt": "2026-06-05T15:10:07.000Z",
+          "uid": "35240-47119955-7d1d-4826-935e-ad6cae0cd29f"
+        }
+      ],
+      "id": "c1152cc0-ee0d-405b-a0fc-035d2651f480",
+      "createdAt": "2026-06-05T15:10:07.000Z",
+      "updatedAt": "2026-06-05T15:10:07.000Z",
+      "uid": "35240-c1152cc0-ee0d-405b-a0fc-035d2651f480"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.interswitchng.com"
+    }
+  ]
+}

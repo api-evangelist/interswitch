@@ -1,0 +1,476 @@
+{
+  "item": [
+    {
+      "id": "c6252d5c-93f3-4e22-af65-de6316c0aed9",
+      "name": "Checkout",
+      "description": {
+        "content": "Hosted checkout payment initiation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ed8e246-da8f-49cf-90ce-5e5ad9f87e2d",
+          "name": "Initiate Web Redirect Payment",
+          "request": {
+            "name": "Initiate Web Redirect Payment",
+            "description": {
+              "content": "POST an HTML form (`application/x-www-form-urlencoded`) to redirect the\ncustomer to the Interswitch hosted payment page. After payment, the\nbrowser is redirected back to `site_redirect_url` with `txnref` in the\nquery string. Always confirm the transaction server-side via\n`/collections/api/v1/gettransaction.json` before delivering value.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                "w",
+                "pay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "merchant_code",
+                  "value": "<string>",
+                  "description": "(Required) Merchant identifier from Quickteller Business."
+                },
+                {
+                  "disabled": false,
+                  "key": "pay_item_id",
+                  "value": "<string>",
+                  "description": "(Required) Pay item identifier configured on the merchant account."
+                },
+                {
+                  "disabled": false,
+                  "key": "txn_ref",
+                  "value": "<string>",
+                  "description": "(Required) Unique merchant transaction reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>",
+                  "description": "(Required) Amount in minor currency units (e.g. kobo for NGN)."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) ISO 4217 numeric currency code (e.g. 566 for NGN)."
+                },
+                {
+                  "disabled": false,
+                  "key": "cust_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "site_redirect_url",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eda65aae-1087-4b5d-897c-80ce9cb6d6ed",
+              "name": "Redirect to hosted payment page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "w",
+                    "pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Merchant identifier from Quickteller Business.",
+                        "type": "text/plain"
+                      },
+                      "key": "merchant_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Pay item identifier configured on the merchant account.",
+                        "type": "text/plain"
+                      },
+                      "key": "pay_item_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique merchant transaction reference.",
+                        "type": "text/plain"
+                      },
+                      "key": "txn_ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Amount in minor currency units (e.g. kobo for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ISO 4217 numeric currency code (e.g. 566 for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cust_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "site_redirect_url",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "745460d5-8faf-4776-ad42-100e8c0c146e",
+              "name": "Validation error in the submitted form.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "w",
+                    "pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Merchant identifier from Quickteller Business.",
+                        "type": "text/plain"
+                      },
+                      "key": "merchant_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Pay item identifier configured on the merchant account.",
+                        "type": "text/plain"
+                      },
+                      "key": "pay_item_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique merchant transaction reference.",
+                        "type": "text/plain"
+                      },
+                      "key": "txn_ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Amount in minor currency units (e.g. kobo for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ISO 4217 numeric currency code (e.g. 566 for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cust_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "site_redirect_url",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "14803105-58d7-4d3d-aad2-8f2a8c73e582",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction status query",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c34566de-9d90-451d-bacd-0a2765ee179b",
+          "name": "Get Transaction Status",
+          "request": {
+            "name": "Get Transaction Status",
+            "description": {
+              "content": "Server-side transaction requery. Returns the authoritative status,\nresponse code, and amount for a given transaction reference. Must be\ncalled before delivering value; do not rely on the browser redirect\nparameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                "api",
+                "v1",
+                "gettransaction.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantcode",
+                  "value": "<string>",
+                  "description": "(Required) Merchant code issued by Interswitch."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionreference",
+                  "value": "<string>",
+                  "description": "(Required) Original `txn_ref` submitted at checkout."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>",
+                  "description": "(Required) Original transaction amount in minor units (kobo)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a8e7a38-0b5c-4470-8e11-a7aadde7140d",
+              "name": "Transaction status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "api",
+                    "v1",
+                    "gettransaction.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionreference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseCode\": \"string\",\n  \"Amount\": 7214,\n  \"TransactionDate\": \"1975-04-25T06:53:42.742Z\",\n  \"MerchantReference\": \"string\",\n  \"PaymentReference\": \"string\",\n  \"RetrievalReferenceNumber\": \"string\",\n  \"CardNumber\": \"string\",\n  \"LeadBankCbnCode\": \"string\",\n  \"LeadBankName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "582a7221-2ee5-4306-82ee-1e89bb4ddc68",
+    "name": "Interswitch Web Checkout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Interswitch Web Checkout (formerly Webpay) is the company's hosted payment\ngateway. Two integration modes are supported: an inline JavaScript popup\nloaded from `inline-checkout.js`, and a Web Redirect form POST to\n`/collections/w/pay`. After payment, merchants must perform a server-side\nrequery against `/collections/api/v1/gettransaction.json` and verify both\nthe response code (`00`) and the returned amount before delivering value.\n\n\nContact Support:\n Name: Interswitch Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

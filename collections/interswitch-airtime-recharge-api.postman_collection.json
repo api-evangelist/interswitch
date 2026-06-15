@@ -1,0 +1,465 @@
+{
+  "item": [
+    {
+      "id": "348668d8-361c-4072-8d3c-dd6e0d6397ff",
+      "name": "Airtime",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "348aa1e1-b76a-4a91-a31b-ea5fb991e07b",
+          "name": "List Airtime Telcos",
+          "request": {
+            "name": "List Airtime Telcos",
+            "description": {
+              "content": "List billers under category 4 (airtime) — MTN, Airtel, Glo, 9mobile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "categorys",
+                "4",
+                "billers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c51e8745-7c52-4cff-aa6f-7ddc61a5390f",
+              "name": "Airtime billers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "categorys",
+                    "4",
+                    "billers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billerId\": 1229,\n    \"name\": \"string\",\n    \"currencyCode\": \"string\"\n  },\n  {\n    \"billerId\": 5629,\n    \"name\": \"string\",\n    \"currencyCode\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e5d43c8-14c1-4520-920e-568eb1dccf7d",
+          "name": "List Airtime Denominations",
+          "request": {
+            "name": "List Airtime Denominations",
+            "description": {
+              "content": "Returns supported denominations for the telco (e.g. MTN-100, MTN-200).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "billers",
+                ":billerId",
+                "paymentitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "billerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd200ae6-fc38-43af-93de-849357276f4f",
+              "name": "Denominations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "billers",
+                    ":billerId",
+                    "paymentitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "billerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"paymentItemId\": 6429,\n    \"paymentCode\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 9925\n  },\n  {\n    \"paymentItemId\": 4984,\n    \"paymentCode\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 6025\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c29fb820-0028-405c-a1f8-d2b65cab4da7",
+          "name": "Recharge Airtime",
+          "request": {
+            "name": "Recharge Airtime",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "payments",
+                "advices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerMobile\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"requestReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f05d41fd-6452-422e-bb1b-1b4bfd30358f",
+              "name": "Recharge response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "payments",
+                    "advices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerMobile\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"requestReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": \"string\",\n  \"transactionRef\": \"string\",\n  \"amount\": 1679\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bc2f3214-a2a6-42a2-94cf-ccecec751d8b",
+      "name": "E-Pins",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b295d12-90f9-490c-b5a5-fe3ebfcaeea3",
+          "name": "Purchase E-Pin Voucher",
+          "request": {
+            "name": "Purchase E-Pin Voucher",
+            "description": {
+              "content": "Purchase recharge e-pins instead of direct top-up.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "payments",
+                "advices",
+                "epin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"amount\": \"<integer>\",\n  \"requestReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f5b213a-c5e5-4105-b03b-5c3903ecfc57",
+              "name": "E-pin batch.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "payments",
+                    "advices",
+                    "epin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentCode\": \"<string>\",\n  \"quantity\": \"<integer>\",\n  \"amount\": \"<integer>\",\n  \"requestReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responseCode\": \"string\",\n  \"pins\": [\n    {\n      \"pin\": \"string\",\n      \"serial\": \"string\",\n      \"expiry\": \"1988-07-17\"\n    },\n    {\n      \"pin\": \"string\",\n      \"serial\": \"string\",\n      \"expiry\": \"1950-05-27\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "928575ed-0549-4c51-9d8e-eb8465a77085",
+    "name": "Interswitch Airtime Recharge API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Web Checkout API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate Web Redirect Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/collections/w/pay",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "POST an HTML form (`application/x-www-form-urlencoded`) to redirect the\ncustomer to the Interswitch hosted payment page. After payment, the\nbrowser is redirected back to `site_redirect_url` with `txnref` in the\nquery string. Always confirm the transaction server-side via\n`/collections/api/v1/gettransaction.json` before delivering value.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Transaction Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json",
+            "params": [
+              {
+                "name": "merchantcode",
+                "value": "",
+                "type": "query",
+                "description": "Merchant code issued by Interswitch."
+              },
+              {
+                "name": "transactionreference",
+                "value": "",
+                "type": "query",
+                "description": "Original `txn_ref` submitted at checkout."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Original transaction amount in minor units (kobo)."
+              }
+            ]
+          },
+          "docs": "Server-side transaction requery. Returns the authoritative status,\nresponse code, and amount for a given transaction reference. Must be\ncalled before delivering value; do not rely on the browser redirect\nparameters.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

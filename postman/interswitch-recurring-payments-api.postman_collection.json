@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "0c4d2757-629f-4b04-8c55-63f2fea5b7bf",
+    "name": "Interswitch Recurring Payments API",
+    "description": "Tokenize Verve, Visa, and Mastercard cards then charge them on schedule\nvia a stored token + expiry pair. The token replaces the raw PAN so\nsubscription merchants stay outside PCI scope.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:10:03.000Z",
+    "updatedAt": "2026-06-05T15:10:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0c4d2757-629f-4b04-8c55-63f2fea5b7bf"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "purchases",
+              "item": [
+                {
+                  "name": "validations",
+                  "item": [
+                    {
+                      "name": "recurrents",
+                      "item": [
+                        {
+                          "name": "Tokenize Card For Recurring",
+                          "id": "b3cb093a-3b71-45bd-8dc2-c8a618b33ef7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"authData\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/purchases/validations/recurrents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "purchases",
+                                "validations",
+                                "recurrents"
+                              ]
+                            },
+                            "description": "Replace sensitive card data with a unique payment token that can be used for future recurring charges."
+                          },
+                          "response": [
+                            {
+                              "id": "d9de427b-c82d-4a8b-8b4d-a2fa96c7d85a",
+                              "name": "Token created.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"authData\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/purchases/validations/recurrents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "purchases",
+                                    "validations",
+                                    "recurrents"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"token\": \"<string>\",\n  \"tokenExpiryDate\": \"<date>\",\n  \"cardBin\": \"<string>\",\n  \"cardLast4\": \"<string>\",\n  \"responseCode\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:10:04.000Z",
+                              "updatedAt": "2026-06-05T15:10:04.000Z",
+                              "uid": "35240-d9de427b-c82d-4a8b-8b4d-a2fa96c7d85a"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:04.000Z",
+                          "updatedAt": "2026-06-05T15:10:04.000Z",
+                          "uid": "35240-b3cb093a-3b71-45bd-8dc2-c8a618b33ef7"
+                        }
+                      ],
+                      "id": "161bb7b7-44ca-4c28-936c-cc39841649d6",
+                      "createdAt": "2026-06-05T15:10:04.000Z",
+                      "updatedAt": "2026-06-05T15:10:04.000Z",
+                      "uid": "35240-161bb7b7-44ca-4c28-936c-cc39841649d6"
+                    }
+                  ],
+                  "id": "05549929-9453-408c-aa2e-993fe5a4c64d",
+                  "createdAt": "2026-06-05T15:10:04.000Z",
+                  "updatedAt": "2026-06-05T15:10:04.000Z",
+                  "uid": "35240-05549929-9453-408c-aa2e-993fe5a4c64d"
+                },
+                {
+                  "name": "recurrents",
+                  "item": [
+                    {
+                      "name": "Charge Recurring Token",
+                      "id": "8dfd6174-d5a5-43ab-ba2f-d749a51e0d4d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"NGN\",\n  \"token\": \"<string>\",\n  \"tokenExpiryDate\": \"<date>\",\n  \"transferRef\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/purchases/recurrents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "purchases",
+                            "recurrents"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6de0bb05-51ac-4074-8566-fadd82690490",
+                          "name": "Charge result.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"customerId\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"NGN\",\n  \"token\": \"<string>\",\n  \"tokenExpiryDate\": \"<date>\",\n  \"transferRef\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/purchases/recurrents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "purchases",
+                                "recurrents"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"paymentId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseMessage\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"authCode\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:10:04.000Z",
+                          "updatedAt": "2026-06-05T15:10:04.000Z",
+                          "uid": "35240-6de0bb05-51ac-4074-8566-fadd82690490"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:10:04.000Z",
+                      "updatedAt": "2026-06-05T15:10:04.000Z",
+                      "uid": "35240-8dfd6174-d5a5-43ab-ba2f-d749a51e0d4d"
+                    }
+                  ],
+                  "id": "c342be5b-44a1-4974-8f63-0582f58eaf6e",
+                  "createdAt": "2026-06-05T15:10:04.000Z",
+                  "updatedAt": "2026-06-05T15:10:04.000Z",
+                  "uid": "35240-c342be5b-44a1-4974-8f63-0582f58eaf6e"
+                }
+              ],
+              "id": "e808b4a8-dc87-4ea0-8a98-7f97565586e1",
+              "createdAt": "2026-06-05T15:10:04.000Z",
+              "updatedAt": "2026-06-05T15:10:04.000Z",
+              "uid": "35240-e808b4a8-dc87-4ea0-8a98-7f97565586e1"
+            }
+          ],
+          "id": "f208df97-0a82-49df-91f5-b15ddcca7b6f",
+          "createdAt": "2026-06-05T15:10:04.000Z",
+          "updatedAt": "2026-06-05T15:10:04.000Z",
+          "uid": "35240-f208df97-0a82-49df-91f5-b15ddcca7b6f"
+        }
+      ],
+      "id": "da9a48da-4e40-40cf-a005-a454643518b4",
+      "createdAt": "2026-06-05T15:10:04.000Z",
+      "updatedAt": "2026-06-05T15:10:04.000Z",
+      "uid": "35240-da9a48da-4e40-40cf-a005-a454643518b4"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://qa.interswitchng.com"
+    }
+  ]
+}

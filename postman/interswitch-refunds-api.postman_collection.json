@@ -1,0 +1,374 @@
+{
+  "info": {
+    "_postman_id": "ed1c1e4b-67ae-48e9-8edd-1133511ee9e7",
+    "name": "Interswitch Refunds API",
+    "description": "Refund successful Quickteller Business transactions in full or in part.\nTracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE,\nCOMPLETE_MANUAL, and FAILED states; auto-refunds settle T+1.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:10:01.000Z",
+    "updatedAt": "2026-06-05T15:10:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ed1c1e4b-67ae-48e9-8edd-1133511ee9e7"
+  },
+  "item": [
+    {
+      "name": "paymentgateway",
+      "item": [
+        {
+          "name": "api",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "refunds",
+                  "item": [
+                    {
+                      "name": "{refundReference}",
+                      "item": [
+                        {
+                          "name": "Get Refund",
+                          "id": "88ac1df1-7518-4895-b729-b3d51a583fb1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/paymentgateway/api/v1/refunds/:refundReference",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paymentgateway",
+                                "api",
+                                "v1",
+                                "refunds",
+                                ":refundReference"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "09fc6913-d3d0-46ac-acc4-b68b5c2f63c9",
+                                  "key": "refundReference",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b926479d-4d98-4710-8f09-8a542763069f",
+                              "name": "Refund details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/paymentgateway/api/v1/refunds/:refundReference",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "paymentgateway",
+                                    "api",
+                                    "v1",
+                                    "refunds",
+                                    ":refundReference"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "refundReference"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"refundReference\": \"<string>\",\n  \"parentPaymentId\": \"<string>\",\n  \"refundType\": \"FULL\",\n  \"refundAmount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"status\": \"PROCESSING\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"responseCode\": \"<string>\",\n  \"responseMessage\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:10:01.000Z",
+                              "updatedAt": "2026-06-05T15:10:01.000Z",
+                              "uid": "35240-b926479d-4d98-4710-8f09-8a542763069f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:10:01.000Z",
+                          "updatedAt": "2026-06-05T15:10:01.000Z",
+                          "uid": "35240-88ac1df1-7518-4895-b729-b3d51a583fb1"
+                        }
+                      ],
+                      "id": "7b722329-b3f8-466a-89bf-32046058adf0",
+                      "createdAt": "2026-06-05T15:10:01.000Z",
+                      "updatedAt": "2026-06-05T15:10:01.000Z",
+                      "uid": "35240-7b722329-b3f8-466a-89bf-32046058adf0"
+                    },
+                    {
+                      "name": "Create Refund",
+                      "id": "6af419ec-9bbc-446e-91f7-414c9db909b9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"refundReference\": \"<string>\",\n  \"parentPaymentId\": \"<string>\",\n  \"refundType\": \"PARTIAL\",\n  \"refundAmount\": \"<integer>\",\n  \"reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/paymentgateway/api/v1/refunds",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "paymentgateway",
+                            "api",
+                            "v1",
+                            "refunds"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "46f7baf7-e1ae-450c-b558-c8b5f16872f6",
+                          "name": "Refund created.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"refundReference\": \"<string>\",\n  \"parentPaymentId\": \"<string>\",\n  \"refundType\": \"PARTIAL\",\n  \"refundAmount\": \"<integer>\",\n  \"reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/paymentgateway/api/v1/refunds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paymentgateway",
+                                "api",
+                                "v1",
+                                "refunds"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"refundReference\": \"<string>\",\n  \"parentPaymentId\": \"<string>\",\n  \"refundType\": \"FULL\",\n  \"refundAmount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"status\": \"PROCESSING\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"responseCode\": \"<string>\",\n  \"responseMessage\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:10:01.000Z",
+                          "updatedAt": "2026-06-05T15:10:01.000Z",
+                          "uid": "35240-46f7baf7-e1ae-450c-b558-c8b5f16872f6"
+                        },
+                        {
+                          "id": "a94d0ce1-9aa6-4909-81b0-f2360d3ce197",
+                          "name": "Validation failure (e.g. 10400).",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"refundReference\": \"<string>\",\n  \"parentPaymentId\": \"<string>\",\n  \"refundType\": \"PARTIAL\",\n  \"refundAmount\": \"<integer>\",\n  \"reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/paymentgateway/api/v1/refunds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paymentgateway",
+                                "api",
+                                "v1",
+                                "refunds"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:10:01.000Z",
+                          "updatedAt": "2026-06-05T15:10:01.000Z",
+                          "uid": "35240-a94d0ce1-9aa6-4909-81b0-f2360d3ce197"
+                        },
+                        {
+                          "id": "7a483330-81b7-4cbe-89c7-c4a02ef15456",
+                          "name": "Server error (e.g. 10500).",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"refundReference\": \"<string>\",\n  \"parentPaymentId\": \"<string>\",\n  \"refundType\": \"PARTIAL\",\n  \"refundAmount\": \"<integer>\",\n  \"reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/paymentgateway/api/v1/refunds",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "paymentgateway",
+                                "api",
+                                "v1",
+                                "refunds"
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:10:01.000Z",
+                          "updatedAt": "2026-06-05T15:10:01.000Z",
+                          "uid": "35240-7a483330-81b7-4cbe-89c7-c4a02ef15456"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:10:01.000Z",
+                      "updatedAt": "2026-06-05T15:10:01.000Z",
+                      "uid": "35240-6af419ec-9bbc-446e-91f7-414c9db909b9"
+                    }
+                  ],
+                  "id": "0a0f17be-72bb-4669-b4fd-3b50baae9062",
+                  "createdAt": "2026-06-05T15:10:01.000Z",
+                  "updatedAt": "2026-06-05T15:10:01.000Z",
+                  "uid": "35240-0a0f17be-72bb-4669-b4fd-3b50baae9062"
+                }
+              ],
+              "id": "79fbce85-114e-4dd5-b276-57b05afa5d53",
+              "createdAt": "2026-06-05T15:10:01.000Z",
+              "updatedAt": "2026-06-05T15:10:01.000Z",
+              "uid": "35240-79fbce85-114e-4dd5-b276-57b05afa5d53"
+            }
+          ],
+          "id": "d539cc99-9040-4ede-8c75-40b009acdf02",
+          "createdAt": "2026-06-05T15:10:01.000Z",
+          "updatedAt": "2026-06-05T15:10:01.000Z",
+          "uid": "35240-d539cc99-9040-4ede-8c75-40b009acdf02"
+        }
+      ],
+      "id": "f90489aa-b602-4ff3-994a-6791467f085d",
+      "createdAt": "2026-06-05T15:10:01.000Z",
+      "updatedAt": "2026-06-05T15:10:01.000Z",
+      "uid": "35240-f90489aa-b602-4ff3-994a-6791467f085d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://qa.interswitchng.com"
+    }
+  ]
+}

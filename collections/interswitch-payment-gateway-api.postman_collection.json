@@ -1,0 +1,594 @@
+{
+  "item": [
+    {
+      "id": "ffb85b4d-8d3d-4555-82f5-49c57e662886",
+      "name": "Payments",
+      "description": {
+        "content": "Direct card payment authorization",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0ddf0be-9e10-41b3-aad9-5f349bbcde12",
+          "name": "Create Card Payment",
+          "request": {
+            "name": "Create Card Payment",
+            "description": {
+              "content": "Authorize and capture a card payment using a tokenized or hosted-field-collected card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentgateway",
+                "api",
+                "v1",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"paymentMethod\": {\n    \"type\": \"<string>\",\n    \"card\": {\n      \"pan\": \"<string>\",\n      \"expiryMonth\": \"<string>\",\n      \"expiryYear\": \"<string>\",\n      \"cvv\": \"<string>\"\n    },\n    \"token\": \"<string>\"\n  },\n  \"customerId\": \"<string>\",\n  \"customerEmail\": \"<email>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "847a36e5-34da-4c34-923a-7ff86e8bfdc0",
+              "name": "Payment result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentgateway",
+                    "api",
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"paymentMethod\": {\n    \"type\": \"<string>\",\n    \"card\": {\n      \"pan\": \"<string>\",\n      \"expiryMonth\": \"<string>\",\n      \"expiryYear\": \"<string>\",\n      \"cvv\": \"<string>\"\n    },\n    \"token\": \"<string>\"\n  },\n  \"customerId\": \"<string>\",\n  \"customerEmail\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentId\": \"string\",\n  \"status\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseMessage\": \"string\",\n  \"amount\": 5884,\n  \"currency\": \"string\",\n  \"authCode\": \"string\",\n  \"retrievalReferenceNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "278e6311-bb70-4654-ad33-340fdd8b3714",
+          "name": "Get Payment",
+          "request": {
+            "name": "Get Payment",
+            "description": {},
+            "url": {
+              "path": [
+                "paymentgateway",
+                "api",
+                "v1",
+                "payments",
+                ":paymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9afd4cf6-1c33-4b79-a30e-9c975e8364a9",
+              "name": "Payment details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentgateway",
+                    "api",
+                    "v1",
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentId\": \"string\",\n  \"status\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseMessage\": \"string\",\n  \"amount\": 5884,\n  \"currency\": \"string\",\n  \"authCode\": \"string\",\n  \"retrievalReferenceNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7424a857-cc1c-4549-9d51-e469bbe7eded",
+      "name": "Hosted Fields",
+      "description": {
+        "content": "Card data tokenization",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa226b20-3a32-4566-923f-6a36384ce66c",
+          "name": "Create Hosted Fields Session",
+          "request": {
+            "name": "Create Hosted Fields Session",
+            "description": {
+              "content": "Create a hosted-fields session so the browser can collect raw card data and POST it directly to Interswitch, keeping the merchant out of PCI scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentgateway",
+                "api",
+                "v1",
+                "hosted-fields",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"redirectUrl\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af72ebad-c307-4360-b241-c8aa2c20c0ea",
+              "name": "Session created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentgateway",
+                    "api",
+                    "v1",
+                    "hosted-fields",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"redirectUrl\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionId\": \"string\",\n  \"hostedFieldsUrl\": \"http://yefrcR.gssujFxQEitfhWzQ.4lClQZ1wceIRQ6ypwt\",\n  \"expiresAt\": \"1998-10-10T18:10:26.325Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6b8688e5-0fc4-4712-9c76-3e77b3a604ab",
+      "name": "Three-D Secure",
+      "description": {
+        "content": "Step-up authentication",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18b89070-a8f4-4610-916f-fc9bc6ba53a4",
+          "name": "Create 3D Secure Session",
+          "request": {
+            "name": "Create 3D Secure Session",
+            "description": {},
+            "url": {
+              "path": [
+                "paymentgateway",
+                "api",
+                "v1",
+                "three-d-secure",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentId\": \"<string>\",\n  \"returnUrl\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3daae238-0284-4833-883e-160a7c1f940d",
+              "name": "Step-up redirect details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentgateway",
+                    "api",
+                    "v1",
+                    "three-d-secure",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentId\": \"<string>\",\n  \"returnUrl\": \"<uri>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"acsUrl\": \"https://FNDgTehOPa.grfwKxE\",\n  \"pareq\": \"string\",\n  \"md\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "89825273-ea29-40c0-a14a-fcdbf3492540",
+      "name": "Payment Links",
+      "description": {
+        "content": "Hosted payment link generation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cac720ea-d352-459f-b088-5b66e3610d47",
+          "name": "Create Payment Link",
+          "request": {
+            "name": "Create Payment Link",
+            "description": {
+              "content": "Create a hosted Pay Bill payment link the merchant can email, SMS, or share.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentgateway",
+                "api",
+                "v1",
+                "payment-links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3567fe4e-237f-4b8b-bd66-02c546fb91c2",
+              "name": "Created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentgateway",
+                    "api",
+                    "v1",
+                    "payment-links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentLinkId\": \"string\",\n  \"url\": \"http://DPebnCb.cbQ-6WG,fUkMZCrEcvX1.xMrgQn1BZ.KkJAQkzsf\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://qa.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6ac29c8-9728-4629-8168-b46be4f72676",
+    "name": "Interswitch Payment Gateway API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server card payment APIs for PCI-DSS-licensed merchants — direct\nCard Payments, Hosted Fields tokenization, 3D Secure step-up, Google Pay,\nand Pay Bill payment-link generation. Authenticated with OAuth 2.0\nclient_credentials via the Passport token service.\n",
+      "type": "text/plain"
+    }
+  }
+}

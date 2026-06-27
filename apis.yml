@@ -251,51 +251,48 @@ access: 3rd-Party
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/interswitch/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/interswitch-airtime-recharge-workflow.yml
-        name: Interswitch Airtime Recharge
-        summary: Discover an airtime telco, pick a denomination, and recharge a phone number.
-      - url: arazzo/interswitch-bill-payment-validate-and-pay-workflow.yml
-        name: Interswitch Validate Customer And Pay Bill
-        summary: Look up a biller's payment item, validate the customer, then submit a bill payment advice.
-      - url: arazzo/interswitch-card-payment-with-3ds-workflow.yml
-        name: Interswitch Card Payment With 3D Secure
-        summary: Authorize a card payment, step up to 3D Secure when required, then confirm the final payment status.
-      - url: arazzo/interswitch-hosted-fields-checkout-workflow.yml
-        name: Interswitch Hosted Fields Checkout
-        summary: Open a hosted-fields session to collect card data out of PCI scope, then confirm the resulting payment.
-      - url: arazzo/interswitch-issue-and-activate-card-workflow.yml
-        name: Interswitch Issue And Activate Card
-        summary: Issue a new card to a customer, set its PIN, then read back the activated card.
-      - url: arazzo/interswitch-lending-enroll-payment-method-workflow.yml
-        name: Interswitch Lending Enroll Payment Method
-        summary: Generate a lending payment token, confirm it with an OTP, then debit a loan repayment with it.
-      - url: arazzo/interswitch-lending-offer-to-disbursement-workflow.yml
-        name: Interswitch Lending Offer To Disbursement
-        summary: Fetch a customer's loan offers, accept one, fund the loan, then confirm the customer's loan status.
-      - url: arazzo/interswitch-link-and-check-card-balance-workflow.yml
-        name: Interswitch Link And Check Card Balance
-        summary: Validate a card PAN, link it to a customer, then read the linked card's balance.
-      - url: arazzo/interswitch-paycode-generate-and-track-workflow.yml
-        name: Interswitch Paycode Generate And Track
-        summary: Generate a cardless Paycode token, poll its status, and cancel it if it is not yet used.
-      - url: arazzo/interswitch-payment-refund-workflow.yml
-        name: Interswitch Payment Refund And Track
-        summary: Confirm an original payment, raise a refund against it, then poll the refund to a terminal state.
-      - url: arazzo/interswitch-recurring-tokenize-and-charge-workflow.yml
-        name: Interswitch Recurring Tokenize And Charge
-        summary: Tokenize a card once, then charge the stored token for a recurring payment.
-      - url: arazzo/interswitch-transaction-reconciliation-workflow.yml
-        name: Interswitch Transaction Reconciliation
-        summary: Find a transaction by merchant reference, then pull its full detail for reconciliation.
-      - url: arazzo/interswitch-transfer-with-name-inquiry-workflow.yml
-        name: Interswitch Transfer With Name Inquiry
-        summary: Resolve a bank code, confirm the recipient account name, then send a single transfer.
-      - url: arazzo/interswitch-web-checkout-confirm-workflow.yml
-        name: Interswitch Web Checkout And Confirm
-        summary: Initiate a hosted Web Redirect payment, then server-side requery to confirm before delivering value.
+  - type: Arazzo
+    url: arazzo/interswitch-airtime-recharge-workflow.yml
+    name: Interswitch Airtime Recharge
+  - type: Arazzo
+    url: arazzo/interswitch-bill-payment-validate-and-pay-workflow.yml
+    name: Interswitch Validate Customer And Pay Bill
+  - type: Arazzo
+    url: arazzo/interswitch-card-payment-with-3ds-workflow.yml
+    name: Interswitch Card Payment With 3D Secure
+  - type: Arazzo
+    url: arazzo/interswitch-hosted-fields-checkout-workflow.yml
+    name: Interswitch Hosted Fields Checkout
+  - type: Arazzo
+    url: arazzo/interswitch-issue-and-activate-card-workflow.yml
+    name: Interswitch Issue And Activate Card
+  - type: Arazzo
+    url: arazzo/interswitch-lending-enroll-payment-method-workflow.yml
+    name: Interswitch Lending Enroll Payment Method
+  - type: Arazzo
+    url: arazzo/interswitch-lending-offer-to-disbursement-workflow.yml
+    name: Interswitch Lending Offer To Disbursement
+  - type: Arazzo
+    url: arazzo/interswitch-link-and-check-card-balance-workflow.yml
+    name: Interswitch Link And Check Card Balance
+  - type: Arazzo
+    url: arazzo/interswitch-paycode-generate-and-track-workflow.yml
+    name: Interswitch Paycode Generate And Track
+  - type: Arazzo
+    url: arazzo/interswitch-payment-refund-workflow.yml
+    name: Interswitch Payment Refund And Track
+  - type: Arazzo
+    url: arazzo/interswitch-recurring-tokenize-and-charge-workflow.yml
+    name: Interswitch Recurring Tokenize And Charge
+  - type: Arazzo
+    url: arazzo/interswitch-transaction-reconciliation-workflow.yml
+    name: Interswitch Transaction Reconciliation
+  - type: Arazzo
+    url: arazzo/interswitch-transfer-with-name-inquiry-workflow.yml
+    name: Interswitch Transfer With Name Inquiry
+  - type: Arazzo
+    url: arazzo/interswitch-web-checkout-confirm-workflow.yml
+    name: Interswitch Web Checkout And Confirm
   - url: https://www.interswitchgroup.com
     type: Portal
   - url: https://docs.interswitchgroup.com/docs/home
@@ -306,7 +303,7 @@ common:
     type: Documentation
   - url: https://developer.interswitchgroup.com
     name: Interswitch Developer Console
-    type: SignUp
+    type: Signup
   - url: https://developer.interswitchgroup.com/marketplace
     name: Interswitch API Marketplace
     type: Portal
@@ -321,13 +318,13 @@ common:
     type: Webhooks
   - url: https://docs.interswitchgroup.com/docs/response-codes
     name: Response Codes
-    type: Errors
+    type: ErrorCodes
   - url: https://docs.interswitchgroup.com/llms.txt
     name: llms.txt
     type: Documentation
   - url: https://join.slack.com/t/iswdevelopercommunity/shared_invite/zt-2lbdgbkjq-7Byrv6unYM2nX5RwK4MQ7g
     name: Interswitch Developer Slack
-    type: Forum
+    type: Forums
   - url: https://www.interswitchgroup.com/blog
     type: Blog
   - url: https://www.interswitchgroup.com/news
@@ -353,19 +350,19 @@ common:
     type: CodeExamples
   - url: https://github.com/techquest/payment_php
     name: Interswitch PHP Payment SDK (community)
-    type: SDK
+    type: SDKs
   - url: https://github.com/techquest/isw-laravel-sdk
     name: Interswitch Laravel SDK (community)
-    type: SDK
+    type: SDKs
   - url: https://github.com/techquest/isw-react-sdk
     name: Interswitch React SDK (community)
-    type: SDK
+    type: SDKs
   - url: https://github.com/akinmail/isw-payment-sdk-android
     name: Interswitch Android Payment SDK (community)
-    type: SDK
+    type: SDKs
   - url: https://github.com/akinmail/isw-payment-sdk-ios
     name: Interswitch iOS Payment SDK (community)
-    type: SDK
+    type: SDKs
   - url: plans/interswitch-plans-pricing.yml
     type: Plans
   - url: rate-limits/interswitch-rate-limits.yml

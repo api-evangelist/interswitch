@@ -1,0 +1,36 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/interswitch-airtime-recharge-api-openapi.yml, openapi/interswitch-bills-payment-api-openapi.yml,
+  openapi/interswitch-card-360-api-openapi.yml, openapi/interswitch-customer-insights-api-openapi.yml,
+  openapi/interswitch-lending-api-openapi.yml, openapi/interswitch-paycode-api-openapi.yml,
+  openapi/interswitch-payment-gateway-api-openapi.yml, openapi/interswitch-recurring-payments-api-openapi.yml,
+  openapi/interswitch-refunds-api-openapi.yml, openapi/interswitch-transaction-search-api-openapi.yml,
+  openapi/interswitch-transfers-api-openapi.yml, openapi/interswitch-web-checkout-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: InterswitchAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/interswitch-airtime-recharge-api-openapi.yml
+  - openapi/interswitch-bills-payment-api-openapi.yml
+  - openapi/interswitch-web-checkout-api-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/interswitch-card-360-api-openapi.yml
+  - openapi/interswitch-customer-insights-api-openapi.yml
+  - openapi/interswitch-lending-api-openapi.yml
+  - openapi/interswitch-paycode-api-openapi.yml
+  - openapi/interswitch-payment-gateway-api-openapi.yml
+  - openapi/interswitch-recurring-payments-api-openapi.yml
+  - openapi/interswitch-refunds-api-openapi.yml
+  - openapi/interswitch-transaction-search-api-openapi.yml
+  - openapi/interswitch-transfers-api-openapi.yml

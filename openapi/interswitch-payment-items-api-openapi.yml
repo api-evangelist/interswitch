@@ -1,0 +1,67 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Payment Items API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Payment Items
+paths:
+  /api/v2/quickteller/billers/{billerId}/paymentitems:
+    get:
+      tags:
+      - Payment Items
+      summary: List Biller Payment Items
+      description: Returns supported amounts, packages, or denominations for the biller (e.g. DSTV Compact, MTN-100 airtime).
+      operationId: listBillerPaymentItems
+      parameters:
+      - in: path
+        name: billerId
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Payment items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentItem'
+components:
+  schemas:
+    PaymentItem:
+      type: object
+      properties:
+        paymentItemId:
+          type: integer
+        paymentCode:
+          type: string
+        name:
+          type: string
+        amount:
+          type: integer
+        currencyCode:
+          type: string
+        isAmountFixed:
+          type: boolean
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

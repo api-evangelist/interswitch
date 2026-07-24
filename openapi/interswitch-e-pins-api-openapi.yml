@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime E-Pins API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: E-Pins
+paths:
+  /api/v2/quickteller/payments/advices/epin:
+    post:
+      tags:
+      - E-Pins
+      summary: Purchase E-Pin Voucher
+      description: Purchase recharge e-pins instead of direct top-up.
+      operationId: purchaseEpinVoucher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - paymentCode
+              - quantity
+              - amount
+              - requestReference
+              properties:
+                paymentCode:
+                  type: string
+                quantity:
+                  type: integer
+                amount:
+                  type: integer
+                requestReference:
+                  type: string
+      responses:
+        '200':
+          description: E-pin batch.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseCode:
+                    type: string
+                  pins:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        pin:
+                          type: string
+                        serial:
+                          type: string
+                        expiry:
+                          type: string
+                          format: date
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

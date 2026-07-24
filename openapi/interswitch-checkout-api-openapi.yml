@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Checkout API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Checkout
+  description: Hosted checkout payment initiation
+paths:
+  /collections/w/pay:
+    post:
+      tags:
+      - Checkout
+      summary: Initiate Web Redirect Payment
+      description: 'POST an HTML form (`application/x-www-form-urlencoded`) to redirect the
+
+        customer to the Interswitch hosted payment page. After payment, the
+
+        browser is redirected back to `site_redirect_url` with `txnref` in the
+
+        query string. Always confirm the transaction server-side via
+
+        `/collections/api/v1/gettransaction.json` before delivering value.
+
+        '
+      operationId: initiateWebRedirectPayment
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+      responses:
+        '302':
+          description: Redirect to hosted payment page.
+        '400':
+          description: Validation error in the submitted form.
+components:
+  schemas:
+    CheckoutRequest:
+      type: object
+      required:
+      - merchant_code
+      - pay_item_id
+      - txn_ref
+      - amount
+      - currency
+      - cust_email
+      - site_redirect_url
+      properties:
+        merchant_code:
+          type: string
+          description: Merchant identifier from Quickteller Business.
+        pay_item_id:
+          type: string
+          description: Pay item identifier configured on the merchant account.
+        txn_ref:
+          type: string
+          description: Unique merchant transaction reference.
+        amount:
+          type: integer
+          description: Amount in minor currency units (e.g. kobo for NGN).
+        currency:
+          type: string
+          description: ISO 4217 numeric currency code (e.g. 566 for NGN).
+        cust_email:
+          type: string
+          format: email
+        site_redirect_url:
+          type: string
+          format: uri
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

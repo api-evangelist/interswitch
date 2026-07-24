@@ -1,0 +1,250 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Payments API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Payments
+paths:
+  /api/v2/quickteller/payments/advices:
+    post:
+      tags:
+      - Payments
+      summary: Submit Bill Payment Advice
+      operationId: submitBillPaymentAdvice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - paymentCode
+              - customerId
+              - customerEmail
+              - customerMobile
+              - amount
+              - requestReference
+              properties:
+                paymentCode:
+                  type: string
+                customerId:
+                  type: string
+                customerEmail:
+                  type: string
+                  format: email
+                customerMobile:
+                  type: string
+                amount:
+                  type: integer
+                  description: Minor currency units.
+                requestReference:
+                  type: string
+                  description: Must be prefixed with the merchant request-reference prefix.
+      responses:
+        '200':
+          description: Payment advice response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseCode:
+                    type: string
+                    description: 90000 indicates success.
+                  transactionRef:
+                    type: string
+                  rawOutput:
+                    type: string
+  /lending-service/api/v2/payments/token:
+    post:
+      tags:
+      - Payments
+      summary: Generate Lending Payment Token
+      operationId: generateLendingPaymentToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardPan
+              properties:
+                customerId:
+                  type: string
+                cardPan:
+                  type: string
+                expiryMonth:
+                  type: string
+                expiryYear:
+                  type: string
+                cvv:
+                  type: string
+      responses:
+        '200':
+          description: Token + OTP challenge.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pendingToken:
+                    type: string
+                  otpRequired:
+                    type: boolean
+  /lending-service/api/v2/payments/token/validate:
+    post:
+      tags:
+      - Payments
+      summary: Validate Lending Payment Token OTP
+      operationId: validateLendingPaymentTokenOtp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - pendingToken
+              - otp
+              properties:
+                pendingToken:
+                  type: string
+                otp:
+                  type: string
+      responses:
+        '200':
+          description: Confirmed token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentMethodId:
+                    type: string
+                  status:
+                    type: string
+  /paymentgateway/api/v1/payments:
+    post:
+      tags:
+      - Payments
+      summary: Create Card Payment
+      description: Authorize and capture a card payment using a tokenized or hosted-field-collected card.
+      operationId: createCardPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Payment result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+  /paymentgateway/api/v1/payments/{paymentId}:
+    get:
+      tags:
+      - Payments
+      summary: Get Payment
+      operationId: getPayment
+      parameters:
+      - in: path
+        name: paymentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Payment details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+components:
+  schemas:
+    PaymentRequest:
+      type: object
+      required:
+      - transactionRef
+      - amount
+      - currency
+      - paymentMethod
+      properties:
+        transactionRef:
+          type: string
+        amount:
+          type: integer
+          description: Minor currency units.
+        currency:
+          type: string
+        customerId:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        paymentMethod:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - card
+              - token
+              - googlePay
+            card:
+              type: object
+              properties:
+                pan:
+                  type: string
+                expiryMonth:
+                  type: string
+                expiryYear:
+                  type: string
+                cvv:
+                  type: string
+            token:
+              type: string
+    PaymentResponse:
+      type: object
+      properties:
+        paymentId:
+          type: string
+        status:
+          type: string
+        responseCode:
+          type: string
+        responseMessage:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        authCode:
+          type: string
+        retrievalReferenceNumber:
+          type: string
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

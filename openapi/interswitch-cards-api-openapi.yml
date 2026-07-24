@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Cards API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Cards
+paths:
+  /card-360/api/v1/cards:
+    post:
+      tags:
+      - Cards
+      summary: Create Card
+      description: Issue a new Verve, debit, or prepaid card to a customer profile.
+      operationId: createCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardType
+              - productCode
+              properties:
+                customerId:
+                  type: string
+                cardType:
+                  type: string
+                  enum:
+                  - debit
+                  - prepaid
+                  - verve
+                productCode:
+                  type: string
+                customerName:
+                  type: string
+                deliveryAddress:
+                  type: string
+      responses:
+        '201':
+          description: Card created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /card-360/api/v1/cards/{cardId}:
+    get:
+      tags:
+      - Cards
+      summary: Get Card
+      operationId: getCard
+      parameters:
+      - in: path
+        name: cardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Card details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+  /card-360/api/v1/cards/{cardId}/block:
+    post:
+      tags:
+      - Cards
+      summary: Block Card
+      operationId: blockCard
+      parameters:
+      - in: path
+        name: cardId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Card blocked.
+  /card-360/api/v1/cards/{cardId}/unblock:
+    post:
+      tags:
+      - Cards
+      summary: Unblock Card
+      operationId: unblockCard
+      parameters:
+      - in: path
+        name: cardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Card unblocked.
+  /card-360/api/v1/cards/validate:
+    post:
+      tags:
+      - Cards
+      summary: Validate Card
+      operationId: validateCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cardPan
+              properties:
+                cardPan:
+                  type: string
+      responses:
+        '200':
+          description: Card validation result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  cardScheme:
+                    type: string
+                    enum:
+                    - VERVE
+                    - VISA
+                    - MASTERCARD
+                  cardType:
+                    type: string
+                  issuerBank:
+                    type: string
+components:
+  schemas:
+    Card:
+      type: object
+      properties:
+        cardId:
+          type: string
+        cardPanMasked:
+          type: string
+        cardScheme:
+          type: string
+          enum:
+          - VERVE
+          - VISA
+          - MASTERCARD
+        cardType:
+          type: string
+          enum:
+          - debit
+          - prepaid
+          - verve
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - BLOCKED
+          - EXPIRED
+          - INACTIVE
+        expiryMonth:
+          type: string
+        expiryYear:
+          type: string
+        customerId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Billers API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Billers
+paths:
+  /api/v2/quickteller/categorys:
+    get:
+      tags:
+      - Billers
+      summary: List Biller Categories
+      operationId: listBillerCategories
+      responses:
+        '200':
+          description: Biller categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    categoryId:
+                      type: integer
+                    categoryName:
+                      type: string
+  /api/v2/quickteller/categorys/{categoryId}/billers:
+    get:
+      tags:
+      - Billers
+      summary: List Billers In Category
+      operationId: listBillersInCategory
+      parameters:
+      - in: path
+        name: categoryId
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Billers in the requested category.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Biller'
+  /api/v2/quickteller/billers:
+    get:
+      tags:
+      - Billers
+      summary: List All Billers
+      operationId: listBillers
+      responses:
+        '200':
+          description: All billers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Biller'
+components:
+  schemas:
+    Biller:
+      type: object
+      properties:
+        billerId:
+          type: integer
+        name:
+          type: string
+        categoryId:
+          type: integer
+        currencyCode:
+          type: string
+        customerField1:
+          type: string
+        customerField2:
+          type: string
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

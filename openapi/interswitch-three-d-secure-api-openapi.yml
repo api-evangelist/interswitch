@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Three-D Secure API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Three-D Secure
+  description: Step-up authentication
+paths:
+  /paymentgateway/api/v1/three-d-secure/sessions:
+    post:
+      tags:
+      - Three-D Secure
+      summary: Create 3D Secure Session
+      operationId: createThreeDSecureSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - paymentId
+              - returnUrl
+              properties:
+                paymentId:
+                  type: string
+                returnUrl:
+                  type: string
+                  format: uri
+      responses:
+        '200':
+          description: Step-up redirect details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acsUrl:
+                    type: string
+                    format: uri
+                  pareq:
+                    type: string
+                  md:
+                    type: string
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

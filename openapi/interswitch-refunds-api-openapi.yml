@@ -1,24 +1,30 @@
 openapi: 3.1.0
 info:
-  title: Interswitch Refunds API
-  description: |
-    Refund successful Quickteller Business transactions in full or in part.
-    Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE,
-    COMPLETE_MANUAL, and FAILED states; auto-refunds settle T+1.
+  title: Interswitch Recharge Airtime Refunds API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
   version: '2024-01-01'
 servers:
-  - url: https://qa.interswitchng.com
-    description: Sandbox / QA
-  - url: https://saturn.interswitchng.com
-    description: Production
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
 security:
-  - BearerAuth: []
+- InterswitchAuth: []
 tags:
-  - name: Refunds
+- name: Refunds
 paths:
   /paymentgateway/api/v1/refunds:
     post:
-      tags: [Refunds]
+      tags:
+      - Refunds
       summary: Create Refund
       operationId: createRefund
       requestBody:
@@ -27,13 +33,27 @@ paths:
           application/json:
             schema:
               type: object
-              required: [refundReference, parentPaymentId, refundType]
+              required:
+              - refundReference
+              - parentPaymentId
+              - refundType
               properties:
-                refundReference: { type: string, description: Unique refund identifier. }
-                parentPaymentId: { type: string, description: ID of the original successful payment. }
-                refundType: { type: string, enum: [PARTIAL, FULL] }
-                refundAmount: { type: integer, description: Required for PARTIAL; minor currency units. }
-                reason: { type: string }
+                refundReference:
+                  type: string
+                  description: Unique refund identifier.
+                parentPaymentId:
+                  type: string
+                  description: ID of the original successful payment.
+                refundType:
+                  type: string
+                  enum:
+                  - PARTIAL
+                  - FULL
+                refundAmount:
+                  type: integer
+                  description: Required for PARTIAL; minor currency units.
+                reason:
+                  type: string
       responses:
         '201':
           description: Refund created.
@@ -47,14 +67,16 @@ paths:
           description: Server error (e.g. 10500).
   /paymentgateway/api/v1/refunds/{refundReference}:
     get:
-      tags: [Refunds]
+      tags:
+      - Refunds
       summary: Get Refund
       operationId: getRefund
       parameters:
-        - in: path
-          name: refundReference
-          required: true
-          schema: { type: string }
+      - in: path
+        name: refundReference
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Refund details.
@@ -63,23 +85,44 @@ paths:
               schema:
                 $ref: '#/components/schemas/Refund'
 components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
   schemas:
     Refund:
       type: object
       properties:
-        refundReference: { type: string }
-        parentPaymentId: { type: string }
-        refundType: { type: string, enum: [PARTIAL, FULL] }
-        refundAmount: { type: integer }
-        currency: { type: string }
+        refundReference:
+          type: string
+        parentPaymentId:
+          type: string
+        refundType:
+          type: string
+          enum:
+          - PARTIAL
+          - FULL
+        refundAmount:
+          type: integer
+        currency:
+          type: string
         status:
           type: string
-          enum: [SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, FAILED]
-        createdAt: { type: string, format: date-time }
-        completedAt: { type: string, format: date-time }
-        responseCode: { type: string }
-        responseMessage: { type: string }
+          enum:
+          - SUCCESS
+          - PENDING
+          - PROCESSING
+          - COMPLETE
+          - COMPLETE_MANUAL
+          - FAILED
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        responseCode:
+          type: string
+        responseMessage:
+          type: string
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

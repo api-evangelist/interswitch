@@ -1,0 +1,65 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Financial Habits API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Financial Habits
+paths:
+  /insights/api/v1/customers/{customerId}/financial-habits:
+    get:
+      tags:
+      - Financial Habits
+      summary: Get Financial Habits
+      operationId: getFinancialHabits
+      parameters:
+      - in: path
+        name: customerId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Behavioral signals.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  spendingPersona:
+                    type: string
+                  recurringBills:
+                    type: array
+                    items:
+                      type: string
+                  channelPreference:
+                    type: string
+                    enum:
+                    - POS
+                    - WEB
+                    - MOBILE
+                    - ATM
+                    - USSD
+                  weekendVsWeekdayRatio:
+                    type: number
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

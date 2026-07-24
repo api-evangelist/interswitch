@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Loans API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Loans
+paths:
+  /lending-service/api/v1/loans/{loanId}/fund:
+    post:
+      tags:
+      - Loans
+      summary: Fund Loan
+      description: Disburse accepted loan funds to the borrower.
+      operationId: fundLoan
+      parameters:
+      - in: path
+        name: loanId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Funded.
+  /lending-service/api/v1/loans/{loanId}/debit:
+    post:
+      tags:
+      - Loans
+      summary: Debit Loan Repayment
+      operationId: debitLoanRepayment
+      parameters:
+      - in: path
+        name: loanId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - amount
+              properties:
+                amount:
+                  type: integer
+                paymentMethodId:
+                  type: string
+      responses:
+        '200':
+          description: Debited.
+  /lending-service/api/v1/loans/{loanId}/update:
+    put:
+      tags:
+      - Loans
+      summary: Update Loan Status
+      operationId: updateLoanStatus
+      parameters:
+      - in: path
+        name: loanId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - ACTIVE
+                  - CLOSED
+                  - DEFAULTED
+                  - WRITTEN_OFF
+      responses:
+        '200':
+          description: Updated.
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

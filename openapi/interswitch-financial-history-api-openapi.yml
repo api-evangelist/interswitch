@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Financial History API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Financial History
+paths:
+  /insights/api/v1/customers/{customerId}/financial-history:
+    get:
+      tags:
+      - Financial History
+      summary: Get Financial History
+      operationId: getFinancialHistory
+      parameters:
+      - in: path
+        name: customerId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: months
+        schema:
+          type: integer
+          default: 12
+      responses:
+        '200':
+          description: Spending and inflow history.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  monthlyInflows:
+                    type: array
+                    items:
+                      type: number
+                  monthlyOutflows:
+                    type: array
+                    items:
+                      type: number
+                  categories:
+                    type: object
+                    additionalProperties:
+                      type: number
+  /insights/api/v1/customers/{customerId}/financial-history/average:
+    get:
+      tags:
+      - Financial History
+      summary: Get Average Financial History
+      operationId: getAverageFinancialHistory
+      parameters:
+      - in: path
+        name: customerId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Average inflow/outflow metrics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  averageMonthlyInflow:
+                    type: number
+                  averageMonthlyOutflow:
+                    type: number
+                  averageBalance:
+                    type: number
+                  windowMonths:
+                    type: integer
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

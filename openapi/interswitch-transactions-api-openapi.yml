@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Transactions API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Transactions
+  description: Transaction status query
+paths:
+  /collections/api/v1/gettransaction.json:
+    get:
+      tags:
+      - Transactions
+      summary: Get Transaction Status
+      description: 'Server-side transaction requery. Returns the authoritative status,
+
+        response code, and amount for a given transaction reference. Must be
+
+        called before delivering value; do not rely on the browser redirect
+
+        parameters.
+
+        '
+      operationId: getTransactionStatus
+      parameters:
+      - in: query
+        name: merchantcode
+        required: true
+        schema:
+          type: string
+        description: Merchant code issued by Interswitch.
+      - in: query
+        name: transactionreference
+        required: true
+        schema:
+          type: string
+        description: Original `txn_ref` submitted at checkout.
+      - in: query
+        name: amount
+        required: true
+        schema:
+          type: integer
+        description: Original transaction amount in minor units (kobo).
+      responses:
+        '200':
+          description: Transaction status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionStatus'
+components:
+  schemas:
+    TransactionStatus:
+      type: object
+      properties:
+        ResponseCode:
+          type: string
+          description: 00 indicates a successful, approved transaction.
+        Amount:
+          type: integer
+          description: Settled amount in minor units.
+        TransactionDate:
+          type: string
+          format: date-time
+        MerchantReference:
+          type: string
+        PaymentReference:
+          type: string
+        RetrievalReferenceNumber:
+          type: string
+        CardNumber:
+          type: string
+          description: Masked PAN of the card used.
+        LeadBankCbnCode:
+          type: string
+        LeadBankName:
+          type: string
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

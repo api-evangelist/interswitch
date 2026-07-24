@@ -1,0 +1,130 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Offers API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Offers
+paths:
+  /lending-service/api/v3/offers:
+    get:
+      tags:
+      - Offers
+      summary: List Loan Offers For Customer
+      operationId: listLoanOffers
+      parameters:
+      - in: query
+        name: customerId
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: amount
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Loan offers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Offer'
+  /lending-service/api/v1/offers/{offerId}/accept:
+    post:
+      tags:
+      - Offers
+      summary: Accept Loan Offer
+      operationId: acceptLoanOffer
+      parameters:
+      - in: path
+        name: offerId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Loan created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loan'
+components:
+  schemas:
+    Loan:
+      type: object
+      properties:
+        loanId:
+          type: string
+        customerId:
+          type: string
+        providerId:
+          type: string
+        principal:
+          type: integer
+        outstandingBalance:
+          type: integer
+        currency:
+          type: string
+        interestRate:
+          type: number
+          format: float
+        tenorDays:
+          type: integer
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACTIVE
+          - CLOSED
+          - DEFAULTED
+          - WRITTEN_OFF
+        disbursedAt:
+          type: string
+          format: date-time
+        dueAt:
+          type: string
+          format: date-time
+    Offer:
+      type: object
+      properties:
+        offerId:
+          type: string
+        providerId:
+          type: string
+        principal:
+          type: integer
+        currency:
+          type: string
+        interestRate:
+          type: number
+          format: float
+        tenorDays:
+          type: integer
+        productType:
+          type: string
+          enum:
+          - NANO
+          - SALARY
+          - VALUE_FINANCING
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

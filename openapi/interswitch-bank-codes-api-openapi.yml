@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Bank Codes API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Bank Codes
+paths:
+  /quicktellerservice/api/v5/banks:
+    get:
+      tags:
+      - Bank Codes
+      summary: List Banks
+      description: Return CBN bank codes and bank names that can be addressed via the transfer endpoints.
+      operationId: listBanks
+      responses:
+        '200':
+          description: List of banks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bankCode:
+                      type: string
+                    bankName:
+                      type: string
+                    cbnCode:
+                      type: string
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Name Inquiry API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Name Inquiry
+paths:
+  /quicktellerservice/api/v5/transactions/NameInquiry:
+    post:
+      tags:
+      - Name Inquiry
+      summary: Resolve Account Name
+      description: Look up the registered name on a bank account before initiating a transfer to it.
+      operationId: nameInquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - accountId
+              - bankCode
+              properties:
+                accountId:
+                  type: string
+                  description: NUBAN bank account number.
+                bankCode:
+                  type: string
+                  description: 6-digit CBN bank code.
+      responses:
+        '200':
+          description: Account holder details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountName:
+                    type: string
+                  accountId:
+                    type: string
+                  bankCode:
+                    type: string
+                  responseCode:
+                    type: string
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Tokenization API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Tokenization
+paths:
+  /api/v2/purchases/validations/recurrents:
+    post:
+      tags:
+      - Tokenization
+      summary: Tokenize Card For Recurring
+      description: Replace sensitive card data with a unique payment token that can be used for future recurring charges.
+      operationId: tokenizeCardForRecurring
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - transactionRef
+              - authData
+              properties:
+                transactionRef:
+                  type: string
+                authData:
+                  type: string
+                  description: Encrypted card payload.
+                customerId:
+                  type: string
+                amount:
+                  type: integer
+                  description: Optional zero-value or minor-unit verification amount.
+                currency:
+                  type: string
+      responses:
+        '200':
+          description: Token created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  tokenExpiryDate:
+                    type: string
+                    format: date
+                  cardBin:
+                    type: string
+                  cardLast4:
+                    type: string
+                  responseCode:
+                    type: string
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

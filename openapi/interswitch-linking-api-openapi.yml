@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Linking API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Linking
+paths:
+  /card-360/api/v1/cards/link:
+    post:
+      tags:
+      - Linking
+      summary: Link Card To Customer
+      operationId: linkCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cardPan
+              - customerId
+              properties:
+                cardPan:
+                  type: string
+                customerId:
+                  type: string
+      responses:
+        '200':
+          description: Linked.
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

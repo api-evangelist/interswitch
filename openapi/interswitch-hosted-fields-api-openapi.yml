@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Hosted Fields API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Hosted Fields
+  description: Card data tokenization
+paths:
+  /paymentgateway/api/v1/hosted-fields/sessions:
+    post:
+      tags:
+      - Hosted Fields
+      summary: Create Hosted Fields Session
+      description: Create a hosted-fields session so the browser can collect raw card data and POST it directly to Interswitch, keeping the merchant out of PCI scope.
+      operationId: createHostedFieldsSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - transactionRef
+              - amount
+              - currency
+              properties:
+                transactionRef:
+                  type: string
+                amount:
+                  type: integer
+                currency:
+                  type: string
+                redirectUrl:
+                  type: string
+                  format: uri
+      responses:
+        '200':
+          description: Session created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessionId:
+                    type: string
+                  hostedFieldsUrl:
+                    type: string
+                    format: uri
+                  expiresAt:
+                    type: string
+                    format: date-time
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

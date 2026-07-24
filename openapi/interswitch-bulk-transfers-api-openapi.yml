@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Interswitch Recharge Airtime Transfers API
+  title: Interswitch Recharge Airtime Bulk Transfers API
   description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
 
     MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
@@ -19,21 +19,15 @@ servers:
 security:
 - InterswitchAuth: []
 tags:
-- name: Transfers
+- name: Bulk Transfers
 paths:
-  /quicktellerservice/api/v5/transactions/TransferFunds:
+  /quicktellerservice/api/v5/transactions/BulkTransfer:
     post:
       tags:
-      - Transfers
-      summary: Send Single Transfer
-      description: 'Move funds from a sender wallet or account to a single recipient bank
-
-        account. `mac` is the SHA-512 hash of the canonical message; consult the
-
-        Interswitch transfer integration guide for the exact field order.
-
-        '
-      operationId: sendSingleTransfer
+      - Bulk Transfers
+      summary: Send Bulk Transfer
+      description: Disburse to up to thousands of recipients in a single request.
+      operationId: sendBulkTransfer
       parameters:
       - in: header
         name: terminalId
@@ -45,29 +39,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SingleTransferRequest'
+              $ref: '#/components/schemas/BulkTransferRequest'
       responses:
         '200':
-          description: Transfer response.
+          description: Batch accepted.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransferResponse'
+                type: object
+                properties:
+                  batchId:
+                    type: string
+                  responseCode:
+                    type: string
+                  acceptedCount:
+                    type: integer
+                  rejectedCount:
+                    type: integer
 components:
   schemas:
-    TransferResponse:
-      type: object
-      properties:
-        ResponseCode:
-          type: string
-          description: 90000 indicates success.
-        TransactionRef:
-          type: string
-        TransferDate:
-          type: string
-          format: date-time
-        Amount:
-          type: integer
     SingleTransferRequest:
       type: object
       required:
@@ -132,6 +122,20 @@ components:
               type: string
             lastName:
               type: string
+    BulkTransferRequest:
+      type: object
+      required:
+      - batchReference
+      - items
+      properties:
+        batchReference:
+          type: string
+        initiatingEntityCode:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SingleTransferRequest'
   securitySchemes:
     InterswitchAuth:
       type: apiKey

@@ -1,0 +1,56 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Balance API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Balance
+paths:
+  /card-360/api/v1/cards/{cardId}/balance:
+    get:
+      tags:
+      - Balance
+      summary: Get Card Balance
+      operationId: getCardBalance
+      parameters:
+      - in: path
+        name: cardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Balance.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: integer
+                    description: Minor currency units.
+                  currency:
+                    type: string
+                  availableBalance:
+                    type: integer
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

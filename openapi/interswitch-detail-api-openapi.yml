@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Detail API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Detail
+paths:
+  /transaction-search/api/v1/transactions/{transactionId}:
+    get:
+      tags:
+      - Detail
+      summary: Get Transaction Detail
+      operationId: getTransactionDetail
+      parameters:
+      - in: path
+        name: transactionId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Full transaction detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        transactionRef:
+          type: string
+        type:
+          type: string
+          enum:
+          - PAYMENT
+          - TRANSFER
+          - BILL
+          - AIRTIME
+          - REFUND
+          - PAYCODE
+        status:
+          type: string
+        responseCode:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        customerId:
+          type: string
+        merchantCode:
+          type: string
+        terminalId:
+          type: string
+        cardPanMasked:
+          type: string
+        cardScheme:
+          type: string
+        settlementDate:
+          type: string
+          format: date
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

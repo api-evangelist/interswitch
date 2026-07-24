@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recharge Airtime Providers API
+  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+
+    customer''s phone number is supplied as `customer_id` on the payment advice.
+
+    '
+  version: '2024-01-01'
+servers:
+- url: https://sandbox.interswitchng.com
+  description: Sandbox
+- url: https://saturn.interswitchng.com
+  description: Production
+security:
+- InterswitchAuth: []
+tags:
+- name: Providers
+paths:
+  /lending-service/api/v1/offers/providers:
+    get:
+      tags:
+      - Providers
+      summary: List Loan Providers
+      operationId: listLoanProviders
+      responses:
+        '200':
+          description: Available lenders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    providerId:
+                      type: string
+                    name:
+                      type: string
+                    products:
+                      type: array
+                      items:
+                        type: string
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

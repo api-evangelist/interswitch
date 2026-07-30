@@ -1,236 +1,1092 @@
 aid: interswitch
 url: https://raw.githubusercontent.com/api-evangelist/interswitch/refs/heads/main/apis.yml
 apis:
-  - aid: interswitch:interswitch-web-checkout-api
-    name: Interswitch Web Checkout API
-    tags:
-      - Payments
-      - Checkout
-      - Webpay
-      - Africa
-      - Nigeria
-    humanURL: https://docs.interswitchgroup.com/docs/web-checkout
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/web-checkout
-        type: Documentation
-      - url: https://docs.interswitchgroup.com/docs/quickstart
-        type: GettingStarted
-      - url: openapi/interswitch-web-checkout-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/interswitch-payment-schema.json
-        type: JSONSchema
-      - url: json-ld/interswitch-context.jsonld
-        type: JSONLD
-    description: >-
-      Interswitch Web Checkout (formerly Webpay) is the company's hosted payment gateway. Two integration modes — inline
-      JavaScript popup (`newwebpay.interswitchng.com/inline-checkout.js`) and Web Redirect form POST to
-      `/collections/w/pay` — plus a server-side requery endpoint at `/collections/api/v1/gettransaction.json` for
-      authoritative confirmation. Supports Verve, Visa, and Mastercard, with mandatory server-side verification before
-      delivering value.
-  - aid: interswitch:interswitch-payment-gateway-api
-    name: Interswitch Payment Gateway API
-    tags:
-      - Payments
-      - Card Payments
-      - Hosted Fields
-      - 3D Secure
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/accept-payments
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/accept-payments
-        type: Documentation
-      - url: openapi/interswitch-payment-gateway-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/interswitch-payment-schema.json
-        type: JSONSchema
-    description: >-
-      Server-to-server card payment APIs for PCI-DSS-licensed merchants — direct Card Payments, Hosted Fields, 3D Secure
-      step-up, Google Pay, and Pay Bill payment-link generation. Base path `/paymentgateway` on the Interswitch
-      QA/production hosts with OAuth 2.0 client_credentials authentication via the Passport token endpoint.
-  - aid: interswitch:interswitch-transfers-api
-    name: Interswitch Transfers API
-    tags:
-      - Transfers
-      - Payouts
-      - Disbursement
-      - Bank Transfer
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/single-transfer
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/single-transfer
-        type: Documentation
-      - url: openapi/interswitch-transfers-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Quickteller Send Money APIs covering Single Transfer (POST /quicktellerservice/api/v5/transactions/TransferFunds),
-      Bulk Transfer, Name Inquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to disburse funds across
-      NIBSS-Instant-Payment-connected Nigerian bank accounts with SHA-512 MAC authentication on each request.
-  - aid: interswitch:interswitch-bills-payment-api
-    name: Interswitch Bills Payment API
-    tags:
-      - Bills
-      - Quickteller
-      - Utilities
-      - Cable TV
-      - Value Added Services
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/bills-payment
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/bills-payment
-        type: Documentation
-      - url: openapi/interswitch-bills-payment-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Quickteller bills payment service — list billers (`GET /api/v2/quickteller/billers`), get payment items, validate
-      customer references, and submit payment advices for DSTV, GOTV, PHCN, water boards, school fees, government TSA
-      payments, and hundreds of other Nigerian billers. Uses the InterswitchAuth legacy signature scheme (Authorization
-      + Timestamp + Nonce + Signature + SignatureMethod + TerminalID headers).
-  - aid: interswitch:interswitch-airtime-recharge-api
-    name: Interswitch Airtime Recharge API
-    tags:
-      - Airtime
-      - Top-up
-      - Virtual Top-up
-      - E-Pins
-      - Telco
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/airtime-recharge
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/airtime-recharge
-        type: Documentation
-      - url: openapi/interswitch-airtime-recharge-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Virtual top-up (direct airtime and data) and e-pin voucher delivery for MTN, Airtel, Glo, and 9mobile. Same
-      biller/category/payment-item flow as Bills Payment, with category ID 4 reserved for airtime billers; phone number
-      is supplied as `customer_id` on the `/api/v2/quickteller/payments/advices` payload.
-  - aid: interswitch:interswitch-paycode-api
-    name: Interswitch Paycode API
-    tags:
-      - Paycode
-      - Cardless
-      - Cash Withdrawal
-      - Tokens
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/single-paycode
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/single-paycode
-        type: Documentation
-      - url: openapi/interswitch-paycode-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate single or bulk one-time tokens via `POST
-      /api/v1/pwm/subscribers/{subscriberId}/tokens`, query token status, and cancel tokens at
-      `/cardless-service/api/v1/cardless-services/cancel-token`. Powers ATM cardless withdrawal across the
-      Interswitch-acquired ATM network.
-  - aid: interswitch:interswitch-refunds-api
-    name: Interswitch Refunds API
-    tags:
-      - Refunds
-      - Payments
-      - Quickteller Business
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/refunds
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/refunds
-        type: Documentation
-      - url: openapi/interswitch-refunds-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Refund successful Quickteller Business transactions in full or in part via `POST /paymentgateway/api/v1/refunds`.
-      Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, and FAILED states;
-      auto-refunds settle T+1.
-  - aid: interswitch:interswitch-recurring-payments-api
-    name: Interswitch Recurring Payments API
-    tags:
-      - Recurring
-      - Subscriptions
-      - Tokenization
-      - Card On File
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/recurring-payments
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/recurring-payments
-        type: Documentation
-      - url: openapi/interswitch-recurring-payments-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Tokenize Verve, Visa, and Mastercard cards at `POST /api/v2/purchases/validations/recurrents` then charge them on
-      schedule via `POST /api/v2/purchases/recurrents`. Token + expiry pair replaces raw PAN so subscription merchants
-      stay outside PCI scope.
-  - aid: interswitch:interswitch-card-360-api
-    name: Interswitch Card 360 API
-    tags:
-      - Cards
-      - Issuing
-      - Card Management
-      - Verve
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/home
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/home
-        type: Documentation
-      - url: openapi/interswitch-card-360-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Card issuer and cardholder lifecycle management for Verve, debit, and prepaid cards — create cards, set/reset PIN,
-      block/unblock, balance inquiry, card linking, and card validation. Lets fintechs and banks issue and operate Verve
-      cards programmatically on the Interswitch issuer-processor.
-  - aid: interswitch:interswitch-lending-api
-    name: Interswitch Lending API
-    tags:
-      - Lending
-      - Nano Loans
-      - Salary Lending
-      - Credit
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/nano-loans
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/nano-loans
-        type: Documentation
-      - url: openapi/interswitch-lending-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Marketplace lending APIs connecting loan providers and distribution channels under `/lending-service/api/v1` —
-      list providers, fetch offers (`GET /lending-service/api/v3/offers`), accept offers, fund loans, debit for
-      repayment, and inspect customer loan status. Supports both PCI-DSS-licensed and hosted-fields integrations and
-      powers Nano Loans, Salary Lending, and Value Financing.
-  - aid: interswitch:interswitch-customer-insights-api
-    name: Interswitch Customer Insights API
-    tags:
-      - Customer Insights
-      - Credit Decisioning
-      - Data
-      - Demographics
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/customer-insights
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/customer-insights
-        type: Documentation
-      - url: openapi/interswitch-customer-insights-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Permissioned access to demography, financial history, average financial history, and financial-habit signals
-      derived from Interswitch's transaction switch and Verve card network. Feeds credit decisioning, KYC enrichment,
-      and segmentation for fintechs, lenders, and retail risk teams.
-  - aid: interswitch:interswitch-transaction-search-api
-    name: Interswitch Transaction Search API
-    tags:
-      - Transactions
-      - Search
-      - Settlement
-      - Reconciliation
-      - Africa
-    humanURL: https://docs.interswitchgroup.com/docs/transaction-search
-    properties:
-      - url: https://docs.interswitchgroup.com/docs/transaction-search
-        type: Documentation
-      - url: openapi/interswitch-transaction-search-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Back-office transaction and settlement verification APIs — Quick Search, Reference Search, Bulk Search, and
-      Transaction Detail lookups across Quickteller Business, Webpay, Transfers, and Bills Payment. Bearer-token
-      authenticated and intended for finance, ops, and dispute teams.
+- aid: interswitch:interswitch-transfers-api
+  name: Interswitch Transfers API
+  tags:
+  - Transfers
+  - Payouts
+  - Disbursement
+  - Bank Transfer
+  - Africa
+  humanURL: https://docs.interswitchgroup.com/docs/single-transfer
+  properties:
+  - url: https://docs.interswitchgroup.com/docs/single-transfer
+    type: Documentation
+  - url: openapi/interswitch-transfers-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Quickteller Send Money APIs covering Single Transfer (POST /quicktellerservice/api/v5/transactions/TransferFunds),
+    Bulk Transfer, Name Inquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to disburse
+    funds across NIBSS-Instant-Payment-connected Nigerian bank accounts with SHA-512 MAC authentication
+    on each request.
+- aid: interswitch:interswitch-refunds-api
+  name: Interswitch Refunds API
+  tags:
+  - Refunds
+  - Payments
+  - Quickteller Business
+  - Africa
+  humanURL: https://docs.interswitchgroup.com/docs/refunds
+  properties:
+  - url: https://docs.interswitchgroup.com/docs/refunds
+    type: Documentation
+  - url: openapi/interswitch-refunds-api-openapi.yml
+    type: OpenAPI
+  description: >-
+    Refund successful Quickteller Business transactions in full or in part via `POST /paymentgateway/api/v1/refunds`.
+    Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, and FAILED
+    states; auto-refunds settle T+1.
+- aid: interswitch:interswitch-airtime-api
+  name: Interswitch Airtime API
+  description: The Airtime API from Interswitch — 3 operation(s) for airtime.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Airtime
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-airtime-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-balance-api
+  name: Interswitch Balance API
+  description: The Balance API from Interswitch — 1 operation(s) for balance.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-balance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-bank-codes-api
+  name: Interswitch Bank Codes API
+  description: The Bank Codes API from Interswitch — 1 operation(s) for bank codes.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Bank Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-bank-codes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-billers-api
+  name: Interswitch Billers API
+  description: The Billers API from Interswitch — 3 operation(s) for billers.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Billers
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-billers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-bulk-transfers-api
+  name: Interswitch Bulk Transfers API
+  description: The Bulk Transfers API from Interswitch — 1 operation(s) for bulk transfers.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Bulk Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-bulk-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-cards-api
+  name: Interswitch Cards API
+  description: The Cards API from Interswitch — 5 operation(s) for cards.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-cards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-checkout-api
+  name: Interswitch Checkout API
+  description: Hosted checkout payment initiation
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Checkout
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-checkout-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-customer-validation-api
+  name: Interswitch Customer Validation API
+  description: The Customer Validation API from Interswitch — 1 operation(s) for customer validation.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Customer Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-customer-validation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-customers-api
+  name: Interswitch Customers API
+  description: The Customers API from Interswitch — 2 operation(s) for customers.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-demography-api
+  name: Interswitch Demography API
+  description: The Demography API from Interswitch — 1 operation(s) for demography.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Demography
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-demography-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-detail-api
+  name: Interswitch Detail API
+  description: The Detail API from Interswitch — 1 operation(s) for detail.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Detail
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-detail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-e-pins-api
+  name: Interswitch E-Pins API
+  description: The E-Pins API from Interswitch — 1 operation(s) for e-pins.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - E-Pins
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-e-pins-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-financial-habits-api
+  name: Interswitch Financial Habits API
+  description: The Financial Habits API from Interswitch — 1 operation(s) for financial habits.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Financial Habits
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-financial-habits-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-financial-history-api
+  name: Interswitch Financial History API
+  description: The Financial History API from Interswitch — 2 operation(s) for financial history.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Financial History
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-financial-history-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-hosted-fields-api
+  name: Interswitch Hosted Fields API
+  description: Card data tokenization
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Hosted Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-hosted-fields-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-linking-api
+  name: Interswitch Linking API
+  description: The Linking API from Interswitch — 1 operation(s) for linking.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Linking
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-linking-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-loans-api
+  name: Interswitch Loans API
+  description: The Loans API from Interswitch — 3 operation(s) for loans.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Loans
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-loans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-name-inquiry-api
+  name: Interswitch Name Inquiry API
+  description: The Name Inquiry API from Interswitch — 1 operation(s) for name inquiry.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Name Inquiry
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-name-inquiry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-offers-api
+  name: Interswitch Offers API
+  description: The Offers API from Interswitch — 2 operation(s) for offers.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-offers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-payment-items-api
+  name: Interswitch Payment Items API
+  description: The Payment Items API from Interswitch — 1 operation(s) for payment items.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Payment Items
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-payment-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-payment-links-api
+  name: Interswitch Payment Links API
+  description: Hosted payment link generation
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Payment Links
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-payment-links-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-payments-api
+  name: Interswitch Payments API
+  description: The Payments API from Interswitch — 5 operation(s) for payments.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-pin-api
+  name: Interswitch PIN API
+  description: The PIN API from Interswitch — 1 operation(s) for pin.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - PIN
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-pin-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-providers-api
+  name: Interswitch Providers API
+  description: The Providers API from Interswitch — 1 operation(s) for providers.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-providers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-recurring-charges-api
+  name: Interswitch Recurring Charges API
+  description: The Recurring Charges API from Interswitch — 1 operation(s) for recurring charges.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Recurring Charges
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-recurring-charges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-search-api
+  name: Interswitch Search API
+  description: The Search API from Interswitch — 3 operation(s) for search.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-three-d-secure-api
+  name: Interswitch Three-D Secure API
+  description: Step-up authentication
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Three-D Secure
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-three-d-secure-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-tokenization-api
+  name: Interswitch Tokenization API
+  description: The Tokenization API from Interswitch — 1 operation(s) for tokenization.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Tokenization
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-tokenization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-tokens-api
+  name: Interswitch Tokens API
+  description: The Tokens API from Interswitch — 4 operation(s) for tokens.
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
+- aid: interswitch:interswitch-transactions-api
+  name: Interswitch Transactions API
+  description: Transaction status query
+  humanURL: https://docs.interswitchgroup.com/docs/web-checkout
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/interswitch-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/web-checkout
+  - type: GettingStarted
+    url: https://docs.interswitchgroup.com/docs/quickstart
+  - type: JSONSchema
+    url: json-schema/interswitch-payment-schema.json
+  - type: JSONLD
+    url: json-ld/interswitch-context.jsonld
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/accept-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/bills-payment
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/airtime-recharge
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/single-paycode
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/recurring-payments
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/home
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/nano-loans
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/customer-insights
+  - type: Documentation
+    url: https://docs.interswitchgroup.com/docs/transaction-search
 name: Interswitch
 tags:
   - Payments
@@ -246,7 +1102,20 @@ tags:
   - Africa
   - Nigeria
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/interswitch.png
 access: 3rd-Party
 common:
   - type: AgenticAccess

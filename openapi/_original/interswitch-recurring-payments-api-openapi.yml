@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Recurring Payments API
+  description: |
+    Tokenize Verve, Visa, and Mastercard cards then charge them on schedule
+    via a stored token + expiry pair. The token replaces the raw PAN so
+    subscription merchants stay outside PCI scope.
+  version: '2024-01-01'
+servers:
+  - url: https://qa.interswitchng.com
+    description: Sandbox / QA
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Tokenization
+  - name: Recurring Charges
+paths:
+  /api/v2/purchases/validations/recurrents:
+    post:
+      tags: [Tokenization]
+      summary: Tokenize Card For Recurring
+      description: Replace sensitive card data with a unique payment token that can be used for future recurring charges.
+      operationId: tokenizeCardForRecurring
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [transactionRef, authData]
+              properties:
+                transactionRef: { type: string }
+                authData: { type: string, description: Encrypted card payload. }
+                customerId: { type: string }
+                amount: { type: integer, description: Optional zero-value or minor-unit verification amount. }
+                currency: { type: string }
+      responses:
+        '200':
+          description: Token created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: { type: string }
+                  tokenExpiryDate: { type: string, format: date }
+                  cardBin: { type: string }
+                  cardLast4: { type: string }
+                  responseCode: { type: string }
+  /api/v2/purchases/recurrents:
+    post:
+      tags: [Recurring Charges]
+      summary: Charge Recurring Token
+      operationId: chargeRecurringToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, amount, currency, token, tokenExpiryDate, transferRef]
+              properties:
+                customerId: { type: string }
+                amount: { type: integer }
+                currency: { type: string, enum: [NGN] }
+                token: { type: string }
+                tokenExpiryDate: { type: string, format: date }
+                transferRef: { type: string }
+      responses:
+        '200':
+          description: Charge result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentId: { type: string }
+                  status: { type: string }
+                  responseCode: { type: string }
+                  responseMessage: { type: string }
+                  amount: { type: integer }
+                  authCode: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

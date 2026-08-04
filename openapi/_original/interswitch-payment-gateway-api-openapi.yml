@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Payment Gateway API
+  description: |
+    Server-to-server card payment APIs for PCI-DSS-licensed merchants — direct
+    Card Payments, Hosted Fields tokenization, 3D Secure step-up, Google Pay,
+    and Pay Bill payment-link generation. Authenticated with OAuth 2.0
+    client_credentials via the Passport token service.
+  version: '2024-01-01'
+servers:
+  - url: https://qa.interswitchng.com
+    description: Sandbox / QA
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Payments
+    description: Direct card payment authorization
+  - name: Hosted Fields
+    description: Card data tokenization
+  - name: Three-D Secure
+    description: Step-up authentication
+  - name: Payment Links
+    description: Hosted payment link generation
+paths:
+  /paymentgateway/api/v1/payments:
+    post:
+      tags: [Payments]
+      summary: Create Card Payment
+      description: Authorize and capture a card payment using a tokenized or hosted-field-collected card.
+      operationId: createCardPayment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Payment result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+  /paymentgateway/api/v1/payments/{paymentId}:
+    get:
+      tags: [Payments]
+      summary: Get Payment
+      operationId: getPayment
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Payment details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+  /paymentgateway/api/v1/hosted-fields/sessions:
+    post:
+      tags: [Hosted Fields]
+      summary: Create Hosted Fields Session
+      description: Create a hosted-fields session so the browser can collect raw card data and POST it directly to Interswitch, keeping the merchant out of PCI scope.
+      operationId: createHostedFieldsSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [transactionRef, amount, currency]
+              properties:
+                transactionRef: { type: string }
+                amount: { type: integer }
+                currency: { type: string }
+                redirectUrl: { type: string, format: uri }
+      responses:
+        '200':
+          description: Session created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessionId: { type: string }
+                  hostedFieldsUrl: { type: string, format: uri }
+                  expiresAt: { type: string, format: date-time }
+  /paymentgateway/api/v1/three-d-secure/sessions:
+    post:
+      tags: [Three-D Secure]
+      summary: Create 3D Secure Session
+      operationId: createThreeDSecureSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentId, returnUrl]
+              properties:
+                paymentId: { type: string }
+                returnUrl: { type: string, format: uri }
+      responses:
+        '200':
+          description: Step-up redirect details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  acsUrl: { type: string, format: uri }
+                  pareq: { type: string }
+                  md: { type: string }
+  /paymentgateway/api/v1/payment-links:
+    post:
+      tags: [Payment Links]
+      summary: Create Payment Link
+      description: Create a hosted Pay Bill payment link the merchant can email, SMS, or share.
+      operationId: createPaymentLink
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount, currency, description]
+              properties:
+                amount: { type: integer }
+                currency: { type: string }
+                description: { type: string }
+                customerEmail: { type: string, format: email }
+                expiresAt: { type: string, format: date-time }
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paymentLinkId: { type: string }
+                  url: { type: string, format: uri }
+                  status: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token from `POST {passport}/passport/oauth/token?grant_type=client_credentials`.
+  schemas:
+    PaymentRequest:
+      type: object
+      required: [transactionRef, amount, currency, paymentMethod]
+      properties:
+        transactionRef: { type: string }
+        amount: { type: integer, description: Minor currency units. }
+        currency: { type: string }
+        customerId: { type: string }
+        customerEmail: { type: string, format: email }
+        paymentMethod:
+          type: object
+          properties:
+            type: { type: string, enum: [card, token, googlePay] }
+            card:
+              type: object
+              properties:
+                pan: { type: string }
+                expiryMonth: { type: string }
+                expiryYear: { type: string }
+                cvv: { type: string }
+            token: { type: string }
+    PaymentResponse:
+      type: object
+      properties:
+        paymentId: { type: string }
+        status: { type: string }
+        responseCode: { type: string }
+        responseMessage: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        authCode: { type: string }
+        retrievalReferenceNumber: { type: string }

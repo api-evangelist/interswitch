@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Airtime Recharge API
+  description: |
+    Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+    as Bills Payment; category ID `4` is reserved for airtime billers and the
+    customer's phone number is supplied as `customer_id` on the payment advice.
+  version: '2024-01-01'
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - InterswitchAuth: []
+tags:
+  - name: Airtime
+  - name: E-Pins
+paths:
+  /api/v2/quickteller/categorys/4/billers:
+    get:
+      tags: [Airtime]
+      summary: List Airtime Telcos
+      description: List billers under category 4 (airtime) — MTN, Airtel, Glo, 9mobile.
+      operationId: listAirtimeTelcos
+      responses:
+        '200':
+          description: Airtime billers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    billerId: { type: integer }
+                    name: { type: string }
+                    currencyCode: { type: string }
+  /api/v2/quickteller/billers/{billerId}/paymentitems:
+    get:
+      tags: [Airtime]
+      summary: List Airtime Denominations
+      description: Returns supported denominations for the telco (e.g. MTN-100, MTN-200).
+      operationId: listAirtimeDenominations
+      parameters:
+        - in: path
+          name: billerId
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Denominations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    paymentItemId: { type: integer }
+                    paymentCode: { type: string }
+                    name: { type: string }
+                    amount: { type: integer }
+  /api/v2/quickteller/payments/advices:
+    post:
+      tags: [Airtime]
+      summary: Recharge Airtime
+      operationId: rechargeAirtime
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentCode, customerId, customerEmail, customerMobile, amount, requestReference]
+              properties:
+                paymentCode: { type: string }
+                customerId: { type: string, description: Recipient mobile number in international format. }
+                customerEmail: { type: string, format: email }
+                customerMobile: { type: string }
+                amount: { type: integer }
+                requestReference: { type: string }
+      responses:
+        '200':
+          description: Recharge response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseCode: { type: string }
+                  transactionRef: { type: string }
+                  amount: { type: integer }
+  /api/v2/quickteller/payments/advices/epin:
+    post:
+      tags: [E-Pins]
+      summary: Purchase E-Pin Voucher
+      description: Purchase recharge e-pins instead of direct top-up.
+      operationId: purchaseEpinVoucher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentCode, quantity, amount, requestReference]
+              properties:
+                paymentCode: { type: string }
+                quantity: { type: integer }
+                amount: { type: integer }
+                requestReference: { type: string }
+      responses:
+        '200':
+          description: E-pin batch.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseCode: { type: string }
+                  pins:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        pin: { type: string }
+                        serial: { type: string }
+                        expiry: { type: string, format: date }
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization

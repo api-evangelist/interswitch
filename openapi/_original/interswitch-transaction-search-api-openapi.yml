@@ -1,0 +1,116 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Transaction Search API
+  description: |
+    Back-office transaction and settlement verification — Quick Search,
+    Reference Search, Bulk Search, and Transaction Detail lookups across
+    Quickteller Business, Webpay, Transfers, and Bills Payment.
+  version: '2024-01-01'
+servers:
+  - url: https://qa.interswitchng.com
+    description: Sandbox / QA
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Search
+  - name: Detail
+paths:
+  /transaction-search/api/v1/search/quick:
+    get:
+      tags: [Search]
+      summary: Quick Transaction Search
+      operationId: quickTransactionSearch
+      parameters:
+        - { in: query, name: from, schema: { type: string, format: date } }
+        - { in: query, name: to, schema: { type: string, format: date } }
+        - { in: query, name: status, schema: { type: string } }
+        - { in: query, name: limit, schema: { type: integer, default: 50 } }
+        - { in: query, name: cursor, schema: { type: string } }
+      responses:
+        '200':
+          description: Matching transactions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions: { type: array, items: { $ref: '#/components/schemas/Transaction' } }
+                  nextCursor: { type: string }
+  /transaction-search/api/v1/search/reference:
+    get:
+      tags: [Search]
+      summary: Search By Reference
+      operationId: searchTransactionByReference
+      parameters:
+        - { in: query, name: reference, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Matching transactions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions: { type: array, items: { $ref: '#/components/schemas/Transaction' } }
+  /transaction-search/api/v1/search/bulk:
+    post:
+      tags: [Search]
+      summary: Bulk Transaction Search
+      operationId: bulkTransactionSearch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [references]
+              properties:
+                references:
+                  type: array
+                  items: { type: string }
+      responses:
+        '200':
+          description: Results keyed by reference.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: { $ref: '#/components/schemas/Transaction' }
+  /transaction-search/api/v1/transactions/{transactionId}:
+    get:
+      tags: [Detail]
+      summary: Get Transaction Detail
+      operationId: getTransactionDetail
+      parameters:
+        - { in: path, name: transactionId, required: true, schema: { type: string } }
+      responses:
+        '200':
+          description: Full transaction detail.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Transaction' }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        transactionId: { type: string }
+        transactionRef: { type: string }
+        type: { type: string, enum: [PAYMENT, TRANSFER, BILL, AIRTIME, REFUND, PAYCODE] }
+        status: { type: string }
+        responseCode: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        customerId: { type: string }
+        merchantCode: { type: string }
+        terminalId: { type: string }
+        cardPanMasked: { type: string }
+        cardScheme: { type: string }
+        settlementDate: { type: string, format: date }
+        createdAt: { type: string, format: date-time }

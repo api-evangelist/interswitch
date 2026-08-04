@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Paycode API
+  description: |
+    Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate
+    single or bulk one-time tokens, query token status, and cancel tokens.
+    Powers cardless ATM withdrawal across the Interswitch-acquired ATM network.
+  version: '2024-01-01'
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - BearerAuth: []
+tags:
+  - name: Tokens
+paths:
+  /api/v1/pwm/subscribers/{subscriberId}/tokens:
+    post:
+      tags: [Tokens]
+      summary: Generate Paycode Token
+      description: Create a one-time access code for a cardless transaction.
+      operationId: generatePaycodeToken
+      parameters:
+        - in: path
+          name: subscriberId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [frontEndPartnerId, paymentMethodCode, amount, tokenLifeTimeInMinutes, oneTimePin]
+              properties:
+                frontEndPartnerId: { type: string, example: WEMA }
+                paymentMethodCode: { type: string }
+                amount: { type: integer }
+                tokenLifeTimeInMinutes: { type: integer }
+                oneTimePin: { type: string }
+                ttid: { type: string, description: Use the same value as `transactionRef`. }
+                transactionRef: { type: string }
+      responses:
+        '200':
+          description: Token created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payWithMobileToken: { type: string }
+                  subscriberId: { type: string }
+                  tokenLifeTimeInMinutes: { type: integer }
+                  responseCode: { type: string }
+  /api/v1/pwm/subscribers/{subscriberId}/tokens/status:
+    get:
+      tags: [Tokens]
+      summary: Get Token Status
+      operationId: getPaycodeTokenStatus
+      parameters:
+        - in: path
+          name: subscriberId
+          required: true
+          schema: { type: string }
+        - in: query
+          name: token
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Token status.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  channel: { type: string }
+                  surchargeAmount: { type: integer }
+                  settlementCode: { type: string }
+                  paymentMethodCode: { type: string }
+  /cardless-service/api/v1/cardless-services/cancel-token:
+    post:
+      tags: [Tokens]
+      summary: Cancel Paycode Token
+      operationId: cancelPaycodeToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [referenceId, frontEndPartner]
+              properties:
+                referenceId: { type: string }
+                frontEndPartner: { type: string }
+      responses:
+        '200':
+          description: Cancellation response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseCode: { type: string }
+                  responseMessage: { type: string }
+  /api/v1/pwm/subscribers/{subscriberId}/tokens/bulk:
+    post:
+      tags: [Tokens]
+      summary: Generate Bulk Paycode Tokens
+      operationId: generateBulkPaycodeTokens
+      parameters:
+        - in: path
+          name: subscriberId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [frontEndPartnerId, items]
+              properties:
+                frontEndPartnerId: { type: string }
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      amount: { type: integer }
+                      tokenLifeTimeInMinutes: { type: integer }
+                      referenceId: { type: string }
+      responses:
+        '200':
+          description: Bulk token batch.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batchId: { type: string }
+                  tokens:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        referenceId: { type: string }
+                        payWithMobileToken: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

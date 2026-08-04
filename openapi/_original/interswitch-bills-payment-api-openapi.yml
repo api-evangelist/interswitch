@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: Interswitch Bills Payment API
+  description: |
+    Quickteller bills payment service — list billers, get payment items,
+    validate customer references, and submit payment advices for hundreds of
+    Nigerian billers including DSTV, GOTV, PHCN, water boards, school fees,
+    and government TSA payments.
+  version: '2024-01-01'
+servers:
+  - url: https://sandbox.interswitchng.com
+    description: Sandbox
+  - url: https://saturn.interswitchng.com
+    description: Production
+security:
+  - InterswitchAuth: []
+tags:
+  - name: Billers
+  - name: Payment Items
+  - name: Customer Validation
+  - name: Payments
+paths:
+  /api/v2/quickteller/categorys:
+    get:
+      tags: [Billers]
+      summary: List Biller Categories
+      operationId: listBillerCategories
+      responses:
+        '200':
+          description: Biller categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    categoryId: { type: integer }
+                    categoryName: { type: string }
+  /api/v2/quickteller/categorys/{categoryId}/billers:
+    get:
+      tags: [Billers]
+      summary: List Billers In Category
+      operationId: listBillersInCategory
+      parameters:
+        - in: path
+          name: categoryId
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Billers in the requested category.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Biller' }
+  /api/v2/quickteller/billers:
+    get:
+      tags: [Billers]
+      summary: List All Billers
+      operationId: listBillers
+      responses:
+        '200':
+          description: All billers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Biller' }
+  /api/v2/quickteller/billers/{billerId}/paymentitems:
+    get:
+      tags: [Payment Items]
+      summary: List Biller Payment Items
+      description: Returns supported amounts, packages, or denominations for the biller (e.g. DSTV Compact, MTN-100 airtime).
+      operationId: listBillerPaymentItems
+      parameters:
+        - in: path
+          name: billerId
+          required: true
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Payment items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PaymentItem' }
+  /api/v2/quickteller/customers/validations:
+    post:
+      tags: [Customer Validation]
+      summary: Validate Customer
+      description: Verify a customer ID (smartcard number, meter number, account number, phone) with the biller before charging.
+      operationId: validateCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentCode, customerId]
+              properties:
+                paymentCode: { type: string }
+                customerId: { type: string }
+                amount: { type: integer }
+      responses:
+        '200':
+          description: Customer record at the biller.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fullName: { type: string }
+                  customerId: { type: string }
+                  responseCode: { type: string }
+  /api/v2/quickteller/payments/advices:
+    post:
+      tags: [Payments]
+      summary: Submit Bill Payment Advice
+      operationId: submitBillPaymentAdvice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentCode, customerId, customerEmail, customerMobile, amount, requestReference]
+              properties:
+                paymentCode: { type: string }
+                customerId: { type: string }
+                customerEmail: { type: string, format: email }
+                customerMobile: { type: string }
+                amount: { type: integer, description: Minor currency units. }
+                requestReference: { type: string, description: Must be prefixed with the merchant request-reference prefix. }
+      responses:
+        '200':
+          description: Payment advice response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseCode: { type: string, description: 90000 indicates success. }
+                  transactionRef: { type: string }
+                  rawOutput: { type: string }
+components:
+  securitySchemes:
+    InterswitchAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: |
+        `InterswitchAuth {base64(client_id)}` plus `Timestamp`, `Nonce`,
+        `Signature` (SHA1 of method + endpoint + timestamp + nonce + client_id
+        + secret), `SignatureMethod: SHA1`, and `TerminalID` headers; or
+        `Bearer {access_token}` from the Passport OAuth token endpoint.
+  schemas:
+    Biller:
+      type: object
+      properties:
+        billerId: { type: integer }
+        name: { type: string }
+        categoryId: { type: integer }
+        currencyCode: { type: string }
+        customerField1: { type: string }
+        customerField2: { type: string }
+    PaymentItem:
+      type: object
+      properties:
+        paymentItemId: { type: integer }
+        paymentCode: { type: string }
+        name: { type: string }
+        amount: { type: integer }
+        currencyCode: { type: string }
+        isAmountFixed: { type: boolean }

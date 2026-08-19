@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "b00a79ae-1e03-46e2-896a-ea09677af47a",
+      "name": "Bulk Transfers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6b4b3233-8185-4bbe-98ba-514a7abb7661",
+          "name": "Send Bulk Transfer",
+          "request": {
+            "name": "Send Bulk Transfer",
+            "description": {
+              "content": "Disburse to up to thousands of recipients in a single request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quicktellerservice",
+                "api",
+                "v5",
+                "transactions",
+                "BulkTransfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "terminalId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batchReference\": \"<string>\",\n  \"items\": [\n    {\n      \"transferCode\": \"<string>\",\n      \"mac\": \"<string>\",\n      \"initiatingEntityCode\": \"<string>\",\n      \"initiation\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"channel\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"termination\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"<string>\",\n          \"accountType\": \"<string>\"\n        },\n        \"entityCode\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"sender\": {\n        \"phone\": \"<string>\",\n        \"email\": \"<email>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      }\n    },\n    {\n      \"transferCode\": \"<string>\",\n      \"mac\": \"<string>\",\n      \"initiatingEntityCode\": \"<string>\",\n      \"initiation\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"channel\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"termination\": {\n        \"amount\": \"<integer>\",\n        \"currencyCode\": \"<string>\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"<string>\",\n          \"accountType\": \"<string>\"\n        },\n        \"entityCode\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"paymentMethodCode\": \"<string>\"\n      },\n      \"sender\": {\n        \"phone\": \"<string>\",\n        \"email\": \"<email>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\"\n      }\n    }\n  ],\n  \"initiatingEntityCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "949ff2ec-8341-449d-8bc4-bc5db16f65e4",
+              "name": "Batch accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quicktellerservice",
+                    "api",
+                    "v5",
+                    "transactions",
+                    "BulkTransfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "terminalId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batchReference\": \"<string>\",\n  \"items\": [\n    {\n      \"transferCode\": \"string\",\n      \"mac\": \"string\",\n      \"initiatingEntityCode\": \"PBL\",\n      \"initiation\": {\n        \"amount\": 7045,\n        \"currencyCode\": \"string\",\n        \"channel\": \"string\",\n        \"paymentMethodCode\": \"CA\"\n      },\n      \"termination\": {\n        \"amount\": 5117,\n        \"currencyCode\": \"string\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"string\",\n          \"accountType\": \"string\"\n        },\n        \"entityCode\": \"string\",\n        \"countryCode\": \"string\",\n        \"paymentMethodCode\": \"AC\"\n      },\n      \"sender\": {\n        \"phone\": \"string\",\n        \"email\": \"lrLDb6mqWI@YOmMolCLnqxeroButRe.ziu\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\"\n      }\n    },\n    {\n      \"transferCode\": \"string\",\n      \"mac\": \"string\",\n      \"initiatingEntityCode\": \"PBL\",\n      \"initiation\": {\n        \"amount\": 7467,\n        \"currencyCode\": \"string\",\n        \"channel\": \"string\",\n        \"paymentMethodCode\": \"CA\"\n      },\n      \"termination\": {\n        \"amount\": 5878,\n        \"currencyCode\": \"string\",\n        \"accountReceivable\": {\n          \"accountNumber\": \"string\",\n          \"accountType\": \"string\"\n        },\n        \"entityCode\": \"string\",\n        \"countryCode\": \"string\",\n        \"paymentMethodCode\": \"AC\"\n      },\n      \"sender\": {\n        \"phone\": \"string\",\n        \"email\": \"dCV8Hh5D@zWRHRHdcletOzud.ltr\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\"\n      }\n    }\n  ],\n  \"initiatingEntityCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batchId\": \"string\",\n  \"responseCode\": \"string\",\n  \"acceptedCount\": 4638,\n  \"rejectedCount\": 4095\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab3a7317-09f7-480e-8407-287b95788761",
+    "name": "Interswitch Recharge Airtime Bulk Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

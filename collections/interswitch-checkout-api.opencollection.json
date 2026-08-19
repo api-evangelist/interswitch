@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Recharge Airtime Checkout API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate Web Redirect Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/collections/w/pay",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "POST an HTML form (`application/x-www-form-urlencoded`) to redirect the\ncustomer to the Interswitch hosted payment page. After payment, the\nbrowser is redirected back to `site_redirect_url` with `txnref` in the\nquery string. Always confirm the transaction server-side via\n`/collections/api/v1/gettransaction.json` before delivering value.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

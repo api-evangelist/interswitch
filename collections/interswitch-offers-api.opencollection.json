@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Recharge Airtime Offers API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Loan Offers For Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v3/offers",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Loan Offers For Customer"
+        },
+        {
+          "info": {
+            "name": "Accept Loan Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/offers/:offerId/accept",
+            "params": [
+              {
+                "name": "offerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accept Loan Offer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,29 +1,28 @@
 {
   "item": [
     {
-      "id": "e8c27968-c3e6-4663-8ce5-e0cd88114ec2",
-      "name": "Transfers",
+      "id": "add2b198-bce9-42ea-b7ae-34bd75bb07f1",
+      "name": "Payment Links",
       "description": {
-        "content": "",
+        "content": "Hosted payment link generation",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "23b10692-8c08-49e3-a179-de183c970744",
-          "name": "Send Single Transfer",
+          "id": "33436840-cdb7-4552-bd12-60f3fc82fa3e",
+          "name": "Create Payment Link",
           "request": {
-            "name": "Send Single Transfer",
+            "name": "Create Payment Link",
             "description": {
-              "content": "Move funds from a sender wallet or account to a single recipient bank\naccount. `mac` is the SHA-512 hash of the canonical message; consult the\nInterswitch transfer integration guide for the exact field order.\n",
+              "content": "Create a hosted Pay Bill payment link the merchant can email, SMS, or share.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "quicktellerservice",
+                "paymentgateway",
                 "api",
-                "v5",
-                "transactions",
-                "TransferFunds"
+                "v1",
+                "payment-links"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -32,12 +31,6 @@
               "variable": []
             },
             "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "terminalId",
-                "value": "<string>"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json"
@@ -51,7 +44,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"transferCode\": \"<string>\",\n  \"mac\": \"<string>\",\n  \"initiatingEntityCode\": \"<string>\",\n  \"initiation\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"termination\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"accountReceivable\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\"\n    },\n    \"entityCode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"sender\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -61,16 +54,15 @@
           },
           "response": [
             {
-              "id": "2906bbbc-20a6-4444-9a8f-517cba4f1b5a",
-              "name": "Transfer response.",
+              "id": "0922dc2a-75b1-4cd3-b578-faffe9e015d0",
+              "name": "Created.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "quicktellerservice",
+                    "paymentgateway",
                     "api",
-                    "v5",
-                    "transactions",
-                    "TransferFunds"
+                    "v1",
+                    "payment-links"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -88,12 +80,6 @@
                     "value": "<API Key>"
                   },
                   {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "terminalId",
-                    "value": "<string>"
-                  },
-                  {
                     "key": "Accept",
                     "value": "application/json"
                   }
@@ -101,7 +87,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"transferCode\": \"<string>\",\n  \"mac\": \"<string>\",\n  \"initiatingEntityCode\": \"PBL\",\n  \"initiation\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"paymentMethodCode\": \"CA\"\n  },\n  \"termination\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"accountReceivable\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\"\n    },\n    \"entityCode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"paymentMethodCode\": \"AC\"\n  },\n  \"sender\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -109,15 +95,15 @@
                   }
                 }
               },
-              "status": "OK",
-              "code": 200,
+              "status": "Created",
+              "code": 201,
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"ResponseCode\": \"string\",\n  \"TransactionRef\": \"string\",\n  \"TransferDate\": \"2000-12-06T21:05:14.400Z\",\n  \"Amount\": 1518\n}",
+              "body": "{\n  \"paymentLinkId\": \"string\",\n  \"url\": \"http://wBg.eqqurUEWS7\",\n  \"status\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -157,8 +143,8 @@
     ]
   },
   "info": {
-    "_postman_id": "6e22d0da-2572-4310-82ea-82bb58ed3df4",
-    "name": "Interswitch Recharge Airtime Transfers API",
+    "_postman_id": "2d04d049-2211-4d73-b567-3f4b0c4800ef",
+    "name": "Interswitch Recharge Airtime Payment Links API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",

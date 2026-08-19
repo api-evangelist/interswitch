@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Recharge Airtime E-Pins API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "E-Pins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Purchase E-Pin Voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/payments/advices/epin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Purchase recharge e-pins instead of direct top-up."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,153 @@
+{
+  "item": [
+    {
+      "id": "c30f8df6-e164-48e1-a2bf-e4922a4711c6",
+      "name": "Payment Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e23d0b5-40fe-4823-9f6a-4574691122ff",
+          "name": "List Biller Payment Items",
+          "request": {
+            "name": "List Biller Payment Items",
+            "description": {
+              "content": "Returns supported amounts, packages, or denominations for the biller (e.g. DSTV Compact, MTN-100 airtime).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "quickteller",
+                "billers",
+                ":billerId",
+                "paymentitems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "billerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b667fb96-f7ba-4fe3-a79e-4fc0418c05ad",
+              "name": "Payment items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "quickteller",
+                    "billers",
+                    ":billerId",
+                    "paymentitems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "billerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"paymentItemId\": 4733,\n    \"paymentCode\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 1265,\n    \"currencyCode\": \"string\",\n    \"isAmountFixed\": false\n  },\n  {\n    \"paymentItemId\": 9615,\n    \"paymentCode\": \"string\",\n    \"name\": \"string\",\n    \"amount\": 4466,\n    \"currencyCode\": \"string\",\n    \"isAmountFixed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d3d96f19-a717-480a-8df7-cb55f3e549ee",
+    "name": "Interswitch Recharge Airtime Payment Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

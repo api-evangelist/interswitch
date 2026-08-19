@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Interswitch Recharge Airtime Transfers API",
+    "name": "Interswitch Recharge Airtime Bulk Transfers API",
     "version": "2024-01-01"
   },
   "request": {
@@ -15,18 +15,18 @@
   "items": [
     {
       "info": {
-        "name": "Transfers",
+        "name": "Bulk Transfers",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Send Single Transfer",
+            "name": "Send Bulk Transfer",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://sandbox.interswitchng.com/quicktellerservice/api/v5/transactions/TransferFunds",
+            "url": "https://sandbox.interswitchng.com/quicktellerservice/api/v5/transactions/BulkTransfer",
             "headers": [
               {
                 "name": "terminalId",
@@ -38,7 +38,7 @@
               "data": "{}"
             }
           },
-          "docs": "Move funds from a sender wallet or account to a single recipient bank\naccount. `mac` is the SHA-512 hash of the canonical message; consult the\nInterswitch transfer integration guide for the exact field order.\n"
+          "docs": "Disburse to up to thousands of recipients in a single request."
         }
       ]
     }

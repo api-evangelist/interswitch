@@ -1,0 +1,133 @@
+{
+  "item": [
+    {
+      "id": "4497d344-b91f-4ef3-9c72-82219d6bdfd6",
+      "name": "Bank Codes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb32fd97-d2b9-4984-a8eb-1e2caa2139f1",
+          "name": "List Banks",
+          "request": {
+            "name": "List Banks",
+            "description": {
+              "content": "Return CBN bank codes and bank names that can be addressed via the transfer endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "quicktellerservice",
+                "api",
+                "v5",
+                "banks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13f7ee5e-799d-40ef-8b45-6e6a2b94313e",
+              "name": "List of banks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quicktellerservice",
+                    "api",
+                    "v5",
+                    "banks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"bankCode\": \"string\",\n    \"bankName\": \"string\",\n    \"cbnCode\": \"string\"\n  },\n  {\n    \"bankCode\": \"string\",\n    \"bankName\": \"string\",\n    \"cbnCode\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "23558974-c254-47ac-9aba-5444ad68cc61",
+    "name": "Interswitch Recharge Airtime Bank Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

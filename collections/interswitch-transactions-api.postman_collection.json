@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "42587fc6-3605-4218-9a94-7f269be7ebd5",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction status query",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6ccf9eb-d618-48cf-8d76-2853088a8631",
+          "name": "Get Transaction Status",
+          "request": {
+            "name": "Get Transaction Status",
+            "description": {
+              "content": "Server-side transaction requery. Returns the authoritative status,\nresponse code, and amount for a given transaction reference. Must be\ncalled before delivering value; do not rely on the browser redirect\nparameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                "api",
+                "v1",
+                "gettransaction.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantcode",
+                  "value": "<string>",
+                  "description": "(Required) Merchant code issued by Interswitch."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionreference",
+                  "value": "<string>",
+                  "description": "(Required) Original `txn_ref` submitted at checkout."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>",
+                  "description": "(Required) Original transaction amount in minor units (kobo)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a9f115e-6daf-4e1e-98c3-6aa7821ec4be",
+              "name": "Transaction status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "api",
+                    "v1",
+                    "gettransaction.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionreference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseCode\": \"string\",\n  \"Amount\": 1209,\n  \"TransactionDate\": \"2025-05-14T20:13:14.266Z\",\n  \"MerchantReference\": \"string\",\n  \"PaymentReference\": \"string\",\n  \"RetrievalReferenceNumber\": \"string\",\n  \"CardNumber\": \"string\",\n  \"LeadBankCbnCode\": \"string\",\n  \"LeadBankName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ffc7e00-566d-4405-9187-656487fd3186",
+    "name": "Interswitch Recharge Airtime Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

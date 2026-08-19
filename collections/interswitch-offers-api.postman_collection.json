@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "5cfa9637-3441-4944-af40-7dc061e1ef37",
+      "name": "Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "168fb390-df3e-465b-8e00-93bf7fa7c567",
+          "name": "List Loan Offers For Customer",
+          "request": {
+            "name": "List Loan Offers For Customer",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v3",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72a88480-6f9d-4d95-9640-91719a4642dc",
+              "name": "Loan offers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v3",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"offerId\": \"string\",\n    \"providerId\": \"string\",\n    \"principal\": 7708,\n    \"currency\": \"string\",\n    \"interestRate\": 7407.26520699581,\n    \"tenorDays\": 2878,\n    \"productType\": \"VALUE_FINANCING\"\n  },\n  {\n    \"offerId\": \"string\",\n    \"providerId\": \"string\",\n    \"principal\": 4734,\n    \"currency\": \"string\",\n    \"interestRate\": 6447.329628714417,\n    \"tenorDays\": 2789,\n    \"productType\": \"SALARY\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "749eabf0-2384-4c12-9f15-c59e93c569fa",
+          "name": "Accept Loan Offer",
+          "request": {
+            "name": "Accept Loan Offer",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "offers",
+                ":offerId",
+                "accept"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "offerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25a0217f-de63-40ea-ac67-a6b00d8d2f93",
+              "name": "Loan created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "offers",
+                    ":offerId",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "offerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"loanId\": \"string\",\n  \"customerId\": \"string\",\n  \"providerId\": \"string\",\n  \"principal\": 940,\n  \"outstandingBalance\": 845,\n  \"currency\": \"string\",\n  \"interestRate\": 9079.37957539268,\n  \"tenorDays\": 4044,\n  \"status\": \"WRITTEN_OFF\",\n  \"disbursedAt\": \"2014-05-03T22:44:23.996Z\",\n  \"dueAt\": \"1974-11-19T15:39:12.851Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b964364f-90d4-4da1-bb44-3547884a4a68",
+    "name": "Interswitch Recharge Airtime Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

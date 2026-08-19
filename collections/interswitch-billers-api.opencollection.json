@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Interswitch Recharge Airtime Billers API",
+    "version": "2024-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Biller Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/categorys"
+          },
+          "docs": "List Biller Categories"
+        },
+        {
+          "info": {
+            "name": "List Billers In Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/categorys/:categoryId/billers",
+            "params": [
+              {
+                "name": "categoryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Billers In Category"
+        },
+        {
+          "info": {
+            "name": "List All Billers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/api/v2/quickteller/billers"
+          },
+          "docs": "List All Billers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

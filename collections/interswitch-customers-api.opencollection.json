@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Interswitch Recharge Airtime Refunds API",
+    "name": "Interswitch Recharge Airtime Customers API",
     "version": "2024-01-01"
   },
   "request": {
@@ -15,42 +15,45 @@
   "items": [
     {
       "info": {
-        "name": "Refunds",
+        "name": "Customers",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Create Refund",
-            "type": "http"
-          },
-          "http": {
-            "method": "POST",
-            "url": "https://sandbox.interswitchng.com/paymentgateway/api/v1/refunds",
-            "body": {
-              "type": "json",
-              "data": "{}"
-            }
-          },
-          "docs": "Create Refund"
-        },
-        {
-          "info": {
-            "name": "Get Refund",
+            "name": "Get Customer Loan Status",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://sandbox.interswitchng.com/paymentgateway/api/v1/refunds/:refundReference",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/users/:customerId/status",
             "params": [
               {
-                "name": "refundReference",
+                "name": "customerId",
                 "value": "",
                 "type": "path"
               }
             ]
           },
-          "docs": "Get Refund"
+          "docs": "Get Customer Loan Status"
+        },
+        {
+          "info": {
+            "name": "List Customer Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.interswitchng.com/lending-service/api/v1/users/:customerId/payment-methods",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Customer Payment Methods"
         }
       ]
     }

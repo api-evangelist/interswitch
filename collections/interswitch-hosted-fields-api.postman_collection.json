@@ -1,29 +1,29 @@
 {
   "item": [
     {
-      "id": "e8c27968-c3e6-4663-8ce5-e0cd88114ec2",
-      "name": "Transfers",
+      "id": "f2a03eff-9fab-45f2-86e8-758e028b4546",
+      "name": "Hosted Fields",
       "description": {
-        "content": "",
+        "content": "Card data tokenization",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "23b10692-8c08-49e3-a179-de183c970744",
-          "name": "Send Single Transfer",
+          "id": "2a29bcb9-4b9b-43b7-9d66-cfa7361075ea",
+          "name": "Create Hosted Fields Session",
           "request": {
-            "name": "Send Single Transfer",
+            "name": "Create Hosted Fields Session",
             "description": {
-              "content": "Move funds from a sender wallet or account to a single recipient bank\naccount. `mac` is the SHA-512 hash of the canonical message; consult the\nInterswitch transfer integration guide for the exact field order.\n",
+              "content": "Create a hosted-fields session so the browser can collect raw card data and POST it directly to Interswitch, keeping the merchant out of PCI scope.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "quicktellerservice",
+                "paymentgateway",
                 "api",
-                "v5",
-                "transactions",
-                "TransferFunds"
+                "v1",
+                "hosted-fields",
+                "sessions"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -32,12 +32,6 @@
               "variable": []
             },
             "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "terminalId",
-                "value": "<string>"
-              },
               {
                 "key": "Content-Type",
                 "value": "application/json"
@@ -51,7 +45,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"transferCode\": \"<string>\",\n  \"mac\": \"<string>\",\n  \"initiatingEntityCode\": \"<string>\",\n  \"initiation\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"termination\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"accountReceivable\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\"\n    },\n    \"entityCode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"paymentMethodCode\": \"<string>\"\n  },\n  \"sender\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+              "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"redirectUrl\": \"<uri>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -61,16 +55,16 @@
           },
           "response": [
             {
-              "id": "2906bbbc-20a6-4444-9a8f-517cba4f1b5a",
-              "name": "Transfer response.",
+              "id": "792bd1ff-9f0d-4a42-9259-a513c1ab977a",
+              "name": "Session created.",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "quicktellerservice",
+                    "paymentgateway",
                     "api",
-                    "v5",
-                    "transactions",
-                    "TransferFunds"
+                    "v1",
+                    "hosted-fields",
+                    "sessions"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -88,12 +82,6 @@
                     "value": "<API Key>"
                   },
                   {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "terminalId",
-                    "value": "<string>"
-                  },
-                  {
                     "key": "Accept",
                     "value": "application/json"
                   }
@@ -101,7 +89,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"transferCode\": \"<string>\",\n  \"mac\": \"<string>\",\n  \"initiatingEntityCode\": \"PBL\",\n  \"initiation\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"paymentMethodCode\": \"CA\"\n  },\n  \"termination\": {\n    \"amount\": \"<integer>\",\n    \"currencyCode\": \"<string>\",\n    \"accountReceivable\": {\n      \"accountNumber\": \"<string>\",\n      \"accountType\": \"<string>\"\n    },\n    \"entityCode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"paymentMethodCode\": \"AC\"\n  },\n  \"sender\": {\n    \"phone\": \"<string>\",\n    \"email\": \"<email>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  }\n}",
+                  "raw": "{\n  \"transactionRef\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"redirectUrl\": \"<uri>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -117,7 +105,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"ResponseCode\": \"string\",\n  \"TransactionRef\": \"string\",\n  \"TransferDate\": \"2000-12-06T21:05:14.400Z\",\n  \"Amount\": 1518\n}",
+              "body": "{\n  \"sessionId\": \"string\",\n  \"hostedFieldsUrl\": \"http://MKVXBbs.vpdaYVKGuVpzZEX4EyBFOWV3\",\n  \"expiresAt\": \"1977-01-29T12:25:38.800Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -157,8 +145,8 @@
     ]
   },
   "info": {
-    "_postman_id": "6e22d0da-2572-4310-82ea-82bb58ed3df4",
-    "name": "Interswitch Recharge Airtime Transfers API",
+    "_postman_id": "910908e9-683b-4801-ad96-e9efd16d9c6c",
+    "name": "Interswitch Recharge Airtime Hosted Fields API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",

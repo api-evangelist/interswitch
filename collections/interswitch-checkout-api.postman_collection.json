@@ -1,0 +1,349 @@
+{
+  "item": [
+    {
+      "id": "b5988649-de9f-4189-b08f-928bda5a395c",
+      "name": "Checkout",
+      "description": {
+        "content": "Hosted checkout payment initiation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3bbba4c-998f-4c74-a243-20519ebc3a2d",
+          "name": "Initiate Web Redirect Payment",
+          "request": {
+            "name": "Initiate Web Redirect Payment",
+            "description": {
+              "content": "POST an HTML form (`application/x-www-form-urlencoded`) to redirect the\ncustomer to the Interswitch hosted payment page. After payment, the\nbrowser is redirected back to `site_redirect_url` with `txnref` in the\nquery string. Always confirm the transaction server-side via\n`/collections/api/v1/gettransaction.json` before delivering value.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                "w",
+                "pay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "merchant_code",
+                  "value": "<string>",
+                  "description": "(Required) Merchant identifier from Quickteller Business."
+                },
+                {
+                  "disabled": false,
+                  "key": "pay_item_id",
+                  "value": "<string>",
+                  "description": "(Required) Pay item identifier configured on the merchant account."
+                },
+                {
+                  "disabled": false,
+                  "key": "txn_ref",
+                  "value": "<string>",
+                  "description": "(Required) Unique merchant transaction reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<integer>",
+                  "description": "(Required) Amount in minor currency units (e.g. kobo for NGN)."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "(Required) ISO 4217 numeric currency code (e.g. 566 for NGN)."
+                },
+                {
+                  "disabled": false,
+                  "key": "cust_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "site_redirect_url",
+                  "value": "<uri>",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "416c8a63-1c18-488d-ac2b-5e7261c37e0b",
+              "name": "Redirect to hosted payment page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "w",
+                    "pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Merchant identifier from Quickteller Business.",
+                        "type": "text/plain"
+                      },
+                      "key": "merchant_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Pay item identifier configured on the merchant account.",
+                        "type": "text/plain"
+                      },
+                      "key": "pay_item_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique merchant transaction reference.",
+                        "type": "text/plain"
+                      },
+                      "key": "txn_ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Amount in minor currency units (e.g. kobo for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ISO 4217 numeric currency code (e.g. 566 for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cust_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "site_redirect_url",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab995405-87ea-4001-b6f8-bb8037c355a3",
+              "name": "Validation error in the submitted form.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "w",
+                    "pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Merchant identifier from Quickteller Business.",
+                        "type": "text/plain"
+                      },
+                      "key": "merchant_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Pay item identifier configured on the merchant account.",
+                        "type": "text/plain"
+                      },
+                      "key": "pay_item_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique merchant transaction reference.",
+                        "type": "text/plain"
+                      },
+                      "key": "txn_ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Amount in minor currency units (e.g. kobo for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ISO 4217 numeric currency code (e.g. 566 for NGN).",
+                        "type": "text/plain"
+                      },
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "cust_email",
+                      "value": "<email>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "site_redirect_url",
+                      "value": "<uri>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6d87a15-fa96-4e62-a57d-bdd794feb3de",
+    "name": "Interswitch Recharge Airtime Checkout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

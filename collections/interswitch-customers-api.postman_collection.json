@@ -1,0 +1,251 @@
+{
+  "item": [
+    {
+      "id": "34522ede-3b10-4654-8ed8-733608ea66dc",
+      "name": "Customers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c06701e5-faa9-4a56-ba54-c275f51c8c76",
+          "name": "Get Customer Loan Status",
+          "request": {
+            "name": "Get Customer Loan Status",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "users",
+                ":customerId",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6f8adb0-1620-458e-9d6b-4590412cba66",
+              "name": "Active loan summary.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "users",
+                    ":customerId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hasActiveLoan\": false,\n  \"activeLoans\": [\n    {\n      \"loanId\": \"string\",\n      \"customerId\": \"string\",\n      \"providerId\": \"string\",\n      \"principal\": 2954,\n      \"outstandingBalance\": 7058,\n      \"currency\": \"string\",\n      \"interestRate\": 2725.0545747825518,\n      \"tenorDays\": 9182,\n      \"status\": \"CLOSED\",\n      \"disbursedAt\": \"1997-10-10T18:45:34.021Z\",\n      \"dueAt\": \"1994-04-06T22:29:36.833Z\"\n    },\n    {\n      \"loanId\": \"string\",\n      \"customerId\": \"string\",\n      \"providerId\": \"string\",\n      \"principal\": 3516,\n      \"outstandingBalance\": 3338,\n      \"currency\": \"string\",\n      \"interestRate\": 8554.24983301993,\n      \"tenorDays\": 1687,\n      \"status\": \"DEFAULTED\",\n      \"disbursedAt\": \"1983-11-25T09:49:56.042Z\",\n      \"dueAt\": \"1974-07-29T19:30:26.125Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d4622a3-86c4-4cd6-94fa-f206e517dfec",
+          "name": "List Customer Payment Methods",
+          "request": {
+            "name": "List Customer Payment Methods",
+            "description": {},
+            "url": {
+              "path": [
+                "lending-service",
+                "api",
+                "v1",
+                "users",
+                ":customerId",
+                "payment-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2b162b2-ccc4-4401-9968-32b5556e1617",
+              "name": "Payment methods.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lending-service",
+                    "api",
+                    "v1",
+                    "users",
+                    ":customerId",
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"paymentMethodId\": \"string\",\n    \"type\": \"account\",\n    \"last4\": \"string\"\n  },\n  {\n    \"paymentMethodId\": \"string\",\n    \"type\": \"account\",\n    \"last4\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a193e615-8624-4eb7-9a74-ca3f593bb9f0",
+    "name": "Interswitch Recharge Airtime Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

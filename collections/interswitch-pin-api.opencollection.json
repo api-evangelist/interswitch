@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Interswitch Recharge Airtime Transfers API",
+    "name": "Interswitch Recharge Airtime PIN API",
     "version": "2024-01-01"
   },
   "request": {
@@ -15,22 +15,23 @@
   "items": [
     {
       "info": {
-        "name": "Transfers",
+        "name": "PIN",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "Send Single Transfer",
+            "name": "Set Or Reset Card PIN",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://sandbox.interswitchng.com/quicktellerservice/api/v5/transactions/TransferFunds",
-            "headers": [
+            "url": "https://sandbox.interswitchng.com/card-360/api/v1/cards/:cardId/pin",
+            "params": [
               {
-                "name": "terminalId",
-                "value": ""
+                "name": "cardId",
+                "value": "",
+                "type": "path"
               }
             ],
             "body": {
@@ -38,7 +39,7 @@
               "data": "{}"
             }
           },
-          "docs": "Move funds from a sender wallet or account to a single recipient bank\naccount. `mac` is the SHA-512 hash of the canonical message; consult the\nInterswitch transfer integration guide for the exact field order.\n"
+          "docs": "Set Or Reset Card PIN"
         }
       ]
     }

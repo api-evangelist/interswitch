@@ -1,0 +1,264 @@
+{
+  "item": [
+    {
+      "id": "174cab3a-f4e8-4546-9f1a-46b95e3925d2",
+      "name": "Financial History",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4393df0-b6c1-44ad-9fc3-0699eadb7f66",
+          "name": "Get Financial History",
+          "request": {
+            "name": "Get Financial History",
+            "description": {},
+            "url": {
+              "path": [
+                "insights",
+                "api",
+                "v1",
+                "customers",
+                ":customerId",
+                "financial-history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "months",
+                  "value": "12"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3816bc0b-ab06-4fdc-bb35-57aff97cdf27",
+              "name": "Spending and inflow history.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "api",
+                    "v1",
+                    "customers",
+                    ":customerId",
+                    "financial-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "months",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"monthlyInflows\": [\n    3882.361032361248,\n    1921.8951776127778\n  ],\n  \"monthlyOutflows\": [\n    7299.5645745595075,\n    4661.7845955010425\n  ],\n  \"categories\": {\n    \"key_0\": 4854.878803506372,\n    \"key_1\": 2149.1208793397263\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ecc3384-a84a-4c45-b5b7-819c209de2c2",
+          "name": "Get Average Financial History",
+          "request": {
+            "name": "Get Average Financial History",
+            "description": {},
+            "url": {
+              "path": [
+                "insights",
+                "api",
+                "v1",
+                "customers",
+                ":customerId",
+                "financial-history",
+                "average"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbd5752e-93f8-46b3-bd4f-2c30b75ed122",
+              "name": "Average inflow/outflow metrics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "api",
+                    "v1",
+                    "customers",
+                    ":customerId",
+                    "financial-history",
+                    "average"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"averageMonthlyInflow\": 174.95289984230777,\n  \"averageMonthlyOutflow\": 643.0046061628758,\n  \"averageBalance\": 5906.742164256411,\n  \"windowMonths\": 1169\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.interswitchng.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1dbc4cfa-e005-45e4-8213-8294f35551cd",
+    "name": "Interswitch Recharge Airtime Financial History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Virtual top-up (direct airtime and data) and e-pin voucher delivery for\nMTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow\nas Bills Payment; category ID `4` is reserved for airtime billers and the\ncustomer's phone number is supplied as `customer_id` on the payment advice.\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -77,6 +77,8 @@ apis:
   description: The Balance API from Interswitch — 1 operation(s) for balance.
   humanURL: https://docs.interswitchgroup.com/docs/web-checkout
   tags:
+  - Balances
+  tags_raw:
   - Balance
   properties:
   - type: OpenAPI
@@ -1057,6 +1059,8 @@ apis:
   description: Transaction status query
   humanURL: https://docs.interswitchgroup.com/docs/web-checkout
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI

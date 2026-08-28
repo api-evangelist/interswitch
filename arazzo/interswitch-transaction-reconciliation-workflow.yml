@@ -11,8 +11,11 @@ info:
     Bearer-authenticated.
   version: 1.0.0
 sourceDescriptions:
-- name: transactionSearchApi
-  url: ../openapi/interswitch-transaction-search-api-openapi.yml
+- name: detailApi
+  url: ../openapi/interswitch-detail-api-openapi.yml
+  type: openapi
+- name: searchApi
+  url: ../openapi/interswitch-search-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: reconcile-transaction

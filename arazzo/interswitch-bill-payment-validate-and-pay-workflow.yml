@@ -12,8 +12,14 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: billsPaymentApi
-  url: ../openapi/interswitch-bills-payment-api-openapi.yml
+- name: customerValidationApi
+  url: ../openapi/interswitch-customer-validation-api-openapi.yml
+  type: openapi
+- name: paymentItemsApi
+  url: ../openapi/interswitch-payment-items-api-openapi.yml
+  type: openapi
+- name: paymentsApi
+  url: ../openapi/interswitch-payments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: validate-and-pay-bill

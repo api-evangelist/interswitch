@@ -11,6 +11,12 @@ info:
     successful transfer.
   version: 1.0.0
 sourceDescriptions:
+- name: bankCodesApi
+  url: ../openapi/interswitch-bank-codes-api-openapi.yml
+  type: openapi
+- name: nameInquiryApi
+  url: ../openapi/interswitch-name-inquiry-api-openapi.yml
+  type: openapi
 - name: transfersApi
   url: ../openapi/interswitch-transfers-api-openapi.yml
   type: openapi

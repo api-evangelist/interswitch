@@ -11,8 +11,8 @@ info:
     descriptions, steps reference operations through their source descriptions.
   version: 1.0.0
 sourceDescriptions:
-- name: paymentGatewayApi
-  url: ../openapi/interswitch-payment-gateway-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/interswitch-payments-api-openapi.yml
   type: openapi
 - name: refundsApi
   url: ../openapi/interswitch-refunds-api-openapi.yml
@@ -52,7 +52,7 @@ workflows:
   steps:
   - stepId: confirmPayment
     description: Read the original payment to confirm it succeeded before refunding.
-    operationId: $sourceDescriptions.paymentGatewayApi.getPayment
+    operationId: $sourceDescriptions.paymentsApi.getPayment
     parameters:
     - name: Authorization
       in: header

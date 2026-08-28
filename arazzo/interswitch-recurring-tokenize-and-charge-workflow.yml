@@ -10,8 +10,11 @@ info:
     Both steps are Bearer-authenticated and inline their request bodies.
   version: 1.0.0
 sourceDescriptions:
-- name: recurringPaymentsApi
-  url: ../openapi/interswitch-recurring-payments-api-openapi.yml
+- name: recurringChargesApi
+  url: ../openapi/interswitch-recurring-charges-api-openapi.yml
+  type: openapi
+- name: tokenizationApi
+  url: ../openapi/interswitch-tokenization-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: tokenize-and-charge

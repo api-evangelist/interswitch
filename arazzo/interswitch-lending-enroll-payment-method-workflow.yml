@@ -11,8 +11,11 @@ info:
     All requests are Bearer-authenticated.
   version: 1.0.0
 sourceDescriptions:
-- name: lendingApi
-  url: ../openapi/interswitch-lending-api-openapi.yml
+- name: loansApi
+  url: ../openapi/interswitch-loans-api-openapi.yml
+  type: openapi
+- name: paymentsApi
+  url: ../openapi/interswitch-payments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: enroll-and-debit-repayment

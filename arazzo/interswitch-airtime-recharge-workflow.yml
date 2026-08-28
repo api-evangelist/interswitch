@@ -10,8 +10,8 @@ info:
     request and outputs so the flow is fully self-describing.
   version: 1.0.0
 sourceDescriptions:
-- name: airtimeRechargeApi
-  url: ../openapi/interswitch-airtime-recharge-api-openapi.yml
+- name: airtimeApi
+  url: ../openapi/interswitch-airtime-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: recharge-airtime

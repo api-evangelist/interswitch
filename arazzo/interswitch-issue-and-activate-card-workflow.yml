@@ -10,8 +10,11 @@ info:
     steps. All requests are Bearer-authenticated.
   version: 1.0.0
 sourceDescriptions:
-- name: card360Api
-  url: ../openapi/interswitch-card-360-api-openapi.yml
+- name: cardsApi
+  url: ../openapi/interswitch-cards-api-openapi.yml
+  type: openapi
+- name: pinApi
+  url: ../openapi/interswitch-pin-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: issue-and-activate-card

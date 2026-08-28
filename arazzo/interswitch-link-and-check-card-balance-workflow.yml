@@ -11,8 +11,14 @@ info:
     their bodies.
   version: 1.0.0
 sourceDescriptions:
-- name: card360Api
-  url: ../openapi/interswitch-card-360-api-openapi.yml
+- name: balanceApi
+  url: ../openapi/interswitch-balance-api-openapi.yml
+  type: openapi
+- name: cardsApi
+  url: ../openapi/interswitch-cards-api-openapi.yml
+  type: openapi
+- name: linkingApi
+  url: ../openapi/interswitch-linking-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: link-and-check-balance

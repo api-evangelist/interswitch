@@ -11,8 +11,14 @@ info:
     Bearer-authenticated.
   version: 1.0.0
 sourceDescriptions:
-- name: lendingApi
-  url: ../openapi/interswitch-lending-api-openapi.yml
+- name: customersApi
+  url: ../openapi/interswitch-customers-api-openapi.yml
+  type: openapi
+- name: loansApi
+  url: ../openapi/interswitch-loans-api-openapi.yml
+  type: openapi
+- name: offersApi
+  url: ../openapi/interswitch-offers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: offer-to-disbursement

@@ -11,8 +11,11 @@ info:
     is sent as application/x-www-form-urlencoded per the spec.
   version: 1.0.0
 sourceDescriptions:
-- name: webCheckoutApi
-  url: ../openapi/interswitch-web-checkout-api-openapi.yml
+- name: checkoutApi
+  url: ../openapi/interswitch-checkout-api-openapi.yml
+  type: openapi
+- name: transactionsApi
+  url: ../openapi/interswitch-transactions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: checkout-and-confirm

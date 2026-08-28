@@ -10,8 +10,8 @@ info:
     requests are Bearer-authenticated and inline their parameters and bodies.
   version: 1.0.0
 sourceDescriptions:
-- name: paycodeApi
-  url: ../openapi/interswitch-paycode-api-openapi.yml
+- name: tokensApi
+  url: ../openapi/interswitch-tokens-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: generate-and-track-paycode

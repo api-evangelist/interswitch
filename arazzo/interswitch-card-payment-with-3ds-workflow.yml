@@ -11,8 +11,11 @@ info:
     are inlined and Bearer-authenticated with the Passport OAuth token.
   version: 1.0.0
 sourceDescriptions:
-- name: paymentGatewayApi
-  url: ../openapi/interswitch-payment-gateway-api-openapi.yml
+- name: paymentsApi
+  url: ../openapi/interswitch-payments-api-openapi.yml
+  type: openapi
+- name: threeDSecureApi
+  url: ../openapi/interswitch-three-d-secure-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: card-payment-with-3ds

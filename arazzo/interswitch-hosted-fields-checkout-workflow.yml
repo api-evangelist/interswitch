@@ -12,8 +12,11 @@ info:
     are Bearer-authenticated.
   version: 1.0.0
 sourceDescriptions:
-- name: paymentGatewayApi
-  url: ../openapi/interswitch-payment-gateway-api-openapi.yml
+- name: hostedFieldsApi
+  url: ../openapi/interswitch-hosted-fields-api-openapi.yml
+  type: openapi
+- name: paymentsApi
+  url: ../openapi/interswitch-payments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: hosted-fields-checkout

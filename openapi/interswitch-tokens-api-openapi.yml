@@ -1,13 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Interswitch Recharge Airtime Tokens API
-  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+  title: Interswitch Paycode Tokens API
+  description: 'Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate
 
-    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+    single or bulk one-time tokens, query token status, and cancel tokens.
 
-    as Bills Payment; category ID `4` is reserved for airtime billers and the
-
-    customer''s phone number is supplied as `customer_id` on the payment advice.
+    Powers cardless ATM withdrawal across the Interswitch-acquired ATM network.
 
     '
   version: '2024-01-01'
@@ -17,7 +15,7 @@ servers:
 - url: https://saturn.interswitchng.com
   description: Production
 security:
-- InterswitchAuth: []
+- BearerAuth: []
 tags:
 - name: Tokens
 paths:
@@ -202,7 +200,6 @@ paths:
                           type: string
 components:
   securitySchemes:
-    InterswitchAuth:
-      type: apiKey
-      in: header
-      name: Authorization
+    BearerAuth:
+      type: http
+      scheme: bearer

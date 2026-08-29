@@ -1,13 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Interswitch Recharge Airtime Offers API
-  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+  title: Interswitch Lending Offers API
+  description: 'Marketplace lending APIs connecting loan providers and distribution
 
-    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+    channels — list providers, fetch offers, accept offers, fund loans, debit
 
-    as Bills Payment; category ID `4` is reserved for airtime billers and the
+    for repayment, and inspect customer loan status. Supports PCI-DSS-licensed
 
-    customer''s phone number is supplied as `customer_id` on the payment advice.
+    and hosted-fields integrations and powers Nano Loans, Salary Lending, and
+
+    Value Financing.
 
     '
   version: '2024-01-01'
@@ -17,7 +19,7 @@ servers:
 - url: https://saturn.interswitchng.com
   description: Production
 security:
-- InterswitchAuth: []
+- BearerAuth: []
 tags:
 - name: Offers
 paths:
@@ -124,7 +126,6 @@ components:
           - SALARY
           - VALUE_FINANCING
   securitySchemes:
-    InterswitchAuth:
-      type: apiKey
-      in: header
-      name: Authorization
+    BearerAuth:
+      type: http
+      scheme: bearer

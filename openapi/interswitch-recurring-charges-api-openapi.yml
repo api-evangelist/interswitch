@@ -1,23 +1,21 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Interswitch Recharge Airtime Recurring Charges API
-  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+  title: Interswitch Recurring Payments Recurring Charges API
+  description: 'Tokenize Verve, Visa, and Mastercard cards then charge them on schedule
 
-    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+    via a stored token + expiry pair. The token replaces the raw PAN so
 
-    as Bills Payment; category ID `4` is reserved for airtime billers and the
-
-    customer''s phone number is supplied as `customer_id` on the payment advice.
+    subscription merchants stay outside PCI scope.
 
     '
   version: '2024-01-01'
 servers:
-- url: https://sandbox.interswitchng.com
-  description: Sandbox
+- url: https://qa.interswitchng.com
+  description: Sandbox / QA
 - url: https://saturn.interswitchng.com
   description: Production
 security:
-- InterswitchAuth: []
+- BearerAuth: []
 tags:
 - name: Recurring Charges
 paths:
@@ -78,7 +76,6 @@ paths:
                     type: string
 components:
   securitySchemes:
-    InterswitchAuth:
-      type: apiKey
-      in: header
-      name: Authorization
+    BearerAuth:
+      type: http
+      scheme: bearer

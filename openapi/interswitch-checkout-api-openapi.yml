@@ -1,20 +1,27 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Interswitch Recharge Airtime Checkout API
-  description: 'Virtual top-up (direct airtime and data) and e-pin voucher delivery for
+  title: Interswitch Web Checkout API
+  description: 'Interswitch Web Checkout (formerly Webpay) is the company''s hosted payment
 
-    MTN, Airtel, Glo, and 9mobile. Same biller / category / payment-item flow
+    gateway. Two integration modes are supported: an inline JavaScript popup
 
-    as Bills Payment; category ID `4` is reserved for airtime billers and the
+    loaded from `inline-checkout.js`, and a Web Redirect form POST to
 
-    customer''s phone number is supplied as `customer_id` on the payment advice.
+    `/collections/w/pay`. After payment, merchants must perform a server-side
+
+    requery against `/collections/api/v1/gettransaction.json` and verify both
+
+    the response code (`00`) and the returned amount before delivering value.
 
     '
   version: '2024-01-01'
+  contact:
+    name: Interswitch Developer Support
+    url: https://www.interswitchgroup.com/support
 servers:
 - url: https://sandbox.interswitchng.com
   description: Sandbox
-- url: https://saturn.interswitchng.com
+- url: https://newwebpay.interswitchng.com
   description: Production
 security:
 - InterswitchAuth: []
@@ -89,3 +96,10 @@ components:
       type: apiKey
       in: header
       name: Authorization
+      description: 'Either `InterswitchAuth {base64(client_id)}` with companion `Timestamp`,
+
+        `Nonce`, `Signature`, and `SignatureMethod` headers (legacy), or
+
+        `Bearer {access_token}` obtained from the Passport OAuth token endpoint.
+
+        '

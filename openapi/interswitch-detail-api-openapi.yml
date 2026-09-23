@@ -5,9 +5,7 @@ info:
 
     Reference Search, Bulk Search, and Transaction Detail lookups across
 
-    Quickteller Business, Webpay, Transfers, and Bills Payment.
-
-    '
+    Quickteller Business, Webpay, Transfers, and Bills Payment.'
   version: '2024-01-01'
 servers:
 - url: https://qa.interswitchng.com

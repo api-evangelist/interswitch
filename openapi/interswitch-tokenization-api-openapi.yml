@@ -5,9 +5,7 @@ info:
 
     via a stored token + expiry pair. The token replaces the raw PAN so
 
-    subscription merchants stay outside PCI scope.
-
-    '
+    subscription merchants stay outside PCI scope.'
   version: '2024-01-01'
 servers:
 - url: https://qa.interswitchng.com

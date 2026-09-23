@@ -7,9 +7,7 @@ info:
 
     and Pay Bill payment-link generation. Authenticated with OAuth 2.0
 
-    client_credentials via the Passport token service.
-
-    '
+    client_credentials via the Passport token service.'
   version: '2024-01-01'
 servers:
 - url: https://qa.interswitchng.com

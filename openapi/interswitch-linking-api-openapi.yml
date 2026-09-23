@@ -9,9 +9,7 @@ info:
 
     issue and operate Verve cards programmatically on the Interswitch
 
-    issuer-processor.
-
-    '
+    issuer-processor.'
   version: '2024-01-01'
 servers:
 - url: https://sandbox.interswitchng.com

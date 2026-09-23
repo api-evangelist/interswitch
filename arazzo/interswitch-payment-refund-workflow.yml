@@ -15,7 +15,7 @@ sourceDescriptions:
   url: ../openapi/interswitch-payments-api-openapi.yml
   type: openapi
 - name: refundsApi
-  url: ../openapi/interswitch-refunds-api-openapi.yml
+  url: ../openapi/_superseded/interswitch-refunds-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: refund-and-track

@@ -11,9 +11,7 @@ info:
 
     requery against `/collections/api/v1/gettransaction.json` and verify both
 
-    the response code (`00`) and the returned amount before delivering value.
-
-    '
+    the response code (`00`) and the returned amount before delivering value.'
   version: '2024-01-01'
   contact:
     name: Interswitch Developer Support
@@ -42,9 +40,7 @@ paths:
 
         query string. Always confirm the transaction server-side via
 
-        `/collections/api/v1/gettransaction.json` before delivering value.
-
-        '
+        `/collections/api/v1/gettransaction.json` before delivering value.'
       operationId: initiateWebRedirectPayment
       requestBody:
         required: true

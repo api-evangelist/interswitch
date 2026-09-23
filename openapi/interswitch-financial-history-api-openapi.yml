@@ -7,9 +7,7 @@ info:
 
     switch and Verve card network. Feeds credit decisioning, KYC enrichment,
 
-    and segmentation.
-
-    '
+    and segmentation.'
   version: '2024-01-01'
 servers:
 - url: https://sandbox.interswitchng.com

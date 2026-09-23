@@ -56,14 +56,13 @@
     "interswitch-recurring-payments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "interswitch-transaction-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "interswitch-web-checkout-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Payments' spans 3 source specs (interswitch-bills-payment-api-openapi.yml, interswitch-lending-api-openapi.yml, interswitch-payment-gateway-api-openapi.yml): per-path servers applied"
+    "tag 'Payments' spans 3 source specs (interswitch-bills-payment-api-openapi.yml, interswitch-lending-api-openapi.yml, interswitch-payment-gateway-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "interswitch-airtime-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-balance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "interswitch-bank-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-billers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "interswitch-bulk-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-checkout-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-customer-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -76,7 +75,6 @@
     "interswitch-hosted-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-linking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-loans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "interswitch-name-inquiry-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-payment-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-payment-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -84,12 +82,10 @@
     "interswitch-pin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-recurring-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "interswitch-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-three-d-secure-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-tokenization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "interswitch-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "interswitch-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "interswitch-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "interswitch-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

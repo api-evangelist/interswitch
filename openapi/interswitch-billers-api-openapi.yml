@@ -7,9 +7,7 @@ info:
 
     Nigerian billers including DSTV, GOTV, PHCN, water boards, school fees,
 
-    and government TSA payments.
-
-    '
+    and government TSA payments.'
   version: '2024-01-01'
 servers:
 - url: https://sandbox.interswitchng.com

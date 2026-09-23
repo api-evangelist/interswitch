@@ -9,9 +9,7 @@ info:
 
     and hosted-fields integrations and powers Nano Loans, Salary Lending, and
 
-    Value Financing.
-
-    '
+    Value Financing.'
   version: '2024-01-01'
 servers:
 - url: https://sandbox.interswitchng.com

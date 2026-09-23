@@ -7,9 +7,7 @@ info:
 
     as Bills Payment; category ID `4` is reserved for airtime billers and the
 
-    customer''s phone number is supplied as `customer_id` on the payment advice.
-
-    '
+    customer''s phone number is supplied as `customer_id` on the payment advice.'
   version: '2024-01-01'
 servers:
 - url: https://sandbox.interswitchng.com

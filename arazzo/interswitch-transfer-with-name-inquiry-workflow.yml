@@ -12,13 +12,13 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: bankCodesApi
-  url: ../openapi/interswitch-bank-codes-api-openapi.yml
+  url: ../openapi/_superseded/interswitch-bank-codes-api-openapi.yml
   type: openapi
 - name: nameInquiryApi
-  url: ../openapi/interswitch-name-inquiry-api-openapi.yml
+  url: ../openapi/_superseded/interswitch-name-inquiry-api-openapi.yml
   type: openapi
 - name: transfersApi
-  url: ../openapi/interswitch-transfers-api-openapi.yml
+  url: ../openapi/_superseded/interswitch-transfers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: transfer-with-name-inquiry

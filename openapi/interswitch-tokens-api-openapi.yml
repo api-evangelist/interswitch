@@ -5,9 +5,7 @@ info:
 
     single or bulk one-time tokens, query token status, and cancel tokens.
 
-    Powers cardless ATM withdrawal across the Interswitch-acquired ATM network.
-
-    '
+    Powers cardless ATM withdrawal across the Interswitch-acquired ATM network.'
   version: '2024-01-01'
 servers:
 - url: https://sandbox.interswitchng.com

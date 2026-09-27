@@ -209,25 +209,6 @@ paths:
       description: Production
 components:
   schemas:
-    PaymentResponse:
-      type: object
-      properties:
-        paymentId:
-          type: string
-        status:
-          type: string
-        responseCode:
-          type: string
-        responseMessage:
-          type: string
-        amount:
-          type: integer
-        currency:
-          type: string
-        authCode:
-          type: string
-        retrievalReferenceNumber:
-          type: string
     PaymentRequest:
       type: object
       required:
@@ -270,6 +251,25 @@ components:
                   type: string
             token:
               type: string
+    PaymentResponse:
+      type: object
+      properties:
+        paymentId:
+          type: string
+        status:
+          type: string
+        responseCode:
+          type: string
+        responseMessage:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        authCode:
+          type: string
+        retrievalReferenceNumber:
+          type: string
   securitySchemes:
     InterswitchAuth:
       type: apiKey

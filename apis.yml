@@ -1,5 +1,8 @@
 aid: interswitch
 url: https://raw.githubusercontent.com/api-evangelist/interswitch/refs/heads/main/apis.yml
+x-docs-platform: readme
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 apis:
 - aid: interswitch:interswitch-airtime-api
   name: Interswitch Airtime API

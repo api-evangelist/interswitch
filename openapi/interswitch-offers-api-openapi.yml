@@ -67,28 +67,6 @@ paths:
                 $ref: '#/components/schemas/Loan'
 components:
   schemas:
-    Offer:
-      type: object
-      properties:
-        offerId:
-          type: string
-        providerId:
-          type: string
-        principal:
-          type: integer
-        currency:
-          type: string
-        interestRate:
-          type: number
-          format: float
-        tenorDays:
-          type: integer
-        productType:
-          type: string
-          enum:
-          - NANO
-          - SALARY
-          - VALUE_FINANCING
     Loan:
       type: object
       properties:
@@ -123,6 +101,28 @@ components:
         dueAt:
           type: string
           format: date-time
+    Offer:
+      type: object
+      properties:
+        offerId:
+          type: string
+        providerId:
+          type: string
+        principal:
+          type: integer
+        currency:
+          type: string
+        interestRate:
+          type: number
+          format: float
+        tenorDays:
+          type: integer
+        productType:
+          type: string
+          enum:
+          - NANO
+          - SALARY
+          - VALUE_FINANCING
   securitySchemes:
     BearerAuth:
       type: http

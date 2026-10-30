@@ -1,4 +1,4 @@
-# Interswitch (interswitch)
+# Interswitch
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,331 +66,221 @@
 
 Interswitch is Nigeria's foundational digital payments and transaction-switching company, founded in 2002 and regulated by the Central Bank of Nigeria. It owns the Verve card scheme (Africa's first domestic EMV chip-and-PIN brand), the Quickteller consumer and business payments platform, the Webpay / Web Checkout gateway, the Paycode cardless service, and the underlying transaction switch that connects Nigerian banks, fintechs, billers, and merchants. The Interswitch developer platform exposes REST APIs for accepting payments, sending transfers, paying bills, recharging airtime, generating cardless tokens, issuing Verve cards (Card 360), originating loans, accessing customer insights, and searching transactions — all under OAuth 2.0 client-credentials authentication via the Passport token service and HMAC-SHA512-signed webhooks. The company is expanding from Nigeria into Ghana, Kenya, Uganda, and other African markets.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/interswitch/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/interswitch/refs/heads/main/apis.yml)
+**Areas:** Payments · Payment Infrastructure · Card Network · Verve · Quickteller · Webpay · Bills Payment · Transfers · Lending · Fintech · Africa · Nigeria
 
-## Scope
+## Interswitch on APIs.io
 
-- **Position:** Producing
-- **Access:** 3rd-Party
+Everything profiled for Interswitch is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/interswitch/](https://apis.io/providers/interswitch/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (27)
 
-- Payments
-- Payment Infrastructure
-- Card Network
-- Verve
-- Quickteller
-- Webpay
-- Bills Payment
-- Transfers
-- Lending
-- Fintech
-- Africa
-- Nigeria
+- [Interswitch Airtime API](https://apis.io/apis/interswitch/interswitch-airtime-api/) — The Airtime API from Interswitch — 3 operation(s) for airtime.
+- [Interswitch Balance API](https://apis.io/apis/interswitch/interswitch-balance-api/) — The Balance API from Interswitch — 1 operation(s) for balance.
+- [Interswitch Billers API](https://apis.io/apis/interswitch/interswitch-billers-api/) — The Billers API from Interswitch — 3 operation(s) for billers.
+- [Interswitch Cards API](https://apis.io/apis/interswitch/interswitch-cards-api/) — The Cards API from Interswitch — 5 operation(s) for cards.
+- [Interswitch Checkout API](https://apis.io/apis/interswitch/interswitch-checkout-api/) — Hosted checkout payment initiation
+- [Interswitch Customer Validation API](https://apis.io/apis/interswitch/interswitch-customer-validation-api/) — The Customer Validation API from Interswitch — 1 operation(s) for customer validation.
+- [Interswitch Customers API](https://apis.io/apis/interswitch/interswitch-customers-api/) — The Customers API from Interswitch — 2 operation(s) for customers.
+- [Interswitch Demography API](https://apis.io/apis/interswitch/interswitch-demography-api/) — The Demography API from Interswitch — 1 operation(s) for demography.
+- [Interswitch Detail API](https://apis.io/apis/interswitch/interswitch-detail-api/) — The Detail API from Interswitch — 1 operation(s) for detail.
+- [Interswitch E-Pins API](https://apis.io/apis/interswitch/interswitch-e-pins-api/) — The E-Pins API from Interswitch — 1 operation(s) for e-pins.
+- [Interswitch Financial Habits API](https://apis.io/apis/interswitch/interswitch-financial-habits-api/) — The Financial Habits API from Interswitch — 1 operation(s) for financial habits.
+- [Interswitch Financial History API](https://apis.io/apis/interswitch/interswitch-financial-history-api/) — The Financial History API from Interswitch — 2 operation(s) for financial history.
+- [Interswitch Hosted Fields API](https://apis.io/apis/interswitch/interswitch-hosted-fields-api/) — Card data tokenization
+- [Interswitch Linking API](https://apis.io/apis/interswitch/interswitch-linking-api/) — The Linking API from Interswitch — 1 operation(s) for linking.
+- [Interswitch Loans API](https://apis.io/apis/interswitch/interswitch-loans-api/) — The Loans API from Interswitch — 3 operation(s) for loans.
+- [Interswitch Offers API](https://apis.io/apis/interswitch/interswitch-offers-api/) — The Offers API from Interswitch — 2 operation(s) for offers.
+- [Interswitch Payment Items API](https://apis.io/apis/interswitch/interswitch-payment-items-api/) — The Payment Items API from Interswitch — 1 operation(s) for payment items.
+- [Interswitch Payment Links API](https://apis.io/apis/interswitch/interswitch-payment-links-api/) — Hosted payment link generation
+- [Interswitch Payments API](https://apis.io/apis/interswitch/interswitch-payments-api/) — The Payments API from Interswitch — 5 operation(s) for payments.
+- [Interswitch PIN API](https://apis.io/apis/interswitch/interswitch-pin-api/) — The PIN API from Interswitch — 1 operation(s) for pin.
+- [Interswitch Providers API](https://apis.io/apis/interswitch/interswitch-providers-api/) — The Providers API from Interswitch — 1 operation(s) for providers.
+- [Interswitch Recurring Charges API](https://apis.io/apis/interswitch/interswitch-recurring-charges-api/) — The Recurring Charges API from Interswitch — 1 operation(s) for recurring charges.
+- [Interswitch Search API](https://apis.io/apis/interswitch/interswitch-search-api/) — The Search API from Interswitch — 3 operation(s) for search.
+- [Interswitch Three-D Secure API](https://apis.io/apis/interswitch/interswitch-three-d-secure-api/) — Step-up authentication
+- [Interswitch Tokenization API](https://apis.io/apis/interswitch/interswitch-tokenization-api/) — The Tokenization API from Interswitch — 1 operation(s) for tokenization.
+- [Interswitch Tokens API](https://apis.io/apis/interswitch/interswitch-tokens-api/) — The Tokens API from Interswitch — 4 operation(s) for tokens.
+- [Interswitch Transactions API](https://apis.io/apis/interswitch/interswitch-transactions-api/) — Transaction status query
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-24
-- **Modified:** 2026-05-24
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (14)
 
-### Interswitch Web Checkout API
+Multi-step workflows that chain operations into a business task.
 
-Interswitch Web Checkout (formerly Webpay) is the company's hosted payment gateway. Two integration modes — inline JavaScript popup (`newwebpay.interswitchng.com/inline-checkout.js`) and Web Redirect form POST to `/collections/w/pay` — plus a server-side requery endpoint at `/collections/api/v1/gettransaction.json` for authoritative confirmation. Supports Verve, Visa, and Mastercard, with mandatory server-side verification before delivering value.
+- [Interswitch Airtime Recharge](https://apis.io/arazzos/interswitch/interswitch-airtime-recharge-workflow/)
+- [Interswitch Validate Customer And Pay Bill](https://apis.io/arazzos/interswitch/interswitch-bill-payment-validate-and-pay-workflow/)
+- [Interswitch Card Payment With 3D Secure](https://apis.io/arazzos/interswitch/interswitch-card-payment-with-3ds-workflow/)
+- [Interswitch Hosted Fields Checkout](https://apis.io/arazzos/interswitch/interswitch-hosted-fields-checkout-workflow/)
+- [Interswitch Issue And Activate Card](https://apis.io/arazzos/interswitch/interswitch-issue-and-activate-card-workflow/)
+- [Interswitch Lending Enroll Payment Method](https://apis.io/arazzos/interswitch/interswitch-lending-enroll-payment-method-workflow/)
+- [Interswitch Lending Offer To Disbursement](https://apis.io/arazzos/interswitch/interswitch-lending-offer-to-disbursement-workflow/)
+- [Interswitch Link And Check Card Balance](https://apis.io/arazzos/interswitch/interswitch-link-and-check-card-balance-workflow/)
+- [Interswitch Paycode Generate And Track](https://apis.io/arazzos/interswitch/interswitch-paycode-generate-and-track-workflow/)
+- [Interswitch Payment Refund And Track](https://apis.io/arazzos/interswitch/interswitch-payment-refund-workflow/)
+- [Interswitch Recurring Tokenize And Charge](https://apis.io/arazzos/interswitch/interswitch-recurring-tokenize-and-charge-workflow/)
+- [Interswitch Transaction Reconciliation](https://apis.io/arazzos/interswitch/interswitch-transaction-reconciliation-workflow/)
+- [Interswitch Transfer With Name Inquiry](https://apis.io/arazzos/interswitch/interswitch-transfer-with-name-inquiry-workflow/)
+- [Interswitch Web Checkout And Confirm](https://apis.io/arazzos/interswitch/interswitch-web-checkout-confirm-workflow/)
 
-- **Human URL:** [https://docs.interswitchgroup.com/docs/web-checkout](https://docs.interswitchgroup.com/docs/web-checkout)
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Payments
-- Checkout
-- Webpay
-- Africa
-- Nigeria
+- [Interswitch Agentic Access](https://apis.io/agentic-access/interswitch/interswitch-agentic-access/)
 
-#### Properties
+#### JSON Schema (1)
 
-- [Documentation](https://docs.interswitchgroup.com/docs/web-checkout)
-- [Getting Started](https://docs.interswitchgroup.com/docs/quickstart)
-- [OpenAPI](openapi/interswitch-web-checkout-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-web-checkout-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-web-checkout-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/interswitch-payment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/interswitch-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+The data models the API reads and writes.
 
-### Interswitch Payment Gateway API
+- [Interswitch Payment](https://apis.io/schemas/interswitch/interswitch-payment/)
 
-Server-to-server card payment APIs for PCI-DSS-licensed merchants — direct Card Payments, Hosted Fields, 3D Secure step-up, Google Pay, and Pay Bill payment-link generation. Base path `/paymentgateway` on the Interswitch QA/production hosts with OAuth 2.0 client_credentials authentication via the Passport token endpoint.
+#### JSON-LD (1)
 
-- **Human URL:** [https://docs.interswitchgroup.com/docs/accept-payments](https://docs.interswitchgroup.com/docs/accept-payments)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Interswitch Context](https://apis.io/jsonld/interswitch/interswitch-context/)
 
-- Payments
-- Card Payments
-- Hosted Fields
-- 3D Secure
-- Africa
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://docs.interswitchgroup.com/docs/accept-payments)
-- [OpenAPI](openapi/interswitch-payment-gateway-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-payment-gateway-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-payment-gateway-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/interswitch-payment-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Interswitch Vocabulary](https://apis.io/vocabularies/interswitch/interswitch-vocabulary/)
 
-### Interswitch Transfers API
+#### Examples (1)
 
-Quickteller Send Money APIs covering Single Transfer (POST /quicktellerservice/api/v5/transactions/TransferFunds), Bulk Transfer, Name Inquiry, and Bank Code Resolution. Used by banks, fintechs, and PSPs to disburse funds across NIBSS-Instant-Payment-connected Nigerian bank accounts with SHA-512 MAC authentication on each request.
+Example requests and responses.
 
-- **Human URL:** [https://docs.interswitchgroup.com/docs/single-transfer](https://docs.interswitchgroup.com/docs/single-transfer)
+- [Interswitch Web Checkout Example](https://apis.io/examples/interswitch/interswitch-web-checkout-example/)
 
-#### Tags
+#### Collections (54)
 
-- Transfers
-- Payouts
-- Disbursement
-- Bank Transfer
-- Africa
+Postman and Open Collection request collections.
 
-#### Properties
+- [Interswitch Recharge Airtime API](https://apis.io/collections/interswitch/open-interswitch-airtime-api/)
+- [Interswitch Airtime Recharge API](https://apis.io/collections/interswitch/open-interswitch-airtime-recharge-api/)
+- [Interswitch Recharge Airtime Balance API](https://apis.io/collections/interswitch/open-interswitch-balance-api/)
+- [Interswitch Recharge Airtime Bank Codes API](https://apis.io/collections/interswitch/open-interswitch-bank-codes-api/)
+- [Interswitch Recharge Airtime Billers API](https://apis.io/collections/interswitch/open-interswitch-billers-api/)
+- [Interswitch Bills Payment API](https://apis.io/collections/interswitch/open-interswitch-bills-payment-api/)
+- [Interswitch Recharge Airtime Bulk Transfers API](https://apis.io/collections/interswitch/open-interswitch-bulk-transfers-api/)
+- [Interswitch Card 360 API](https://apis.io/collections/interswitch/open-interswitch-card-360-api/)
+- [Interswitch Recharge Airtime Cards API](https://apis.io/collections/interswitch/open-interswitch-cards-api/)
+- [Interswitch Recharge Airtime Checkout API](https://apis.io/collections/interswitch/open-interswitch-checkout-api/)
+- [Interswitch Customer Insights API](https://apis.io/collections/interswitch/open-interswitch-customer-insights-api/)
+- [Interswitch Recharge Airtime Customer Validation API](https://apis.io/collections/interswitch/open-interswitch-customer-validation-api/)
+- [Interswitch Recharge Airtime Customers API](https://apis.io/collections/interswitch/open-interswitch-customers-api/)
+- [Interswitch Recharge Airtime Demography API](https://apis.io/collections/interswitch/open-interswitch-demography-api/)
+- [Interswitch Recharge Airtime Detail API](https://apis.io/collections/interswitch/open-interswitch-detail-api/)
+- [Interswitch Recharge Airtime E-Pins API](https://apis.io/collections/interswitch/open-interswitch-e-pins-api/)
+- [Interswitch Recharge Airtime Financial Habits API](https://apis.io/collections/interswitch/open-interswitch-financial-habits-api/)
+- [Interswitch Recharge Airtime Financial History API](https://apis.io/collections/interswitch/open-interswitch-financial-history-api/)
+- [Interswitch Recharge Airtime Hosted Fields API](https://apis.io/collections/interswitch/open-interswitch-hosted-fields-api/)
+- [Interswitch Lending API](https://apis.io/collections/interswitch/open-interswitch-lending-api/)
+- [Interswitch Recharge Airtime Linking API](https://apis.io/collections/interswitch/open-interswitch-linking-api/)
+- [Interswitch Recharge Airtime Loans API](https://apis.io/collections/interswitch/open-interswitch-loans-api/)
+- [Interswitch Recharge Airtime Name Inquiry API](https://apis.io/collections/interswitch/open-interswitch-name-inquiry-api/)
+- [Interswitch Recharge Airtime Offers API](https://apis.io/collections/interswitch/open-interswitch-offers-api/)
+- [Interswitch Paycode API](https://apis.io/collections/interswitch/open-interswitch-paycode-api/)
+- …and 29 more published on APIs.io
 
-- [Documentation](https://docs.interswitchgroup.com/docs/single-transfer)
-- [OpenAPI](openapi/interswitch-transfers-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-transfers-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-transfers-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-### Interswitch Bills Payment API
+Spectral rulesets for the provider's contracts.
 
-Quickteller bills payment service — list billers (`GET /api/v2/quickteller/billers`), get payment items, validate customer references, and submit payment advices for DSTV, GOTV, PHCN, water boards, school fees, government TSA payments, and hundreds of other Nigerian billers. Uses the InterswitchAuth legacy signature scheme (Authorization + Timestamp + Nonce + Signature + SignatureMethod + TerminalID headers).
+- [Interswitch — jsonschema rules](https://apis.io/rules/interswitch/interswitch-jsonschema-spectral-rules/)
+- [Interswitch API Rules](https://apis.io/rules/interswitch/interswitch-rules/)
 
-- **Human URL:** [https://docs.interswitchgroup.com/docs/bills-payment](https://docs.interswitchgroup.com/docs/bills-payment)
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Bills
-- Quickteller
-- Utilities
-- Cable TV
-- Value Added Services
-- Africa
+- [Interswitch Authentication](https://apis.io/security/interswitch/interswitch-authentication/)
+- [Interswitch Domain Security](https://apis.io/security/interswitch/interswitch-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.interswitchgroup.com/docs/bills-payment)
-- [OpenAPI](openapi/interswitch-bills-payment-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-bills-payment-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-bills-payment-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Interswitch Airtime Recharge API
+- [Interswitch Plans Pricing](https://apis.io/plans/interswitch/interswitch-plans-pricing/)
 
-Virtual top-up (direct airtime and data) and e-pin voucher delivery for MTN, Airtel, Glo, and 9mobile. Same biller/category/payment-item flow as Bills Payment, with category ID 4 reserved for airtime billers; phone number is supplied as `customer_id` on the `/api/v2/quickteller/payments/advices` payload.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.interswitchgroup.com/docs/airtime-recharge](https://docs.interswitchgroup.com/docs/airtime-recharge)
+Published request limits.
 
-#### Tags
+- [Interswitch Rate Limits](https://apis.io/rate-limits/interswitch/interswitch-rate-limits/)
 
-- Airtime
-- Top-up
-- Virtual Top-up
-- E-Pins
-- Telco
-- Africa
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.interswitchgroup.com/docs/airtime-recharge)
-- [OpenAPI](openapi/interswitch-airtime-recharge-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-airtime-recharge-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-airtime-recharge-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Interswitch Finops](https://apis.io/finops/interswitch/interswitch-finops/)
 
-### Interswitch Paycode API
+## Where to find this API
 
-Cardless cash and merchant tokens (Pay with Mobile / Paycode). Generate single or bulk one-time tokens via `POST /api/v1/pwm/subscribers/{subscriberId}/tokens`, query token status, and cancel tokens at `/cardless-service/api/v1/cardless-services/cancel-token`. Powers ATM cardless withdrawal across the Interswitch-acquired ATM network.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.interswitchgroup.com/docs/single-paycode](https://docs.interswitchgroup.com/docs/single-paycode)
-
-#### Tags
-
-- Paycode
-- Cardless
-- Cash Withdrawal
-- Tokens
-- Africa
-
-#### Properties
-
-- [Documentation](https://docs.interswitchgroup.com/docs/single-paycode)
-- [OpenAPI](openapi/interswitch-paycode-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-paycode-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-paycode-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Interswitch Refunds API
-
-Refund successful Quickteller Business transactions in full or in part via `POST /paymentgateway/api/v1/refunds`. Tracks refund lifecycle through SUCCESS, PENDING, PROCESSING, COMPLETE, COMPLETE_MANUAL, and FAILED states; auto-refunds settle T+1.
-
-- **Human URL:** [https://docs.interswitchgroup.com/docs/refunds](https://docs.interswitchgroup.com/docs/refunds)
-
-#### Tags
-
-- Refunds
-- Payments
-- Quickteller Business
-- Africa
-
-#### Properties
-
-- [Documentation](https://docs.interswitchgroup.com/docs/refunds)
-- [OpenAPI](openapi/interswitch-refunds-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-refunds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-refunds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Interswitch Recurring Payments API
-
-Tokenize Verve, Visa, and Mastercard cards at `POST /api/v2/purchases/validations/recurrents` then charge them on schedule via `POST /api/v2/purchases/recurrents`. Token + expiry pair replaces raw PAN so subscription merchants stay outside PCI scope.
-
-- **Human URL:** [https://docs.interswitchgroup.com/docs/recurring-payments](https://docs.interswitchgroup.com/docs/recurring-payments)
-
-#### Tags
-
-- Recurring
-- Subscriptions
-- Tokenization
-- Card On File
-- Africa
-
-#### Properties
-
-- [Documentation](https://docs.interswitchgroup.com/docs/recurring-payments)
-- [OpenAPI](openapi/interswitch-recurring-payments-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-recurring-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-recurring-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Interswitch Card 360 API
-
-Card issuer and cardholder lifecycle management for Verve, debit, and prepaid cards — create cards, set/reset PIN, block/unblock, balance inquiry, card linking, and card validation. Lets fintechs and banks issue and operate Verve cards programmatically on the Interswitch issuer-processor.
-
-- **Human URL:** [https://docs.interswitchgroup.com/docs/home](https://docs.interswitchgroup.com/docs/home)
-
-#### Tags
-
-- Cards
-- Issuing
-- Card Management
-- Verve
-- Africa
-
-#### Properties
-
+- [Website](https://www.interswitchgroup.com/)
 - [Documentation](https://docs.interswitchgroup.com/docs/home)
-- [OpenAPI](openapi/interswitch-card-360-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-card-360-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-card-360-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Interswitch Lending API
-
-Marketplace lending APIs connecting loan providers and distribution channels under `/lending-service/api/v1` — list providers, fetch offers (`GET /lending-service/api/v3/offers`), accept offers, fund loans, debit for repayment, and inspect customer loan status. Supports both PCI-DSS-licensed and hosted-fields integrations and powers Nano Loans, Salary Lending, and Value Financing.
-
-- **Human URL:** [https://docs.interswitchgroup.com/docs/nano-loans](https://docs.interswitchgroup.com/docs/nano-loans)
-
-#### Tags
-
-- Lending
-- Nano Loans
-- Salary Lending
-- Credit
-- Africa
-
-#### Properties
-
-- [Documentation](https://docs.interswitchgroup.com/docs/nano-loans)
-- [OpenAPI](openapi/interswitch-lending-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-lending-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-lending-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Interswitch Customer Insights API
-
-Permissioned access to demography, financial history, average financial history, and financial-habit signals derived from Interswitch's transaction switch and Verve card network. Feeds credit decisioning, KYC enrichment, and segmentation for fintechs, lenders, and retail risk teams.
-
-- **Human URL:** [https://docs.interswitchgroup.com/docs/customer-insights](https://docs.interswitchgroup.com/docs/customer-insights)
-
-#### Tags
-
-- Customer Insights
-- Credit Decisioning
-- Data
-- Demographics
-- Africa
-
-#### Properties
-
-- [Documentation](https://docs.interswitchgroup.com/docs/customer-insights)
-- [OpenAPI](openapi/interswitch-customer-insights-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-customer-insights-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-customer-insights-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Interswitch Transaction Search API
-
-Back-office transaction and settlement verification APIs — Quick Search, Reference Search, Bulk Search, and Transaction Detail lookups across Quickteller Business, Webpay, Transfers, and Bills Payment. Bearer-token authenticated and intended for finance, ops, and dispute teams.
-
-- **Human URL:** [https://docs.interswitchgroup.com/docs/transaction-search](https://docs.interswitchgroup.com/docs/transaction-search)
-
-#### Tags
-
-- Transactions
-- Search
-- Settlement
-- Reconciliation
-- Africa
-
-#### Properties
-
-- [Documentation](https://docs.interswitchgroup.com/docs/transaction-search)
-- [OpenAPI](openapi/interswitch-transaction-search-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/interswitch-transaction-search-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/interswitch-transaction-search-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://www.interswitchgroup.com)
-- [Documentation](https://docs.interswitchgroup.com/docs/home)
-- [Documentation](https://docs.interswitchgroup.com/reference)
-- [Sign Up](https://developer.interswitchgroup.com)
-- [Portal](https://developer.interswitchgroup.com/marketplace)
-- [Authentication](https://docs.interswitchgroup.com/docs/authentication)
-- [Authentication](https://passport-sandbox.interswitchng.com/passport/oauth/token)
-- [Webhooks](https://docs.interswitchgroup.com/docs/webhooks)
-- [Errors](https://docs.interswitchgroup.com/docs/response-codes)
-- [Documentation](https://docs.interswitchgroup.com/llms.txt)
-- [Forum](https://join.slack.com/t/iswdevelopercommunity/shared_invite/zt-2lbdgbkjq-7Byrv6unYM2nX5RwK4MQ7g)
-- [Blog](https://www.interswitchgroup.com/blog)
-- [Press Releases](https://www.interswitchgroup.com/news)
 - [Support](https://www.interswitchgroup.com/support)
-- [Careers](https://www.interswitchgroup.com/company/careers)
-- [Privacy Policy](https://www.interswitchgroup.com/privacy-policy)
-- [Terms of Service](https://www.interswitchgroup.com/terms-of-use)
+- [Blog](https://www.interswitchgroup.com/blog)
 - [Compliance](https://www.interswitchgroup.com/compliance)
-- [LinkedIn](https://www.linkedin.com/company/interswitch-group)
-- [Twitter](https://x.com/interswitchgrp)
-- [YouTube](https://www.youtube.com/@InterswitchGroup)
-- [Code Examples](https://github.com/techquest/integrating-to-ipg)
-- [SDK](https://github.com/techquest/payment_php)
-- [SDK](https://github.com/techquest/isw-laravel-sdk)
-- [SDK](https://github.com/techquest/isw-react-sdk)
-- [SDK](https://github.com/akinmail/isw-payment-sdk-android)
-- [SDK](https://github.com/akinmail/isw-payment-sdk-ios)
-- [Plans](plans/interswitch-plans-pricing.yml)
-- [Rate Limits](rate-limits/interswitch-rate-limits.yml)
-- [Fin Ops](finops/interswitch-finops.yml)
-- [Vocabulary](vocabulary/interswitch-vocabulary.yml)
-- [Spectral Rules](rules/interswitch-rules.yml) — [Spectral](https://docs.stoplight.io/docs/spectral)
-- [Features](undefined)
+- [Terms of service](https://www.interswitchgroup.com/terms-of-use)
+- [Privacy policy](https://www.interswitchgroup.com/privacy-policy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 48.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 53.8 |
+| Contract governance | 27.3 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 57.1 |
+| Access clarity | 57.9 |
+
+**Agent readiness 29.4** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | unknown |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 26.8** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/interswitch/](https://apis.io/providers/interswitch/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Interswitch: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/interswitch/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
